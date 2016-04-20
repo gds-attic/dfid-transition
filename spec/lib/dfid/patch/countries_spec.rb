@@ -1,4 +1,4 @@
-require 'rspec'
+require 'spec_helper'
 require 'json'
 require 'dfid-transition/patch/countries'
 
