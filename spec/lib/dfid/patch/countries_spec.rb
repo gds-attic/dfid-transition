@@ -52,7 +52,7 @@ describe DfidTransition::Patch::Countries do
       end
 
       context 'we have a full set of countries from the countries register' do
-        def page (index)
+        def page(index)
           { 'page-index' => index, 'page-size' => 100}
         end
 
