@@ -4,9 +4,9 @@ require 'json'
 module DfidTransition
   module Patch
     SPECIALIST_PUBLISHER_DIR = 'specialist-publisher-rebuild'
-    COUNTRY_REGISTER_JSON    = 'https://country.register.gov.uk/records.json'
 
     class Countries
+      REGISTER_JSON = 'https://country.register.gov.uk/records.json'
       attr_reader :location
 
       def initialize(location = nil)
@@ -37,11 +37,12 @@ module DfidTransition
 
         [].tap do |results|
           while !done
-            STDERR.puts "Getting #{COUNTRY_REGISTER_JSON} page #{params[:page]}"
-            body = RestClient.get(COUNTRY_REGISTER_JSON, { params: params })
-            country_page = JSON.parse(body)
-            results.concat country_page.select(&existing_countries)
-            done = (country_page.length < params['page-size'])
+            body = RestClient.get(REGISTER_JSON, { params: params })
+            countries_page = JSON.parse(body)
+
+            results.concat(countries_page.select(&existing_countries))
+
+            done = (countries_page.length < params['page-size'])
             params['page-index'] += 1
           end
         end
@@ -57,7 +58,8 @@ module DfidTransition
       end
 
       def country_facet
-        schema_hash['facets'].find { |f| f['key'] == 'country' }
+        schema_hash['facets'].find { |f| f['key'] == 'country' } or
+          raise KeyError.new('No country facet found')
       end
 
       def schema_hash

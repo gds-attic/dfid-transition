@@ -52,16 +52,33 @@ describe DfidTransition::Patch::Countries do
       end
 
       context 'we have a full set of countries from the countries register' do
+        def page (index)
+          { 'page-index' => index, 'page-size' => 100}
+        end
+
         before do
-          expect(RestClient).to receive(:get).and_return(File.read(query_results_p1))
-          expect(RestClient).to receive(:get).and_return(File.read(query_results_p2))
-          patch.run!
+          allow(RestClient).to receive(:get).with(
+            DfidTransition::Patch::Countries::REGISTER_JSON,
+            params: page(1)).and_return(File.read(query_results_p1))
+          allow(RestClient).to receive(:get).with(
+            DfidTransition::Patch::Countries::REGISTER_JSON,
+            params: page(2)).and_return(File.read(query_results_p2))
         end
 
         it 'patches the schema with all extant countries' do
+          patch.run!
           expect(country_facet['allowed_values'].length).to eql(195)
         end
+
+        context 'the target schema file does not have a countries facet to patch' do
+          let(:schema_src) { 'spec/fixtures/schemas/dfid_research_outputs_no_countries.json' }
+
+          it 'fails with an informative KeyError' do
+            expect { patch.run! }.to raise_error(KeyError, /No country facet found/)
+          end
+        end
       end
+
     end
   end
 end
