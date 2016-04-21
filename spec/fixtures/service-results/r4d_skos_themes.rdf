@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+            <skos:ConceptScheme rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes">
+                <dc:title>R4D Themes</dc:title>
+                <dc:description>A controlled vocabulary of research themes primarily to assist in migration to GOV.UK</dc:description>
+                <dc:creator>CABI</dc:creator>
+                <dc:date>2016-04-15</dc:date>
+                <dc:language>en-gb</dc:language>
+            </skos:ConceptScheme>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture">
+                <skos:prefLabel>Agriculture</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agricultural%20Innovation" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Crops" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Fisheries,%20Aquaculture%20and%20Fish%20Genetics" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Livestock%20Production" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Agriculture)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20into%20Use%20(Agriculture)" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment">
+                <skos:prefLabel>Climate and Environment</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Adaptation%20to%20Climate%20Change" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Forests" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Low%20Carbon%20Development" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Climate%20and%20Environment)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Natural%20Resource%20Systems" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education">
+                <skos:prefLabel>Education</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education%20in%20Fragile%20States" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education%20Policy%20and%20Strategy" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Focus%20on%20Girls%20Education" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Getting%20Kids%20into%20School" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#ICTs%20in%20Education" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Education)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Raising%20Standards%20in%20Education" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Skills%20and%20Training" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth">
+                <skos:prefLabel>Economic Growth</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Business%20Regulation" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Growth%20and%20Agriculture" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Growth)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Private%20Sector" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Trade" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Women%20and%20Business" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health">
+                <skos:prefLabel>Health</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Access%20to%20Healthcare" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Communicable%20Diseases" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Evidence%20Based%20Health%20Care" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#HIV%20and%20AIDS" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Immunisation" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Malaria" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Maternal,%20Neonatal%20and%20Child%20Health" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Mental%20Health" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Health)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Neglected%20Tropical%20Diseases" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Non-Communicable%20Diseases" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Reproductive%20Health" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Strengthening%20Health%20Systems" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Tuberculosis" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake">
+                <skos:prefLabel>Research Communication and Uptake</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Communication%20of%20DFID%20Research" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Information%20and%20Communication%20Technologies%20(ICTs)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#International%20Communication%20Systems" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#International%20Information%20Systems" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Internet%20Services" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Media%20and%20Broadcasting" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Online%20Journals" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Uptake,%20Evaluation%20and%20Capacity%20Building" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Systematic%20Reviews" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure">
+                <skos:prefLabel>Infrastructure</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Energy" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Engineering" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Geoscience" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Infrastructure)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Transport" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change">
+                <skos:prefLabel>Social Change</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Chronic%20Poverty" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Disability" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#ESRC/DFID%20Joint%20Research" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Gender" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Migration" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Social%20Change)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Religion%20and%20Development" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Urbanisation" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Young%20Lives" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict">
+                <skos:prefLabel>Governance and Conflict</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Building%20peace%20and%20stability" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Conflict%20Prevention" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Democratic%20Governance" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Empowerment%20and%20Accountability" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Mines%20and%20Mine%20Action" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Governance%20and%20Conflict)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Public%20Financial%20Management" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Public%20Sector%20Reform" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Security,%20Justice%20and%20Rights" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Tackling%20Corruption" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Women,%20Peace%20and%20Security" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Water%20and%20Sanitation">
+                <skos:prefLabel>Water and Sanitation</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Managing%20Water%20Resources" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Water%20and%20Sanitation)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Safe%20Drinking%20Water" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Sanitation%20and%20Hygiene" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Humanitarian%20Disasters%20and%20Emergencies">
+                <skos:prefLabel>Humanitarian Disasters and Emergencies</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Humanitarian%20Assistance%20and%20Disasters" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20and%20Nutrition">
+                <skos:prefLabel>Food and Nutrition</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20Security" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Hunger%20Emergencies" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Food%20and%20Nutrition)" />
+                <skos:narrower rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Nutrition" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Access%20to%20Healthcare">
+                <skos:prefLabel>Access to Healthcare</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Adaptation%20to%20Climate%20Change">
+                <skos:prefLabel>Adaptation to Climate Change</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agricultural%20Innovation">
+                <skos:prefLabel>Agricultural Innovation</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Arms%20Control">
+                <skos:prefLabel>Arms Control</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Building%20peace%20and%20stability">
+                <skos:prefLabel>Building peace and stability</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Business%20Regulation">
+                <skos:prefLabel>Business Regulation</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Chronic%20Poverty">
+                <skos:prefLabel>Chronic Poverty</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Communicable%20Diseases">
+                <skos:prefLabel>Communicable Diseases</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Communication%20of%20DFID%20Research">
+                <skos:prefLabel>Communication of DFID Research</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Conflict%20Prevention">
+                <skos:prefLabel>Conflict Prevention</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Crops">
+                <skos:prefLabel>Crops</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Democratic%20Governance">
+                <skos:prefLabel>Democratic Governance</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Disability">
+                <skos:prefLabel>Disability</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth">
+                <skos:prefLabel>Economic Growth</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education%20in%20Fragile%20States">
+                <skos:prefLabel>Education in Fragile States</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education%20Policy%20and%20Strategy">
+                <skos:prefLabel>Education Policy and Strategy</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Empowerment%20and%20Accountability">
+                <skos:prefLabel>Empowerment and Accountability</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Energy">
+                <skos:prefLabel>Energy</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Engineering">
+                <skos:prefLabel>Engineering</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#ESRC/DFID%20Joint%20Research">
+                <skos:prefLabel>ESRC/DFID Joint Research</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Evidence%20Based%20Health%20Care">
+                <skos:prefLabel>Evidence Based Health Care</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Fisheries,%20Aquaculture%20and%20Fish%20Genetics">
+                <skos:prefLabel>Fisheries, Aquaculture and Fish Genetics</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Focus%20on%20Girls%20Education">
+                <skos:prefLabel>Focus on Girls Education</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20Security">
+                <skos:prefLabel>Food Security</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20and%20Nutrition" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Forests">
+                <skos:prefLabel>Forests</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Gender">
+                <skos:prefLabel>Gender</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Geoscience">
+                <skos:prefLabel>Geoscience</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Getting%20Kids%20into%20School">
+                <skos:prefLabel>Getting Kids into School</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Growth%20and%20Agriculture">
+                <skos:prefLabel>Growth and Agriculture</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#HIV%20and%20AIDS">
+                <skos:prefLabel>HIV and AIDS</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Humanitarian%20Assistance%20and%20Disasters">
+                <skos:prefLabel>Humanitarian Assistance and Disasters</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Humanitarian%20Disasters%20and%20Emergencies" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Hunger%20Emergencies">
+                <skos:prefLabel>Hunger Emergencies</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20and%20Nutrition" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#ICTs%20in%20Education">
+                <skos:prefLabel>ICTs in Education</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Immunisation">
+                <skos:prefLabel>Immunisation</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Information%20and%20Communication%20Technologies%20(ICTs)">
+                <skos:prefLabel>Information and Communication Technologies (ICTs)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#International%20Communication%20Systems">
+                <skos:prefLabel>International Communication Systems</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#International%20Information%20Systems">
+                <skos:prefLabel>International Information Systems</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Internet%20Services">
+                <skos:prefLabel>Internet Services</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Livestock%20Production">
+                <skos:prefLabel>Livestock Production</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Low%20Carbon%20Development">
+                <skos:prefLabel>Low Carbon Development</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Malaria">
+                <skos:prefLabel>Malaria</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Managing%20Water%20Resources">
+                <skos:prefLabel>Managing Water Resources</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Water%20and%20Sanitation" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Maternal,%20Neonatal%20and%20Child%20Health">
+                <skos:prefLabel>Maternal, Neonatal and Child Health</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Media%20and%20Broadcasting">
+                <skos:prefLabel>Media and Broadcasting</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Mental%20Health">
+                <skos:prefLabel>Mental Health</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Migration">
+                <skos:prefLabel>Migration</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Mines%20and%20Mine%20Action">
+                <skos:prefLabel>Mines and Mine Action</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Agriculture)">
+                <skos:prefLabel>Miscellaneous (Agriculture)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Climate%20and%20Environment)">
+                <skos:prefLabel>Miscellaneous (Climate and Environment)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Education)">
+                <skos:prefLabel>Miscellaneous (Education)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Food%20and%20Nutrition)">
+                <skos:prefLabel>Miscellaneous (Food and Nutrition)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20and%20Nutrition" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Governance%20and%20Conflict)">
+                <skos:prefLabel>Miscellaneous (Governance and Conflict)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Growth)">
+                <skos:prefLabel>Miscellaneous (Growth)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Health)">
+                <skos:prefLabel>Miscellaneous (Health)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Infrastructure)">
+                <skos:prefLabel>Miscellaneous (Infrastructure)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Social%20Change)">
+                <skos:prefLabel>Miscellaneous (Social Change)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Miscellaneous%20(Water%20and%20Sanitation)">
+                <skos:prefLabel>Miscellaneous (Water and Sanitation)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Water%20and%20Sanitation" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Natural%20Resource%20Systems">
+                <skos:prefLabel>Natural Resource Systems</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Neglected%20Tropical%20Diseases">
+                <skos:prefLabel>Neglected Tropical Diseases</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Non-Communicable%20Diseases">
+                <skos:prefLabel>Non-Communicable Diseases</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Nutrition">
+                <skos:prefLabel>Nutrition</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Food%20and%20Nutrition" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Online%20Journals">
+                <skos:prefLabel>Online Journals</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Private%20Sector">
+                <skos:prefLabel>Private Sector</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Public%20Financial%20Management">
+                <skos:prefLabel>Public Financial Management</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Public%20Sector%20Reform">
+                <skos:prefLabel>Public Sector Reform</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Raising%20Standards%20in%20Education">
+                <skos:prefLabel>Raising Standards in Education</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Religion%20and%20Development">
+                <skos:prefLabel>Religion and Development</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Reproductive%20Health">
+                <skos:prefLabel>Reproductive Health</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20into%20Use%20(Agriculture)">
+                <skos:prefLabel>Research into Use (Agriculture)</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Uptake,%20Evaluation%20and%20Capacity%20Building">
+                <skos:prefLabel>Research Uptake, Evaluation and Capacity Building</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Safe%20Drinking%20Water">
+                <skos:prefLabel>Safe Drinking Water</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Water%20and%20Sanitation" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Sanitation%20and%20Hygiene">
+                <skos:prefLabel>Sanitation and Hygiene</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Water%20and%20Sanitation" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Security,%20Justice%20and%20Rights">
+                <skos:prefLabel>Security, Justice and Rights</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Skills%20and%20Training">
+                <skos:prefLabel>Skills and Training</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Education" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Strengthening%20Health%20Systems">
+                <skos:prefLabel>Strengthening Health Systems</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Systematic%20Reviews">
+                <skos:prefLabel>Systematic Reviews</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Research%20Communication%20and%20Uptake" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Tackling%20Corruption">
+                <skos:prefLabel>Tackling Corruption</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Trade">
+                <skos:prefLabel>Trade</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Transport">
+                <skos:prefLabel>Transport</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Tuberculosis">
+                <skos:prefLabel>Tuberculosis</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Health" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Urbanisation">
+                <skos:prefLabel>Urbanisation</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Women%20and%20Business">
+                <skos:prefLabel>Women and Business</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Economic%20Growth" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Women,%20Peace%20and%20Security">
+                <skos:prefLabel>Women, Peace and Security</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Governance%20and%20Conflict" />
+            </skos:Concept>
+
+            <skos:Concept rdf:about="http://r4d.dfid.gov.uk/rdf/skos/Themes#Young%20Lives">
+                <skos:prefLabel>Young Lives</skos:prefLabel>
+                <skos:inScheme rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes"/>
+                <skos:broader rdf:resource="http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" />
+            </skos:Concept>
+</rdf:RDF>

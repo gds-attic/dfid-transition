@@ -34,6 +34,17 @@
       "type": "date",
       "display_as_result_metadata": true,
       "filterable": false
+    },
+    {
+      "key": "theme",
+      "name": "Theme",
+      "type": "text",
+      "preposition": "in themes",
+      "display_as_result_metadata": true,
+      "filterable": true,
+      "allowed_values": [
+        {"label": "Agriculture", "value": "Agriculture"}
+      ]
     }
   ]
 }
