@@ -52,8 +52,8 @@ describe DfidTransition::Patch::Themes do
       expect(allowed_values.count).to eq(95)
       expect(allowed_values).to include(
         {
-          'label' => 'Neglected%20Tropical%20Diseases',
-          'value' => 'Neglected Tropical Diseases'
+          'label' => 'Neglected Tropical Diseases',
+          'value' => 'Neglected%20Tropical%20Diseases'
         }
       )
     end

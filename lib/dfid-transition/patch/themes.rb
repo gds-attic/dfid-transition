@@ -35,8 +35,8 @@ module DfidTransition
           theme_slug = solution['theme'].to_s.sub(%r{http://.*#}, '')
 
           {
-            label: theme_slug,
-            value: solution['prefLabel'].to_s
+            value: theme_slug,
+            label: solution['prefLabel'].to_s
           }
         end
       end
