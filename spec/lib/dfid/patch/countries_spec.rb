@@ -26,12 +26,12 @@ describe DfidTransition::Patch::Countries do
     end
   end
 
-  describe '#run!' do
+  describe '#run' do
     let(:patch_location) { 'spec/fixtures/schemas/dfid_research_outputs.json' }
 
     context 'the target schema file does not exist' do
       it 'tells us so' do
-        expect { patch.run! }.to raise_error(
+        expect { patch.run }.to raise_error(
           Errno::ENOENT, /dfid_research_outputs\.json/)
       end
     end
@@ -66,7 +66,7 @@ describe DfidTransition::Patch::Countries do
         end
 
         it 'patches the schema with all extant countries' do
-          patch.run!
+          patch.run
           expect(country_facet['allowed_values'].length).to eql(195)
         end
 
@@ -74,7 +74,7 @@ describe DfidTransition::Patch::Countries do
           let(:schema_src) { 'spec/fixtures/schemas/dfid_research_outputs_no_countries.json' }
 
           it 'fails with an informative KeyError' do
-            expect { patch.run! }.to raise_error(KeyError, /No country facet found/)
+            expect { patch.run }.to raise_error(KeyError, /No country facet found/)
           end
         end
       end
