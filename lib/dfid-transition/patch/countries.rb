@@ -39,8 +39,8 @@ module DfidTransition
       def transform_to_label_value(query_results)
         query_results.map do |result|
           {
-            label: result.dig('entry', 'country'),
-            value: result.dig('entry', 'name')
+            value: result.dig('entry', 'country'),
+            label: result.dig('entry', 'name')
           }
         end
       end
