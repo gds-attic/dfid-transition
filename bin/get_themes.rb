@@ -30,4 +30,4 @@ results.map! do |solution|
   }
 end
 
-puts result
+puts results
