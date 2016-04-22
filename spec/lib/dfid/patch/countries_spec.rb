@@ -60,7 +60,7 @@ describe DfidTransition::Patch::Countries do
         let(:all_countries) { json_for_page(1).concat(json_for_page(2)) }
 
         before do
-          allow(DfidTransition::GovUkCountryRegister).to receive(:countries).
+          allow(GovUk::Registers::Country).to receive(:countries).
             and_return(all_countries)
         end
 

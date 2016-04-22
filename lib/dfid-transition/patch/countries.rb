@@ -1,14 +1,14 @@
 require 'rest-client'
 require 'json'
 require 'dfid-transition/patch/base'
-require 'dfid-transition/govuk_country_registry'
+require 'gov_uk/registers/country'
 
 module DfidTransition
   module Patch
     class Countries < Base
       def mutate_schema
         country_facet['allowed_values'] = transform_to_label_value(
-          DfidTransition::GovUkCountryRegister.countries)
+          GovUk::Registers::Country.countries)
       end
 
     private
