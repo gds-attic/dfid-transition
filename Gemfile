@@ -6,6 +6,10 @@ gem 'sparql'
 gem 'rdf-rdfxml'
 gem 'pry'
 
+group :development do
+  gem 'govuk-lint'
+end
+
 group :test do
   gem 'rspec'
 end
