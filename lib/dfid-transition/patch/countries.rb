@@ -25,7 +25,7 @@ module DfidTransition
 
         [].tap do |results|
           while !done
-            body = RestClient.get(REGISTER_JSON, { params: params })
+            body = RestClient.get(REGISTER_JSON, params: params)
             countries_page = JSON.parse(body)
 
             results.concat(countries_page.select(&existing_countries))

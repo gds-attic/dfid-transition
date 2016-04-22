@@ -26,6 +26,7 @@ module DfidTransition
       end
 
     private
+
       def theme_facet
         facet('theme')
       end
@@ -40,7 +41,6 @@ module DfidTransition
           }
         end
       end
-
     end
   end
 end
