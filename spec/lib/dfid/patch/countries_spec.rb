@@ -58,10 +58,10 @@ describe DfidTransition::Patch::Countries do
 
         before do
           allow(RestClient).to receive(:get).with(
-            DfidTransition::Patch::Countries::REGISTER_JSON,
+            DfidTransition::GovUkCountryRegister::URL,
             params: page(1)).and_return(File.read(query_results_p1))
           allow(RestClient).to receive(:get).with(
-            DfidTransition::Patch::Countries::REGISTER_JSON,
+            DfidTransition::GovUkCountryRegister::URL,
             params: page(2)).and_return(File.read(query_results_p2))
         end
 
