@@ -2,13 +2,12 @@ require 'spec_helper'
 require 'govuk/country_registry'
 
 describe Govuk::CountryRegister do
-
   describe '.countries' do
     let(:query_results_p1)  { 'spec/fixtures/service-results/country-register-p1.json' }
     let(:query_results_p2)  { 'spec/fixtures/service-results/country-register-p2.json' }
 
     def page(index)
-      { 'page-index' => index, 'page-size' => 100}
+      { 'page-index' => index, 'page-size' => 100 }
     end
 
     it 'returns both active and inactive countries from the register' do
@@ -22,8 +21,7 @@ describe Govuk::CountryRegister do
       result = Govuk::CountryRegister.countries
 
       expect(result.count).to eq 199
-      expect(result).to include({
-        "serial-number" => 204,
+      expect(result).to include("serial-number" => 204,
         "hash" => "a4290031913597e47cf38457798ec98ab977e745",
         "entry" =>
           {
@@ -31,10 +29,8 @@ describe Govuk::CountryRegister do
             "country" => "VA",
             "name" => "Vatican City",
             "official-name" => "Vatican City State"
-          }
-        })
-      expect(result).to include({
-        "serial-number" => 1,
+          })
+      expect(result).to include("serial-number" => 1,
         "hash"          => "439cf12ecb3f3cff67b8b5eab67aab4e28896941",
         "entry" => {
           "citizen-names" => "Soviet citizen",
@@ -42,10 +38,7 @@ describe Govuk::CountryRegister do
           "end-date"      => "1991-12-25",
           "name"          => "USSR",
           "official-name" => "Union of Soviet Socialist Republics"
-        }
-      })
+        })
     end
   end
-
-
 end

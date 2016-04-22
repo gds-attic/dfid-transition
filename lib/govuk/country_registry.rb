@@ -8,7 +8,7 @@ module Govuk
 
       [].tap do |results|
         while !done
-          body = RestClient.get(URL, { params: params })
+          body = RestClient.get(URL, params: params)
           countries_page = JSON.parse(body)
 
           results.concat(countries_page)
@@ -18,6 +18,5 @@ module Govuk
         end
       end
     end
-
   end
 end
