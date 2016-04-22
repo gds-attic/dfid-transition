@@ -1,4 +1,4 @@
-module GovUk
+module Govuk
   class Registers
     class Country
       URL = 'https://country.register.gov.uk/records.json'.freeze
