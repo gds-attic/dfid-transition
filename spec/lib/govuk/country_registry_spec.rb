@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'dfid-transition/govuk_country_registry'
+require 'govuk/country_registry'
 
-describe DfidTransition::GovUkCountryRegister do
+describe Govuk::CountryRegister do
 
   describe '.countries' do
     let(:query_results_p1)  { 'spec/fixtures/service-results/country-register-p1.json' }
@@ -13,13 +13,13 @@ describe DfidTransition::GovUkCountryRegister do
 
     it 'returns both active and inactive countries from the register' do
       allow(RestClient).to receive(:get).with(
-        DfidTransition::GovUkCountryRegister::URL,
+        Govuk::CountryRegister::URL,
         params: page(1)).and_return(File.read(query_results_p1))
       allow(RestClient).to receive(:get).with(
-        DfidTransition::GovUkCountryRegister::URL,
+        Govuk::CountryRegister::URL,
         params: page(2)).and_return(File.read(query_results_p2))
 
-      result = DfidTransition::GovUkCountryRegister.countries
+      result = Govuk::CountryRegister.countries
 
       expect(result.count).to eq 199
       expect(result).to include({

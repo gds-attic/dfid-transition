@@ -1,5 +1,5 @@
-module DfidTransition
-  class GovUkCountryRegister
+module Govuk
+  class CountryRegister
     URL = 'https://country.register.gov.uk/records.json'.freeze
 
     def self.countries
