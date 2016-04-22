@@ -52,17 +52,16 @@ describe DfidTransition::Patch::Countries do
       end
 
       context 'we have a full set of countries from the countries register' do
-        def page(index)
-          { 'page-index' => index, 'page-size' => 100 }
+        def json_for_page(page)
+          JSON.parse(
+            File.read(
+              "spec/fixtures/service-results/country-register-p#{page}.json"))
         end
+        let(:all_countries) { json_for_page(1).concat(json_for_page(2)) }
 
         before do
-          allow(RestClient).to receive(:get).with(
-            DfidTransition::GovUkCountryRegister::URL,
-            params: page(1)).and_return(File.read(query_results_p1))
-          allow(RestClient).to receive(:get).with(
-            DfidTransition::GovUkCountryRegister::URL,
-            params: page(2)).and_return(File.read(query_results_p2))
+          allow(DfidTransition::GovUkCountryRegister).to receive(:countries).
+            and_return(all_countries)
         end
 
         it 'patches the schema with all extant countries' do
