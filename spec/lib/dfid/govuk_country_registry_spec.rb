@@ -11,7 +11,7 @@ describe DfidTransition::GovUkCountryRegister do
       { 'page-index' => index, 'page-size' => 100}
     end
 
-    it 'returns active countries from the register' do
+    it 'returns both active and inactive countries from the register' do
       allow(RestClient).to receive(:get).with(
         DfidTransition::GovUkCountryRegister::URL,
         params: page(1)).and_return(File.read(query_results_p1))
@@ -21,7 +21,7 @@ describe DfidTransition::GovUkCountryRegister do
 
       result = DfidTransition::GovUkCountryRegister.countries
 
-      expect(result.count).to eq 195
+      expect(result.count).to eq 199
       expect(result).to include({
         "serial-number" => 204,
         "hash" => "a4290031913597e47cf38457798ec98ab977e745",
@@ -33,7 +33,7 @@ describe DfidTransition::GovUkCountryRegister do
             "official-name" => "Vatican City State"
           }
         })
-      expect(result).not_to include({
+      expect(result).to include({
         "serial-number" => 1,
         "hash"          => "439cf12ecb3f3cff67b8b5eab67aab4e28896941",
         "entry" => {

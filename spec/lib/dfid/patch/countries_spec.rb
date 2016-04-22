@@ -67,7 +67,7 @@ describe DfidTransition::Patch::Countries do
 
         it 'patches the schema with all extant countries' do
           patch.run
-          expect(country_facet['allowed_values'].length).to eql(195)
+          expect(country_facet['allowed_values'].length).to eql(199)
           expect(country_facet['allowed_values']).to include(
             'label' => 'The Bahamas',
             'value' => 'BS'
