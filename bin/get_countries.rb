@@ -33,11 +33,12 @@ results_str = RestClient.get JSON_ENDPOINT, params: { query: get_countries }
 results_hash = JSON.parse results_str
 source_array = results_hash.dig "results", "bindings"
 
-dest_array = source_array.inject([]) do |dest_array, result|
+source_array.inject([]) do |dest_array, result|
   dest_array << {
     label: result.dig('countryName', 'value'),
     value: result.dig('countryCode', 'value')
   }
+  dest_array
 end
 
 puts JSON.pretty_generate(dest_array)
