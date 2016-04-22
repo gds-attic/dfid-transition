@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'govuk/country_registry'
+require 'gov_uk/registers/country'
 
-describe Govuk::CountryRegister do
+describe GovUk::Registers::Country do
   describe '.countries' do
     let(:query_results_p1)  { 'spec/fixtures/service-results/country-register-p1.json' }
     let(:query_results_p2)  { 'spec/fixtures/service-results/country-register-p2.json' }
@@ -12,13 +12,13 @@ describe Govuk::CountryRegister do
 
     it 'returns both active and inactive countries from the register' do
       allow(RestClient).to receive(:get).with(
-        Govuk::CountryRegister::URL,
+        GovUk::Registers::Country::URL,
         params: page(1)).and_return(File.read(query_results_p1))
       allow(RestClient).to receive(:get).with(
-        Govuk::CountryRegister::URL,
+        GovUk::Registers::Country::URL,
         params: page(2)).and_return(File.read(query_results_p2))
 
-      result = Govuk::CountryRegister.countries
+      result = GovUk::Registers::Country.countries
 
       expect(result.count).to eq 199
       expect(result).to include("serial-number" => 204,
