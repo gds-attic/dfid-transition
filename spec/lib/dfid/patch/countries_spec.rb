@@ -37,7 +37,7 @@ describe DfidTransition::Patch::Countries do
     end
 
     context 'the target schema file exists' do
-      let(:schema_src)     { 'spec/fixtures/schemas/dfid_research_outputs_src.json' }
+      let(:schema_src) { 'spec/fixtures/schemas/dfid_research_outputs_src.json' }
       let(:query_results_p1)  { 'spec/fixtures/service-results/country-register-p1.json' }
       let(:query_results_p2)  { 'spec/fixtures/service-results/country-register-p2.json' }
       let(:parsed_json)    { JSON.parse(File.read(patch_location)) }
@@ -53,7 +53,7 @@ describe DfidTransition::Patch::Countries do
 
       context 'we have a full set of countries from the countries register' do
         def page(index)
-          { 'page-index' => index, 'page-size' => 100}
+          { 'page-index' => index, 'page-size' => 100 }
         end
 
         before do
@@ -68,10 +68,8 @@ describe DfidTransition::Patch::Countries do
         it 'patches the schema with all extant countries' do
           patch.run
           expect(country_facet['allowed_values'].length).to eql(195)
-          expect(country_facet['allowed_values']).to include({
-            'label' => 'The Bahamas',
-            'value' => 'BS'
-          })
+          expect(country_facet['allowed_values']).to include('label' => 'The Bahamas',
+            'value' => 'BS')
         end
 
         context 'the target schema file does not have a countries facet to patch' do
@@ -82,7 +80,6 @@ describe DfidTransition::Patch::Countries do
           end
         end
       end
-
     end
   end
 end

@@ -1,6 +1,5 @@
 module DfidTransition
   module Patch
-
     class Base
       attr_reader :location
 
@@ -9,8 +8,8 @@ module DfidTransition
       end
 
       def facet(name)
-        schema_hash['facets'].find { |f| f['key'] == name } or
-          raise KeyError.new("No #{name} facet found")
+        schema_hash['facets'].find { |f| f['key'] == name } ||
+          raise(KeyError.new("No #{name} facet found"))
       end
 
       def mutate_schema
@@ -18,7 +17,7 @@ module DfidTransition
       end
 
       def run
-        File.exists?(location) or raise Errno::ENOENT.new(location)
+        File.exist?(location) || raise(Errno::ENOENT.new(location))
 
         mutate_schema
 
@@ -26,8 +25,9 @@ module DfidTransition
           target.write(JSON.pretty_generate(schema_hash))
         end
       end
-      
+
     private
+
       def schema_hash
         @schema_hash ||= JSON.parse(File.read(location))
       end
@@ -43,6 +43,5 @@ module DfidTransition
         )
       end
     end
-
   end
 end

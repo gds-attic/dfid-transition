@@ -46,17 +46,14 @@ describe DfidTransition::Patch::Themes do
       patch.run
 
       schema = JSON.parse(File.read(path_to_schema))
-      themes = schema['facets'].find{ |facet| facet['key'] == 'theme' }
+      themes = schema['facets'].find { |facet| facet['key'] == 'theme' }
       allowed_values = themes['allowed_values']
 
       expect(allowed_values.count).to eq(95)
       expect(allowed_values).to include(
-        {
-          'label' => 'Neglected Tropical Diseases',
-          'value' => 'Neglected%20Tropical%20Diseases'
-        }
+        'label' => 'Neglected Tropical Diseases',
+'value' => 'Neglected%20Tropical%20Diseases'
       )
     end
-
   end
 end
