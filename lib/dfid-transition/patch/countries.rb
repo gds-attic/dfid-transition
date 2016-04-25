@@ -1,6 +1,5 @@
-require 'rest-client'
-require 'json'
 require 'dfid-transition/patch/base'
+require 'rest-client'
 require 'govuk/registers/country'
 
 module DfidTransition

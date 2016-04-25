@@ -1,7 +1,6 @@
 require 'dfid-transition/patch/base'
 require 'sparql'
 require 'rdf/rdfxml'
-require 'json'
 
 module DfidTransition
   module Patch

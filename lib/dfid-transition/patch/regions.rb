@@ -1,6 +1,5 @@
 require 'dfid-transition/patch/base'
 require 'rest-client'
-require 'json'
 
 module DfidTransition
   module Patch
