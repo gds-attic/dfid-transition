@@ -16,6 +16,18 @@
   "document_noun": "output",
   "facets": [
     {
+        "key": "region",
+        "name": "Region",
+        "type": "text",
+        "preposition": "in region",
+        "display_as_result_metadata": true,
+        "filterable": true,
+        "allowed_values": [
+          {"label": "Africa", "value": "africa"},
+          {"label": "South-east Asia", "value": "south-east-asia"}
+        ]
+    },
+    {
         "key": "country",
         "name": "Country",
         "type": "text",
