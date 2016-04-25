@@ -25,15 +25,10 @@ SPARQL
 
 results_str = RestClient.get JSON_ENDPOINT, params: { query: get_countries }
 
-# puts Dir.pwd
-# File.open('../spec/fixtures/countries.json', 'w+') do |file|
-#   file.write(results_str)
-# end
-
 results_hash = JSON.parse results_str
 source_array = results_hash.dig "results", "bindings"
 
-source_array.inject([]) do |dest_array, result|
+label_value_pairs = source_array.inject([]) do |dest_array, result|
   dest_array << {
     label: result.dig('countryName', 'value'),
     value: result.dig('countryCode', 'value')
@@ -41,4 +36,4 @@ source_array.inject([]) do |dest_array, result|
   dest_array
 end
 
-puts JSON.pretty_generate(dest_array)
+puts JSON.pretty_generate(label_value_pairs)
