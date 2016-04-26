@@ -7,16 +7,15 @@ module DfidTransition
 
   module Patch
     class Regions < Base
-
       def mutate_schema
         html = RestClient.get R4D_ADVANCED_SEARCH
 
         region_facet['allowed_values'] =
-          transform_to_label_value(html).reject {|lv| lv[:value] == "=="}
+          transform_to_label_value(html).reject { |lv| lv[:value] == "==" }
       end
 
 
-      private
+    private
 
       def region_facet
         facet('region')
