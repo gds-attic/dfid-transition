@@ -37,10 +37,9 @@ module DfidTransition
         source_array = results_hash.dig "results", "bindings"
 
         source_array.inject([]) do |dest_array, result|
-          name = result.dig('nameShort', 'value')
           dest_array << {
-            label: name,
-            value: name.downcase.gsub(' ', '-')
+            label: result.dig('nameShort', 'value'),
+            value: result.dig('codeUN', 'value')
           }
           dest_array
         end
