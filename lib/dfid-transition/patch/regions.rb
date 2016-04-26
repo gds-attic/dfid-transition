@@ -7,13 +7,13 @@ module DfidTransition
 
   module Patch
     class Regions < Base
+
       def mutate_schema
         html = RestClient.get R4D_ADVANCED_SEARCH
 
         region_facet['allowed_values'] =
           transform_to_label_value(html).reject { |lv| lv[:value] == "==" }
       end
-
 
     private
 
@@ -26,7 +26,7 @@ module DfidTransition
         options = doc.css('#ContentPlaceHolderMainDiv_ddlRegionList option')
         options.map do |option|
           {
-            label: option.text,
+            label: option.xpath('./text()'),
             value: option['value']
           }
         end
