@@ -5,6 +5,7 @@ gem 'rest-client'
 gem 'sparql'
 gem 'rdf-rdfxml'
 gem 'pry'
+gem 'nokogiri'
 
 group :development do
   gem 'govuk-lint'

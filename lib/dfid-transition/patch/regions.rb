@@ -1,28 +1,18 @@
 require 'dfid-transition/patch/base'
 require 'rest-client'
+require 'nokogiri'
 
 module DfidTransition
+  R4D_ADVANCED_SEARCH = "http://r4d.dfid.gov.uk/Search/SearchResearchDatabase.aspx"
+
   module Patch
     class Regions < Base
-      JSON_ENDPOINT = "http://linked-development.org/sparql.json"
-
-      QUERY = <<-SPARQL
-        prefix geo:<http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
-
-        SELECT DISTINCT ?codeUN ?nameShort
-        WHERE {
-          ?region a geo:geographical_region ;
-                  geo:codeUN ?codeUN ;
-                  geo:nameShort ?nameShort .
-
-          FILTER(LANG(?nameShort) = "en")
-        }
-      SPARQL
 
       def mutate_schema
-        results = RestClient.get JSON_ENDPOINT, params: { query: QUERY }
+        html = RestClient.get R4D_ADVANCED_SEARCH
 
-        region_facet['allowed_values'] = transform_to_label_value(results)
+        region_facet['allowed_values'] =
+          transform_to_label_value(html).reject {|lv| lv[:value] == "=="}
       end
 
 
@@ -32,16 +22,14 @@ module DfidTransition
         facet('region')
       end
 
-      def transform_to_label_value(results)
-        results_hash = JSON.parse results
-        source_array = results_hash.dig "results", "bindings"
-
-        source_array.inject([]) do |dest_array, result|
-          dest_array << {
-            label: result.dig('nameShort', 'value'),
-            value: result.dig('codeUN', 'value')
+      def transform_to_label_value(html)
+        doc = Nokogiri::HTML(html)
+        options = doc.css('#ContentPlaceHolderMainDiv_ddlRegionList option')
+        options.map do |option|
+          {
+            label: option.text,
+            value: option['value']
           }
-          dest_array
         end
       end
     end

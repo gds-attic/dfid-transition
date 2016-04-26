@@ -41,8 +41,13 @@ describe DfidTransition::Patch::Regions do
       let(:test_schema)  { 'spec/fixtures/schemas/dfid_research_outputs_src.json' }
       let(:parsed_json)  { JSON.parse(File.read(patch_location)) }
       let(:region_facet) { parsed_json['facets'].find { |f| f['key'] == 'region' } }
+      let(:regions_response_body) { nil }
 
       before do
+        allow(RestClient).to receive(:get).with(
+          DfidTransition::R4D_ADVANCED_SEARCH
+        ).and_return(regions_response_body)
+
         FileUtils.cp(test_schema, patch_location)
       end
 
@@ -59,27 +64,29 @@ describe DfidTransition::Patch::Regions do
       end
 
       context 'we have a full set of regions from the regions SPARQL' do
-        let(:regions_sparql_json) {
-          File.read('spec/fixtures/service-results/regions-sparql.json')
+        let(:regions_response_body) {
+          File.read('spec/fixtures/service-results/r4dAdvancedSearch.html')
         }
 
         before do
-          allow(RestClient).to receive(:get).with(
-            DfidTransition::Patch::Regions::JSON_ENDPOINT,
-            params: { query: DfidTransition::Patch::Regions::QUERY }
-          ).and_return(regions_sparql_json)
-
           patch.run
         end
 
         it 'patches the schema with all extant regions' do
-          expect(region_facet['allowed_values'].length).to eql(26)
+          expect(region_facet['allowed_values'].length).to eql(30)
         end
 
-        it 'has region names for labels and UN codes for facets' do
+        it 'does not have an "All Regions" option' do
+          expect(region_facet['allowed_values']).not_to include(
+            'label' => 'All Regions',
+            'value' => '=='
+          )
+        end
+
+        it 'has titleized region names for labels and UN codes for facets' do
           expect(region_facet['allowed_values']).to include(
-            'label' => 'south-eastern Asia',
-            'value' => '035'
+            'label' => 'Australia and New Zealand',
+            'value' => '53'
           )
         end
       end
