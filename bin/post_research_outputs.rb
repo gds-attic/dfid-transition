@@ -1,6 +1,6 @@
+#!/usr/bin/env ruby
 require 'gds_api/publishing_api_v2'
 require 'pry'
-
 
 content_id = "7ff519c9-f315-490e-8ccc-1f01e80f0cf1"
 path = '/dfid-research-outputs/abc'
