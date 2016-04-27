@@ -4,25 +4,7 @@ require 'dfid-transition/patch/specialist_publisher/themes'
 describe DfidTransition::Patch::SpecialistPublisher::Themes do
   let(:path_to_schema) { nil }
 
-  subject(:patch) { DfidTransition::Patch::SpecialistPublisher::Themes.new(path_to_schema) }
-
-  describe '#location' do
-    context 'a path is given' do
-      let(:path_to_schema) { '/foo' }
-      it 'stores the location of the schema' do
-        expect(patch.location).to eq(path_to_schema)
-      end
-    end
-
-    context 'when no path is given' do
-      it 'derives a conventional location' do
-        expect(patch.location).to eql(
-          File.expand_path(
-            File.join(Dir.pwd, '..',
-              'specialist-publisher-rebuild/lib/documents/schemas/dfid_research_outputs.json')))
-      end
-    end
-  end
+  it_behaves_like "a patcher"
 
   describe '#run' do
     let(:path_to_schema) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs.json' }
