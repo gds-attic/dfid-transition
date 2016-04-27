@@ -25,14 +25,14 @@ describe DfidTransition::Patch::Themes do
   end
 
   describe '#run' do
-    let(:path_to_schema) { 'spec/fixtures/schemas/dfid_research_outputs.json' }
+    let(:path_to_schema) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs.json' }
     let(:r4d_skos_theme_repo) do
       RDF::Repository.load('spec/fixtures/service-results/r4d_skos_themes.rdf')
     end
 
     before do
       FileUtils.cp(
-        'spec/fixtures/schemas/dfid_research_outputs_src.json',
+        'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json',
         path_to_schema)
     end
 
