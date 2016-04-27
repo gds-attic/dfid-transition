@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'json'
-require 'dfid-transition/patch/countries'
+require 'dfid-transition/patch/specialist_publisher/countries'
 
-describe DfidTransition::Patch::Countries do
+describe DfidTransition::Patch::SpecialistPublisher::Countries do
   subject(:patch) { described_class.new(patch_location) }
 
   describe '#location' do

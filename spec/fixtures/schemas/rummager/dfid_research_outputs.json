@@ -1,0 +1,19 @@
+{
+  "fields": [
+    "country",
+    "published_date"
+  ],
+
+  "expanded_search_result_fields": {
+    "country": [
+      {
+        "label": "United Kingdom",
+        "value": "UK"
+      },
+      {
+        "label": "Azerbaijan",
+        "value": "AZ"
+      }
+    ]
+  }
+}

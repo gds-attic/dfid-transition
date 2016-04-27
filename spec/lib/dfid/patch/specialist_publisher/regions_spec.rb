@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'json'
 require 'rest-client'
-require 'dfid-transition/patch/regions'
+require 'dfid-transition/patch/specialist_publisher/regions'
 
-describe DfidTransition::Patch::Regions do
+describe DfidTransition::Patch::SpecialistPublisher::Regions do
   subject(:patch) { described_class.new(patch_location) }
 
   describe '#location' do
