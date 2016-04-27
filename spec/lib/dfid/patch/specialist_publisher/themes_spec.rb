@@ -2,12 +2,13 @@ require 'spec_helper'
 require 'dfid-transition/patch/specialist_publisher/themes'
 
 describe DfidTransition::Patch::SpecialistPublisher::Themes do
-  let(:path_to_schema) { nil }
+  let(:patch_location) { nil }
+  subject(:patch) { DfidTransition::Patch::SpecialistPublisher::Themes.new(patch_location) }
 
   it_behaves_like "a patcher"
 
   describe '#run' do
-    let(:path_to_schema) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs.json' }
+    let(:patch_location) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs.json' }
     let(:r4d_skos_theme_repo) do
       RDF::Repository.load('spec/fixtures/service-results/r4d_skos_themes.rdf')
     end
@@ -15,11 +16,11 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     before do
       FileUtils.cp(
         'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json',
-        path_to_schema)
+        patch_location)
     end
 
     after do
-      File.delete(path_to_schema)
+      File.delete(patch_location)
     end
 
     it 'adds theme data to the schema' do
@@ -27,7 +28,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
 
       patch.run
 
-      schema = JSON.parse(File.read(path_to_schema))
+      schema = JSON.parse(File.read(patch_location))
       themes = schema['facets'].find { |facet| facet['key'] == 'theme' }
       allowed_values = themes['allowed_values']
 
