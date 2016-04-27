@@ -5,15 +5,9 @@ require 'dfid-transition/patch/specialist_publisher/countries'
 describe DfidTransition::Patch::SpecialistPublisher::Countries do
   subject(:patch) { described_class.new(patch_location) }
 
+  it_behaves_like "a patcher"
+
   describe '#location' do
-    context 'a schema location is supplied' do
-      let(:patch_location) { 'spec/fixtures/patchme.json' }
-
-      it 'patches that location' do
-        expect(patch.location).to eq(patch_location)
-      end
-    end
-
     context 'a location is not supplied' do
       let(:patch_location) { nil }
 
@@ -28,13 +22,6 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
 
   describe '#run' do
     let(:patch_location) { 'spec/fixtures/schemas/dfid_research_outputs.json' }
-
-    context 'the target schema file does not exist' do
-      it 'tells us so' do
-        expect { patch.run }.to raise_error(
-          Errno::ENOENT, /dfid_research_outputs\.json/)
-      end
-    end
 
     context 'the target schema file exists' do
       let(:schema_src) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json' }
