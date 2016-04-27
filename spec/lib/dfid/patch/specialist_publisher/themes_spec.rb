@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'dfid-transition/patch/themes'
+require 'dfid-transition/patch/specialist_publisher/themes'
 
-describe DfidTransition::Patch::Themes do
+describe DfidTransition::Patch::SpecialistPublisher::Themes do
   let(:path_to_schema) { nil }
 
-  subject(:patch) { DfidTransition::Patch::Themes.new(path_to_schema) }
+  subject(:patch) { DfidTransition::Patch::SpecialistPublisher::Themes.new(path_to_schema) }
 
   describe '#location' do
     context 'a path is given' do
