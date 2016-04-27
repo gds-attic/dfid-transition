@@ -3,7 +3,8 @@ require 'json'
 require 'dfid-transition/patch/specialist_publisher/countries'
 
 describe DfidTransition::Patch::SpecialistPublisher::Countries do
-  subject(:patch) { described_class.new(patch_location) }
+  let(:patch_location) { nil }
+  subject(:patcher) { described_class.new(patch_location) }
 
   it_behaves_like "a patcher"
 
@@ -12,7 +13,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
       let(:patch_location) { nil }
 
       it 'defaults to lib/documents/schemas/dfid_research_outputs.json relative to the current directory' do
-        expect(patch.location).to eq(
+        expect(patcher.location).to eq(
           File.expand_path(
             File.join(
               Dir.pwd, '..', 'specialist-publisher-rebuild/lib/documents/schemas/dfid_research_outputs.json')))
@@ -52,7 +53,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
         end
 
         it 'patches the schema with all extant countries' do
-          patch.run
+          patcher.run
           expect(country_facet['allowed_values'].length).to eql(199)
           expect(country_facet['allowed_values']).to include(
             'label' => 'The Bahamas',
@@ -64,7 +65,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
           let(:schema_src) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_no_facets.json' }
 
           it 'fails with an informative KeyError' do
-            expect { patch.run }.to raise_error(KeyError, /No country facet found/)
+            expect { patcher.run }.to raise_error(KeyError, /No country facet found/)
           end
         end
       end
