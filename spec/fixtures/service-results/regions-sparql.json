@@ -1,0 +1,324 @@
+{
+  "head": {
+    "vars": [
+      "codeUN",
+      "nameShort"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "002"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Africa"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "019"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Americas"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "142"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "005"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "South America"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "013"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "central America"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "150"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Europe"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "035"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "south-eastern Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "034"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "southern Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "014"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "eastern Africa"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "029"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Caribbean"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "030"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "eastern Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "009"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Oceania"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "054"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Melanesia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "061"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Polynesia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "143"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Central Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "011"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "western Africa"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "145"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "western Asia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "151"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "eastern Europe"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "015"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "northern Africa"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "021"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "northern America"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "154"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "northern Europe"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "39"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "southern Europe"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "017"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "middle Africa"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "155"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "western Europe"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "057"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Micronesia"
+        }
+      },
+      {
+        "codeUN": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "type": "typed-literal",
+          "value": "053"
+        },
+        "nameShort": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "Australia and New Zealand"
+        }
+      }
+    ]
+  }
+}

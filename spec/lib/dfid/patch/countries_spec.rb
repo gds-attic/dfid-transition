@@ -74,7 +74,7 @@ describe DfidTransition::Patch::Countries do
         end
 
         context 'the target schema file does not have a countries facet to patch' do
-          let(:schema_src) { 'spec/fixtures/schemas/dfid_research_outputs_no_countries.json' }
+          let(:schema_src) { 'spec/fixtures/schemas/dfid_research_outputs_no_facets.json' }
 
           it 'fails with an informative KeyError' do
             expect { patch.run }.to raise_error(KeyError, /No country facet found/)

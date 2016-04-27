@@ -1,3 +1,5 @@
+require 'json'
+
 module DfidTransition
   module Patch
     class Base
