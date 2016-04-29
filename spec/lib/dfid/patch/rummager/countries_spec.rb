@@ -37,13 +37,7 @@ describe DfidTransition::Patch::Rummager::Countries do
         patcher.run
 
         parsed_json = JSON.parse(File.read(patch_location))
-        country_search_facets = parsed_json['expanded_search_result_fields']['country']
-
-        expect(country_search_facets.count).to eq 199
-        expect(country_search_facets).to include(
-          'label' => 'Guinea-Bissau',
-          'value' => 'GW'
-        )
+        expect(parsed_json['fields']).to include('country')
       end
     end
   end
