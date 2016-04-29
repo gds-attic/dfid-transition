@@ -7,7 +7,9 @@ module DfidTransition
     module Rummager
       class Countries < Base
         def mutate_schema
-          schema_hash.fetch('fields') | ['country']
+          unless schema_hash.fetch('fields').include?('country')
+            schema_hash.fetch('fields') << 'country'
+          end
         end
       end
     end
