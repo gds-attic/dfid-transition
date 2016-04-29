@@ -57,7 +57,7 @@ describe DfidTransition::Patch::Countries do
             File.read(
               "spec/fixtures/service-results/country-register-p#{page}.json"))
         end
-        let(:all_countries) { json_for_page(1).concat(json_for_page(2)) }
+        let(:all_countries) { json_for_page(1).merge(json_for_page(2)) }
 
         before do
           allow(Govuk::Registers::Country).to receive(:countries).

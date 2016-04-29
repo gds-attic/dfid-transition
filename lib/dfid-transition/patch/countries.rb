@@ -13,10 +13,10 @@ module DfidTransition
     private
 
       def transform_to_label_value(query_results)
-        query_results.map do |result|
+        query_results.map do |country_code, country_details|
           {
-            value: result.dig('entry', 'country'),
-            label: result.dig('entry', 'name')
+            value: country_code,
+            label: country_details['name']
           }
         end
       end

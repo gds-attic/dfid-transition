@@ -12,7 +12,7 @@ module Govuk
             body = RestClient.get(URL, params: params)
             countries_page = JSON.parse(body)
 
-            results.concat(countries_page)
+            results.concat(countries_page.to_a)
 
             done = (countries_page.length < params['page-size'])
             params['page-index'] += 1
