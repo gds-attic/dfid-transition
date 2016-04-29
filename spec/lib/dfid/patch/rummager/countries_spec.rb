@@ -20,7 +20,7 @@ describe DfidTransition::Patch::Rummager::Countries do
 
   describe '#run' do
     context 'the target schema file exists' do
-      let(:schema_src) { 'spec/fixtures/schemas/rummager/dfid_research_outputs_src.json' }
+      let(:schema_src) { 'spec/fixtures/schemas/rummager/dfid_research_outputs_no_fields.json' }
       let(:patch_location) { 'spec/fixtures/schemas/rummager/dfid_research_outputs.json' }
 
       before do
