@@ -10,9 +10,6 @@ module DfidTransition
             raise(KeyError.new("No #{name} facet found"))
         end
 
-        def mutate_schema
-          raise NotImplementedError
-        end
 
       private
 

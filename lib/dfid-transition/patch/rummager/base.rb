@@ -4,9 +4,6 @@ module DfidTransition
   module Patch
     module Rummager
       class Base < Patcher
-        def mutate_schema
-          raise NotImplementedError
-        end
 
       private
 
