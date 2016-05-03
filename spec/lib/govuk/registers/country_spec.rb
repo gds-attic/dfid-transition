@@ -23,32 +23,28 @@ describe Govuk::Registers::Country do
 
       expect(result.count).to eq 199
       expect(result).to include(
-        ["PT",
-          {
-            "entry-number" => "147-from-fixture",
-            "item-hash" => "sha-256:237f7100bbbdcf670f0b0087a07350cd824007e230795acef6835883a68f9a37",
-            "entry-timestamp" => "2016-04-05T13:23:05Z",
-            "name" => "Portugal",
-            "country" => "PT",
-            "citizen-names" => "Portuguese",
-            "official-name" => "The Portuguese Republic"
-          }
-        ]
+        "PT" => {
+          "entry-number" => "147",
+          "item-hash" => "sha-256:237f7100bbbdcf670f0b0087a07350cd824007e230795acef6835883a68f9a37",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "name" => "Portugal",
+          "country" => "PT",
+          "citizen-names" => "Portuguese",
+          "official-name" => "The Portuguese Republic"
+        }
       )
       expect(result).to include(
-        ["SU",
-          {
-            "entry-number" => "1",
-            "item-hash" => "sha-256:e94c4a9ab00d951dadde848ee2c9fe51628b22ff2e0a88bff4cca6e4e6086d7a",
-            "entry-timestamp" => "2016-04-05T13:23:05Z",
-            "name" => "USSR",
-            "country" => "SU",
-            "end-date" => "1991-12-25",
-            "citizen-names" => "Soviet citizen",
-            "official-name" =>
-            "Union of Soviet Socialist Republics"
-          }
-        ]
+        "SU" => {
+          "entry-number" => "1",
+          "item-hash" => "sha-256:e94c4a9ab00d951dadde848ee2c9fe51628b22ff2e0a88bff4cca6e4e6086d7a",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "name" => "USSR",
+          "country" => "SU",
+          "end-date" => "1991-12-25",
+          "citizen-names" => "Soviet citizen",
+          "official-name" =>
+          "Union of Soviet Socialist Republics"
+        }
       )
     end
   end

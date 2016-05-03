@@ -7,12 +7,12 @@ module Govuk
         params = { 'page-size' => 100, 'page-index' => 1 }
         done = false
 
-        [].tap do |results|
+        {}.tap do |results|
           while !done
             body = RestClient.get(URL, params: params)
             countries_page = JSON.parse(body)
 
-            results.concat(countries_page.to_a)
+            results.merge!(countries_page)
 
             done = (countries_page.length < params['page-size'])
             params['page-index'] += 1
