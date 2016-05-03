@@ -1,44 +1,18 @@
 require 'spec_helper'
 require 'json'
 require 'rest-client'
-require 'dfid-transition/patch/regions'
+require 'dfid-transition/patch/specialist_publisher/regions'
 
-describe DfidTransition::Patch::Regions do
+describe DfidTransition::Patch::SpecialistPublisher::Regions do
   subject(:patch) { described_class.new(patch_location) }
 
-  describe '#location' do
-    context 'a schema location is supplied' do
-      let(:patch_location) { 'spec/fixtures/patchme.json' }
-
-      it 'patches that location' do
-        expect(patch.location).to eq(patch_location)
-      end
-    end
-
-    context 'a location is not supplied' do
-      let(:patch_location) { nil }
-
-      it 'defaults to lib/documents/schemas/dfid_research_outputs.json relative to the current directory' do
-        expect(patch.location).to eq(
-          File.expand_path(
-            File.join(
-              Dir.pwd, '..', 'specialist-publisher-rebuild/lib/documents/schemas/dfid_research_outputs.json')))
-      end
-    end
-  end
+  it_behaves_like "holds onto the location of a schema file and warns us if it is not there"
 
   describe '#run' do
-    let(:patch_location) { 'spec/fixtures/schemas/regions-sparql.json' }
-
-    context 'the target schema file does not exist' do
-      it 'tells us so' do
-        expect { patch.run }.to raise_error(
-          Errno::ENOENT, /regions-sparql\.json/)
-      end
-    end
+    let(:patch_location) { 'spec/fixtures/schemas/dfid_research_outputs.json' }
 
     context 'the target schema file exists' do
-      let(:test_schema)  { 'spec/fixtures/schemas/dfid_research_outputs_src.json' }
+      let(:test_schema)  { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json' }
       let(:parsed_json)  { JSON.parse(File.read(patch_location)) }
       let(:region_facet) { parsed_json['facets'].find { |f| f['key'] == 'region' } }
       let(:regions_response_body) { nil }
@@ -56,7 +30,7 @@ describe DfidTransition::Patch::Regions do
       end
 
       context 'the target schema file does not have a regions facet to patch' do
-        let(:test_schema) { 'spec/fixtures/schemas/dfid_research_outputs_no_facets.json' }
+        let(:test_schema) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_no_facets.json' }
 
         it 'fails with an informative KeyError' do
           expect { patch.run }.to raise_error(KeyError, /No region facet found/)

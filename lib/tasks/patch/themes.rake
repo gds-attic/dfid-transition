@@ -1,8 +1,8 @@
-require 'dfid-transition/patch/themes'
+require 'dfid-transition/patch/specialist_publisher/themes'
 
 namespace :patch do
   desc 'Patch the DFID schema with themes from the R4D SKOS'
   task :themes do
-    DfidTransition::Patch::Themes.new.run
+    DfidTransition::Patch::SpecialistPublisher::Themes.new.run
   end
 end
