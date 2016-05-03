@@ -3,7 +3,7 @@ require 'json'
 require 'dfid-transition/patch/rummager/countries'
 
 describe DfidTransition::Patch::Rummager::Countries do
-  it_behaves_like "a patcher"
+  it_behaves_like "holds onto the location of a schema file and warns us if it is not there"
 
   describe '#location' do
     context 'a location is not supplied' do

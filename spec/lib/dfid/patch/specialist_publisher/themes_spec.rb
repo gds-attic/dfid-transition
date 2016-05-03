@@ -5,7 +5,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
   let(:patch_location) { nil }
   subject(:patch) { DfidTransition::Patch::SpecialistPublisher::Themes.new(patch_location) }
 
-  it_behaves_like "a patcher"
+  it_behaves_like "holds onto the location of a schema file and warns us if it is not there"
 
   describe '#run' do
     let(:patch_location) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs.json' }

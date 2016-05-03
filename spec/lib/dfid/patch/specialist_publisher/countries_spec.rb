@@ -6,7 +6,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
   let(:patch_location) { nil }
   subject(:patcher) { described_class.new(patch_location) }
 
-  it_behaves_like "a patcher"
+  it_behaves_like "holds onto the location of a schema file and warns us if it is not there"
 
   describe '#location' do
     context 'a location is not supplied' do

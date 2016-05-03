@@ -1,4 +1,4 @@
-shared_examples 'a patcher' do
+shared_examples 'holds onto the location of a schema file and warns us if it is not there' do
   let(:patcher) { described_class.new(patch_location) }
   let(:patch_location) { nil }
 
