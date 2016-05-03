@@ -26,7 +26,7 @@ module DfidTransition
           options = doc.css('#ContentPlaceHolderMainDiv_ddlRegionList option')
           options.map do |option|
             {
-              label: option.xpath('./text()'),
+              label: option.text,
               value: option['value']
             }
           end
