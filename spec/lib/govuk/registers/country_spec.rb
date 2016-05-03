@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rest-client'
 require 'govuk/registers/country'
 
 describe Govuk::Registers::Country do
@@ -21,24 +22,30 @@ describe Govuk::Registers::Country do
       result = Govuk::Registers::Country.countries
 
       expect(result.count).to eq 199
-      expect(result).to include("serial-number" => 204,
-        "hash" => "a4290031913597e47cf38457798ec98ab977e745",
-        "entry" =>
-          {
-            "citizen-names" => "Vatican citizen",
-            "country" => "VA",
-            "name" => "Vatican City",
-            "official-name" => "Vatican City State"
-          })
-      expect(result).to include("serial-number" => 1,
-        "hash"          => "439cf12ecb3f3cff67b8b5eab67aab4e28896941",
-        "entry" => {
+      expect(result).to include(
+        "PT" => {
+          "entry-number" => "147",
+          "item-hash" => "sha-256:237f7100bbbdcf670f0b0087a07350cd824007e230795acef6835883a68f9a37",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "name" => "Portugal",
+          "country" => "PT",
+          "citizen-names" => "Portuguese",
+          "official-name" => "The Portuguese Republic"
+        }
+      )
+      expect(result).to include(
+        "SU" => {
+          "entry-number" => "1",
+          "item-hash" => "sha-256:e94c4a9ab00d951dadde848ee2c9fe51628b22ff2e0a88bff4cca6e4e6086d7a",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "name" => "USSR",
+          "country" => "SU",
+          "end-date" => "1991-12-25",
           "citizen-names" => "Soviet citizen",
-          "country"       => "SU",
-          "end-date"      => "1991-12-25",
-          "name"          => "USSR",
-          "official-name" => "Union of Soviet Socialist Republics"
-        })
+          "official-name" =>
+          "Union of Soviet Socialist Republics"
+        }
+      )
     end
   end
 end
