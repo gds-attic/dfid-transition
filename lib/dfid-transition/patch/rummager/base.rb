@@ -4,7 +4,6 @@ module DfidTransition
   module Patch
     module Rummager
       class Base < Patcher
-
       private
 
         def relative_path

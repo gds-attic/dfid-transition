@@ -21,6 +21,7 @@ module DfidTransition
             }
           end
         end
+
         def country_facet
           facet('country')
         end
