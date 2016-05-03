@@ -2,12 +2,6 @@ shared_examples 'holds onto the location of a schema file and warns us if it is 
   let(:patcher) { described_class.new(patch_location) }
   let(:patch_location) { nil }
 
-  describe '#mutate_schema' do
-    it 'implements mutate schema' do
-      expect(patcher).to respond_to(:mutate_schema)
-    end
-  end
-
   describe '#location' do
     let(:patch_location) { nil }
 
