@@ -8,10 +8,18 @@ module DfidTransition
       class Countries < Base
         def mutate_schema
           country_facet['allowed_values'] = transform_to_label_value(
-            Govuk::Registers::Country.countries)
+            alphabetically_sorted_countries)
         end
 
       private
+
+        def countries
+          Govuk::Registers::Country.countries
+        end
+
+        def alphabetically_sorted_countries
+          countries.sort_by { |_, details| details['name'] }
+        end
 
         def transform_to_label_value(query_results)
           query_results.map do |country_code, country_details|
