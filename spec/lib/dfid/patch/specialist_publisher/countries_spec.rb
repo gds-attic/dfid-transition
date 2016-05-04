@@ -62,6 +62,13 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
           )
         end
 
+        it 'sorts countries alphabetically by label' do
+          patcher.run
+
+          labels = country_facet['allowed_values'].map { |lv| lv['label'] }
+          expect(labels).to eql(labels.sort), 'country labels are not sorted'
+        end
+
         context 'the target schema file does not have a countries facet to patch' do
           let(:schema_src) { 'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_no_facets.json' }
 
