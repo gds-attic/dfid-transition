@@ -38,5 +38,14 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
         'value' => 'Neglected%20Tropical%20Diseases'
       )
     end
+
+    it 'sorts themes alphabetically by label' do
+      patch.run
+
+      schema = JSON.parse(File.read(patch_location))
+      themes = schema['facets'].find { |facet| facet['key'] == 'theme' }
+      labels = themes['allowed_values'].map { |lv| lv['label'] }
+      expect(labels).to eql(labels.sort), 'theme labels are not sorted'
+    end
   end
 end

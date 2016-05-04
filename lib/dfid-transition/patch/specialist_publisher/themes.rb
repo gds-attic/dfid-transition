@@ -17,22 +17,35 @@ module DfidTransition
         SPARQL
 
         def mutate_schema
-          repository = RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
-          sparql = SPARQL::Client.new(repository)
-
-          results = sparql.query(QUERY)
-
-          theme_facet['allowed_values'] = transform_to_label_value(results)
+          theme_facet['allowed_values'] = transform_to_label_value(
+            sorted_r4d_solutions
+          )
         end
 
       private
+
+        def sparql
+          SPARQL::Client.new(repository)
+        end
+
+        def repository
+          RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
+        end
+
+        def sorted_r4d_solutions
+          r4d_solutions.sort_by { |result| result['prefLabel'].value }
+        end
+
+        def r4d_solutions
+          sparql.query(QUERY)
+        end
 
         def theme_facet
           facet('theme')
         end
 
-        def transform_to_label_value(results)
-          results.map do |solution|
+        def transform_to_label_value(r4d_solutions)
+          r4d_solutions.map do |solution|
             theme_slug = solution['theme'].to_s.sub(%r{http://.*#}, '')
 
             {
