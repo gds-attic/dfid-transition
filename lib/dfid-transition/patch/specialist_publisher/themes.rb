@@ -14,11 +14,14 @@ module DfidTransition
             ?theme skos:inScheme <http://r4d.dfid.gov.uk/rdf/skos/Themes> ;
                    skos:prefLabel ?prefLabel .
           }
+          ORDER BY ?prefLabel
         SPARQL
 
         def mutate_schema
+          r4d_solutions = sparql_client.query(QUERY)
+
           theme_facet['allowed_values'] = transform_to_label_value(
-            sorted_r4d_solutions
+            r4d_solutions
           )
         end
 
@@ -32,9 +35,6 @@ module DfidTransition
           RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
         end
 
-        def sorted_r4d_solutions
-          r4d_solutions.sort_by { |result| result['prefLabel'].value }
-        end
 
         def r4d_solutions
           sparql.query(QUERY)
