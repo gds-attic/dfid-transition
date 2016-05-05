@@ -14,6 +14,8 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     end
 
     before do
+      expect(RDF::Repository).to receive(:load).and_return(r4d_skos_theme_repo)
+
       FileUtils.cp(
         'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json',
         patch_location)
@@ -23,13 +25,12 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
       File.delete(patch_location)
     end
 
-    it 'adds theme data to the schema' do
-      expect(RDF::Repository).to receive(:load).and_return(r4d_skos_theme_repo)
+    let(:schema) { JSON.parse(File.read(patch_location)) }
+    let(:themes) { schema['facets'].find { |facet| facet['key'] == 'theme' } }
 
+    it 'adds theme data to the schema' do
       patch.run
 
-      schema = JSON.parse(File.read(patch_location))
-      themes = schema['facets'].find { |facet| facet['key'] == 'theme' }
       allowed_values = themes['allowed_values']
 
       expect(allowed_values.count).to eq(95)
@@ -37,6 +38,13 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
         'label' => 'Neglected Tropical Diseases',
         'value' => 'Neglected%20Tropical%20Diseases'
       )
+    end
+
+    it 'sorts themes alphabetically by label' do
+      patch.run
+
+      labels = themes['allowed_values'].map { |lv| lv['label'] }
+      expect(labels).to eql(labels.sort), 'theme labels are not sorted'
     end
   end
 end
