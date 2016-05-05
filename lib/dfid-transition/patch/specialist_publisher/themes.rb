@@ -27,17 +27,12 @@ module DfidTransition
 
       private
 
-        def sparql
-          SPARQL::Client.new(repository)
+        def sparql_client
+          @sparql_client ||= SPARQL::Client.new(repository)
         end
 
         def repository
-          RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
-        end
-
-
-        def r4d_solutions
-          sparql.query(QUERY)
+          @repository ||= RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
         end
 
         def theme_facet
