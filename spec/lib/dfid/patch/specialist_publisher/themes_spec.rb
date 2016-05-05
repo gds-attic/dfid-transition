@@ -14,6 +14,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     end
 
     before do
+      expect(RDF::Repository).to receive(:load).and_return(r4d_skos_theme_repo)
       FileUtils.cp(
         'spec/fixtures/schemas/specialist_publisher/dfid_research_outputs_src.json',
         patch_location)
@@ -24,7 +25,6 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     end
 
     it 'adds theme data to the schema' do
-      expect(RDF::Repository).to receive(:load).and_return(r4d_skos_theme_repo)
 
       patch.run
 
