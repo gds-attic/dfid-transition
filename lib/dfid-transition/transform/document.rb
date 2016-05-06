@@ -1,22 +1,8 @@
 require 'securerandom'
 require 'cgi'
-require 'govspeak'
+require 'govuk/presenters/govspeak'
 
 module DfidTransition
-  module GovspeakPresenter
-    class << self
-      def present(govspeak)
-        [
-          { content_type: "text/govspeak", content: govspeak },
-          {
-            content_type: "text/html",
-            content:      Govspeak::Document.new(govspeak).to_html
-          }
-        ]
-      end
-    end
-  end
-
   LINKED_DEVELOPMENT_OUTPUT_URI =
     %r{http://linked-development.org/r4d/output/(?<id>[0-9]+?)/}
   ORGANISATION_CONTENT_ID       = "b994552-7644-404d-a770-a2fe659c661f"
@@ -82,7 +68,7 @@ module DfidTransition
 
       def details
         {
-          body: GovspeakPresenter.present(summary),
+          body: Govuk::Presenters::Govspeak.present(summary),
           metadata: metadata
           # change_history: change_history
         }
