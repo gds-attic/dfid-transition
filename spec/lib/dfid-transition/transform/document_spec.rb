@@ -107,10 +107,6 @@ module DfidTransition::Transform
         expect(doc.public_updated_at).to eql('2016-04-28T09:52:00')
       end
 
-      it 'has fixed metadata' do
-        expect(doc.metadata).to eql({ document_type: "dfid_research_output" })
-      end
-
       it 'splits country codes' do
         expect(doc.countries).to eql(['AZ', 'GB'])
       end
@@ -128,12 +124,24 @@ module DfidTransition::Transform
 
       describe '#details' do
         subject(:details) { doc.details }
+
         it 'has a body' do
           expect(details[:body]).to be_an(Array)
         end
 
         it 'has metadata' do
           expect(details[:metadata]).to eql(doc.metadata)
+        end
+      end
+
+      describe 'the metadata' do
+        subject(:metadata) { doc.metadata }
+
+        it 'has the document type' do
+          expect(metadata[:document_type]).to eql('dfid_research_output')
+        end
+        it 'has a list of countries' do
+          expect(metadata[:country]).to eql(['AZ', 'GB'])
         end
       end
 
