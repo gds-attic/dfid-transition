@@ -39,7 +39,12 @@ module DfidTransition
       end
 
       def summary
-        solution[:summary].to_s.strip
+        escaped_summary = double_html_unescape(solution[:summary].to_s)
+        escaped_summary.strip
+      end
+
+      def double_html_unescape(string)
+        CGI.unescape_html(CGI.unescape_html(string))
       end
 
       def base_path
