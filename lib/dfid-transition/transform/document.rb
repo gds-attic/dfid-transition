@@ -52,7 +52,10 @@ module DfidTransition
       end
 
       def metadata
-        { document_type: "dfid_research_output" }
+        {
+          document_type: "dfid_research_output",
+          country: countries
+        }
       end
 
       def public_updated_at
