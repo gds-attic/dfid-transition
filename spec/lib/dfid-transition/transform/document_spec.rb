@@ -20,7 +20,8 @@ module DfidTransition::Transform
 
       let(:original_url)  { AN_R4D_OUTPUT_URL }
       let(:solution)      { double('RDF::Query::Solution') }
-      let(:solution_hash) do
+      let(:solution_hash) { default_solution_hash }
+      let(:default_solution_hash) do
         {
           output:  uri(original_url),
           date:    literal('2016-04-28T09:52:00'),
@@ -63,9 +64,24 @@ module DfidTransition::Transform
           '‘And Then He Switched off the Phone’: Mobile Phones ...')
       end
 
-      it 'normalises the summary by stripping' do
-        expect(doc.summary).to eql(
-          'a summary with leading and trailing space')
+      describe '#summary' do
+        subject { doc.summary }
+
+        it 'normalises the summary by stripping' do
+          expect(subject).to eql(
+            'a summary with leading and trailing space')
+        end
+
+        context 'it has leading and trailing space' do
+          let(:solution_hash) do
+            default_solution_hash.merge(
+              summary: literal('  ugeiuwgwef  '))
+          end
+
+          it 'strips that space' do
+            expect(subject).to eql('ugeiuwgwef')
+          end
+        end
       end
 
       it 'knows the original ID for things' do
@@ -93,7 +109,7 @@ module DfidTransition::Transform
           {country: doc.countries}
         )
       end
-      
+
       it 'has fixed organisations' do
         dfid_content_id = 'b994552-7644-404d-a770-a2fe659c661f'
         expect(doc.organisations).to eql([dfid_content_id])
