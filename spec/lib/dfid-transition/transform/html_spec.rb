@@ -3,17 +3,15 @@ require 'dfid-transition/transform/html'
 
 module DfidTransition::Transform
   describe Html do
-    subject(:unescape_html) do
+    subject(:unescaped_html) do
       DfidTransition::Transform::Html.unescape_three_times(string_input)
     end
-
-    let(:string_input) { 'a normal string' }
 
     context 'when given single html escaped HTML' do
       let(:string_input) { '&lt;p&gt;hello&lt;/p&gt;' }
 
       it "returns an unescaped string" do
-        expect(unescape_html).to eql('<p>hello</p>')
+        expect(unescaped_html).to eql('<p>hello</p>')
       end
     end
 
