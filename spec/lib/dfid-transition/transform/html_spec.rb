@@ -38,7 +38,7 @@ module DfidTransition::Transform
       end
     end
 
-    context 'is has triple-escaled HTML' do
+    context 'is has triple-escaped HTML' do
       let(:tripled_escaped_html_examples) do
         {
           'spread of India&amp;amp;#8217;s HIV epidemic' =>
