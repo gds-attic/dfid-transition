@@ -24,9 +24,10 @@ module DfidTransition::Transform
       let(:default_solution_hash) do
         {
           output:  uri(original_url),
-          date:    literal('2016-04-28T09:52:00'),
-          title:   literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
-          summary: literal('  a summary with leading and trailing space  '),
+          output:       uri(original_url),
+          date:         literal('2016-04-28T09:52:00'),
+          title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
+          abstract:     literal('  a summary with leading and trailing space  '),
           countryCodes: literal('AZ GB')
         }
       end

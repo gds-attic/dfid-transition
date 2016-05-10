@@ -28,7 +28,7 @@ class SearchPresenter
   def to_json
     {
       title: document.title,
-      description: document.summary,
+      description: document.abstract,
       link: document.base_path,
       indexable_content: indexable_content,
       organisations: organisation_slugs,
@@ -70,7 +70,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX ont:     <http://purl.org/ontology/bibo/>
 PREFIX geo:     <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
 
-SELECT DISTINCT ?output ?date ?summary
+SELECT DISTINCT ?output ?date ?abstract
                 (GROUP_CONCAT(DISTINCT(?titleSource)) AS ?title)
                 (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
 WHERE {
@@ -81,7 +81,7 @@ WHERE {
           dcterms:coverage ?country .
   ?country a geo:self_governing ;
            geo:codeISO2 ?codeISO2 .
-} GROUP BY ?output ?date ?summary
+} GROUP BY ?output ?date ?abstract
 ORDER BY DESC(?date)
 LIMIT 100
 SPARQL

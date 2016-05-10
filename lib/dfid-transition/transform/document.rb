@@ -72,7 +72,7 @@ module DfidTransition
 
       def details
         {
-          body: Govuk::Presenters::Govspeak.present(solution[:summary].to_s),
+          body: abstract,
           metadata: metadata
           # change_history: change_history
         }
@@ -81,6 +81,10 @@ module DfidTransition
         #.tap do |details_hash|
         #  details_hash[:attachments] = attachments if document.attachments
         #end
+      end
+
+      def abstract
+        Govuk::Presenters::Govspeak.present(solution[:abstract].to_s)
       end
 
       def body
