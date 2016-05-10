@@ -24,10 +24,6 @@ module DfidTransition::Transform
             '‘Successful’ Development Models',
           '&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt; This policy brief explores' =>
             '<br/><br/> This policy brief explores',
-          'spread of India&amp;amp;#8217;s HIV epidemic' =>
-            'spread of India’s HIV epidemic',
-          'IPs&amp;amp;#8217; perceptions' =>
-            'IPs’ perceptions',
           'domestic violence.&amp;lt;/p&amp;gt;' =>
             'domestic violence.</p>',
           'various countries.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;Given that both Mexico' =>
@@ -45,7 +41,25 @@ module DfidTransition::Transform
         end
       end
     end
-  end
 
+    context 'is has triple-escaled HTML' do
+      let(:tripled_escaped_html_examples) do
+        {
+          'spread of India&amp;amp;#8217;s HIV epidemic' =>
+            'spread of India’s HIV epidemic',
+          'IPs&amp;amp;#8217; perceptions' =>
+            'IPs’ perceptions',
+        }
+      end
+
+      it 'returns an unescaped string' do
+        tripled_escaped_html_examples.each_pair do |escaped_string, desired_string|
+          expect(
+            DfidTransition::Transform::UnescapeHtml.run(escaped_string)
+          ).to eql(desired_string)
+        end
+      end
+    end
+  end
 
 end
