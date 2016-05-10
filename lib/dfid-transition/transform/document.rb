@@ -34,9 +34,9 @@ module DfidTransition
       end
 
       def title
-        stripped_title = solution[:title].to_s.strip
-        corrected_ampersands = stripped_title.gsub('&amp;', '&')
-        CGI.unescape_html(corrected_ampersands)
+        title = solution[:title].to_s
+        unescaped_title = DfidTransition::Transform::UnescapeHtml.run(title)
+        unescaped_title.strip
       end
 
       def summary
@@ -87,7 +87,7 @@ module DfidTransition
       def abstract
         unescaped_abstract = DfidTransition::Transform::UnescapeHtml.run(
           solution[:abstract].to_s)
-          
+
         Govuk::Presenters::Govspeak.present(unescaped_abstract)
       end
 
