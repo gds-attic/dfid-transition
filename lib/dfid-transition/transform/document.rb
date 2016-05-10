@@ -1,7 +1,7 @@
 require 'securerandom'
 require 'cgi'
 require 'govuk/presenters/govspeak'
-require 'dfid-transition/transform/unescape_html'
+require 'dfid-transition/transform/html'
 
 module DfidTransition
   LINKED_DEVELOPMENT_OUTPUT_URI =
@@ -35,7 +35,7 @@ module DfidTransition
 
       def title
         title = solution[:title].to_s
-        unescaped_title = DfidTransition::Transform::UnescapeHtml.run(title)
+        unescaped_title = DfidTransition::Transform::Html.unescape_three_times(title)
         unescaped_title.strip
       end
 
@@ -85,7 +85,7 @@ module DfidTransition
       end
 
       def abstract
-        unescaped_abstract = DfidTransition::Transform::UnescapeHtml.run(
+        unescaped_abstract = DfidTransition::Transform::Html.unescape_three_times(
           solution[:abstract].to_s)
 
         Govuk::Presenters::Govspeak.present(unescaped_abstract)
