@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'dfid-transition/transform/unescape_html'
+require 'dfid-transition/transform/html'
 
 module DfidTransition::Transform
-  describe UnescapeHtml do
+  describe Html do
     subject(:unescape_html) do
-      DfidTransition::Transform::UnescapeHtml.run(string_input)
+      DfidTransition::Transform::Html.unescape_three_times(string_input)
     end
 
     let(:string_input) { 'a normal string' }
@@ -34,7 +34,7 @@ module DfidTransition::Transform
       it 'returns an unescaped string' do
         double_escaped_html_examples.each_pair do |escaped_string, desired_string|
           expect(
-            DfidTransition::Transform::UnescapeHtml.run(escaped_string)
+            DfidTransition::Transform::Html.unescape_three_times(escaped_string)
           ).to eql(desired_string)
         end
       end
@@ -53,7 +53,7 @@ module DfidTransition::Transform
       it 'returns an unescaped string' do
         tripled_escaped_html_examples.each_pair do |escaped_string, desired_string|
           expect(
-            DfidTransition::Transform::UnescapeHtml.run(escaped_string)
+            DfidTransition::Transform::Html.unescape_three_times(escaped_string)
           ).to eql(desired_string)
         end
       end
