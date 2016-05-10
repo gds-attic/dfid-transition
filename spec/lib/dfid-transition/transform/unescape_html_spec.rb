@@ -27,9 +27,7 @@ module DfidTransition::Transform
           'domestic violence.&amp;lt;/p&amp;gt;' =>
             'domestic violence.</p>',
           'various countries.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;Given that both Mexico' =>
-            'various countries.</p> <p>Given that both Mexico',
-          '&amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ...' =>
-            '‘And Then He Switched off the Phone’: Mobile Phones ...'
+            'various countries.</p> <p>Given that both Mexico'
         }
       end
 
