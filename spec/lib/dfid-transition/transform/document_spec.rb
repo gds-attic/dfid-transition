@@ -64,35 +64,8 @@ module DfidTransition::Transform
           '‘And Then He Switched off the Phone’: Mobile Phones ...')
       end
 
-      describe '#summary' do
-        subject(:summary) { doc.summary }
-
-        it 'normalises the summary by stripping' do
-         expect(subject).to eql(
-           'a summary with leading and trailing space')
-        end
-
-        context 'it has leading and trailing space' do
-         let(:solution_hash) do
-           default_solution_hash.merge(
-             summary: literal('  ugeiuwgwef  '))
-         end
-
-         it 'strips that space' do
-           expect(summary).to eql('ugeiuwgwef')
-         end
-        end
-
-        context 'it has double-escaped HTML' do
-         let(:solution_hash) do
-           default_solution_hash.merge(
-             summary: literal('  &amp;#8216;Successful&amp;#8217; Development Models in the MENA Region  '))
-         end
-
-         it 'makes it pretty' do
-           expect(summary).to eql('‘Successful’ Development Models in the MENA Region')
-         end
-       end
+      it 'fixes #summary to the example' do
+       expect(doc.summary).to include('This is an example summary for output 5050')
       end
 
       it 'knows the original ID for things' do

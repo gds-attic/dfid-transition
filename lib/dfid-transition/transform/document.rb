@@ -39,12 +39,8 @@ module DfidTransition
       end
 
       def summary
-        escaped_summary = double_html_unescape(solution[:summary].to_s)
-        escaped_summary.strip
-      end
-
-      def double_html_unescape(string)
-        CGI.unescape_html(CGI.unescape_html(string))
+        "This is an example summary for output #{original_id}. The citation would ordinarily
+         appear here but we need CABI to include that data in their triples."
       end
 
       def base_path
@@ -76,7 +72,7 @@ module DfidTransition
 
       def details
         {
-          body: Govuk::Presenters::Govspeak.present(summary),
+          body: Govuk::Presenters::Govspeak.present(solution[:summary].to_s),
           metadata: metadata
           # change_history: change_history
         }
