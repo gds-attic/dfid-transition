@@ -23,7 +23,6 @@ module DfidTransition::Transform
       let(:solution_hash) { default_solution_hash }
       let(:default_solution_hash) do
         {
-          output:  uri(original_url),
           output:       uri(original_url),
           date:         literal('2016-04-28T09:52:00'),
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
@@ -97,10 +96,6 @@ module DfidTransition::Transform
       describe '#details' do
         subject(:details) { doc.details }
 
-        it 'has a body' do
-          expect(details[:body]).to be_an(Array)
-        end
-
         it 'has metadata' do
           expect(details[:metadata]).to eql(doc.metadata)
         end
@@ -117,8 +112,41 @@ module DfidTransition::Transform
         end
       end
 
-      it 'has a body it gets from details' do
-        expect(doc.body).to eql(doc.details[:body])
+      describe '#body' do
+        subject(:body) { doc.body }
+
+        it 'has a body' do
+          expect(body).to be_an(Array)
+        end
+
+        it 'has a body it gets from details' do
+          expect(body).to eql(doc.details[:body])
+        end
+
+        context 'when the abstract has unescaped HTML' do
+          let(:abstract) do
+            '&amp;lt;p&amp;gt;This research design and methods paper can be '\
+            'applied to other countries in Africa and Latin America.&amp;lt;/p&amp;gt;'
+          end
+          let(:solution_hash) do
+            default_solution_hash.merge(abstract: abstract)
+          end
+
+          it 'has an unescaped body' do
+            expect(body).to match([
+              {
+                content_type: 'text/govspeak',
+                content: '<p>This research design and methods paper '\
+                  'can be applied to other countries in Africa and Latin America.</p>'
+              },
+              {
+                content_type: 'text/html',
+                content: "<p>This research design and methods paper can be "\
+                  "applied to other countries in Africa and Latin America.</p>\n"
+              }
+            ])
+          end
+        end
       end
     end
   end
