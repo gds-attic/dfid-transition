@@ -34,5 +34,4 @@ module DfidTransition::Transform
       it { is_expected.to eql('spread of India’s HIV epidemic') }
     end
   end
-
 end
