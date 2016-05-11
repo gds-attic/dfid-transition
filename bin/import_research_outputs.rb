@@ -93,11 +93,14 @@ content_id_mappings = ContentIdByBasePath.new(publishing_api)
 
 output_solutions.each do |output_solution|
   doc = DfidTransition::Transform::Document.new(output_solution)
+
   existing_draft_content_id = content_id_mappings[doc.base_path]
   doc.content_id = existing_draft_content_id if existing_draft_content_id
 
+  update_type = existing_draft_content_id ? 'republish' : 'major'
+
   publishing_api.put_content(doc.content_id, doc.to_json)
-  publishing_api.publish(doc.content_id, 'minor')
+  publishing_api.publish(doc.content_id, update_type)
   puts "Published #{doc.title} at "\
        "http://specialist-frontend.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
 
