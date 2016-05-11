@@ -3,20 +3,20 @@ require 'dfid-transition/transform/document'
 
 module DfidTransition::Transform
   describe Document do
-    def literal(value, options={class: 'RDF::Literal'})
+    def literal(value, options = { class: 'RDF::Literal' })
       double(options[:class]).tap do |literal|
         allow(literal).to receive(:to_s).and_return(value)
       end
     end
 
-    def uri(value, options={class: 'RDF::URI'})
+    def uri(value, options = { class: 'RDF::URI' })
       literal(value, options)
     end
 
     subject(:doc) { Document.new(solution) }
 
     context 'a solution that behaves like a hash is given' do
-      AN_R4D_OUTPUT_URL = 'http://r4d.dfid.gov.uk/Output/5050/Default.aspx'
+      AN_R4D_OUTPUT_URL = 'http://r4d.dfid.gov.uk/Output/5050/Default.aspx'.freeze
 
       let(:original_url)  { AN_R4D_OUTPUT_URL }
       let(:solution)      { double('RDF::Query::Solution') }
@@ -65,7 +65,7 @@ module DfidTransition::Transform
       end
 
       it 'fixes #summary to the example' do
-       expect(doc.summary).to include('This is an example summary for output 5050')
+        expect(doc.summary).to include('This is an example summary for output 5050')
       end
 
       it 'knows the original ID for things' do
@@ -81,13 +81,11 @@ module DfidTransition::Transform
       end
 
       it 'splits country codes' do
-        expect(doc.countries).to eql(['AZ', 'GB'])
+        expect(doc.countries).to eql(%w(AZ GB))
       end
 
       it 'has these countries in format_specific_metadata' do
-        expect(doc.format_specific_metadata).to eql(
-          {country: doc.countries}
-        )
+        expect(doc.format_specific_metadata).to eql(country: doc.countries)
       end
 
       it 'has fixed organisations' do
@@ -114,7 +112,7 @@ module DfidTransition::Transform
           expect(metadata[:document_type]).to eql('dfid_research_output')
         end
         it 'has a list of countries' do
-          expect(metadata[:country]).to eql(['AZ', 'GB'])
+          expect(metadata[:country]).to eql(%w(AZ GB))
         end
       end
 
