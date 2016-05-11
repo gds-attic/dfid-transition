@@ -73,7 +73,7 @@ module DfidTransition
 
       def details
         {
-          body: abstract,
+          body: Govuk::Presenters::Govspeak.present(abstract),
           metadata: metadata
           # change_history: change_history
         }
@@ -85,10 +85,8 @@ module DfidTransition
       end
 
       def abstract
-        unescaped_abstract = DfidTransition::Transform::Html.unescape_three_times(
+        @abstract ||= DfidTransition::Transform::Html.unescape_three_times(
           solution[:abstract].to_s)
-
-        Govuk::Presenters::Govspeak.present(unescaped_abstract)
       end
 
       def body
