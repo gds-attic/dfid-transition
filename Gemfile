@@ -7,10 +7,7 @@ gem 'rdf-rdfxml'
 gem 'pry'
 gem 'nokogiri'
 
-group :development do
+group :development, :test do
   gem 'govuk-lint'
-end
-
-group :test do
   gem 'rspec'
 end
