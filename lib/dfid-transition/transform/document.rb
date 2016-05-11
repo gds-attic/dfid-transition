@@ -5,7 +5,7 @@ require 'govuk/presenters/govspeak'
 module DfidTransition
   LINKED_DEVELOPMENT_OUTPUT_URI =
     %r{http://linked-development.org/r4d/output/(?<id>[0-9]+?)/}
-  ORGANISATION_CONTENT_ID       = "b994552-7644-404d-a770-a2fe659c661f"
+  ORGANISATION_CONTENT_ID       = "b994552-7644-404d-a770-a2fe659c661f".freeze
 
   module Transform
     class Document
