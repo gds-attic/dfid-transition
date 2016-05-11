@@ -76,7 +76,7 @@ SELECT DISTINCT ?output ?date ?abstract
 WHERE {
   ?output a ont:Article ;
           dcterms:title ?titleSource ;
-          dcterms:abstract ?summary ;
+          dcterms:abstract ?abstract ;
           dcterms:date ?date ;
           dcterms:coverage ?country .
   ?country a geo:self_governing ;
