@@ -90,7 +90,8 @@ module DfidTransition
       end
 
       def body
-        details[:body]
+        "## Abstract\n" +
+        abstract
       end
 
       def to_json

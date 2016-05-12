@@ -20,13 +20,14 @@ module DfidTransition::Transform
 
       let(:original_url)  { AN_R4D_OUTPUT_URL }
       let(:solution)      { double('RDF::Query::Solution') }
-      let(:solution_hash) { default_solution_hash }
-      let(:default_solution_hash) do
+      let(:solution_hash) do
         {
           output:       uri(original_url),
           date:         literal('2016-04-28T09:52:00'),
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
-          abstract:     literal('  a summary with leading and trailing space  '),
+          abstract:     literal(
+            '&amp;lt;p&amp;gt;This research design and methods paper can be '\
+            'applied to other countries in Africa and Latin America.&amp;lt;/p&amp;gt;'),
           countryCodes: literal('AZ GB')
         }
       end
@@ -115,37 +116,15 @@ module DfidTransition::Transform
       describe '#body' do
         subject(:body) { doc.body }
 
-        it 'has a body' do
-          expect(body).to be_an(Array)
+        it { is_expected.to be_a(String) }
+
+        it 'has a markdown h2 header for the abstract' do
+          expect(body).to include('## Abstract')
         end
-
-        it 'has a body it gets from details' do
-          expect(body).to eql(doc.details[:body])
-        end
-
-        context 'when the abstract has unescaped HTML' do
-          let(:abstract) do
-            '&amp;lt;p&amp;gt;This research design and methods paper can be '\
-            'applied to other countries in Africa and Latin America.&amp;lt;/p&amp;gt;'
-          end
-          let(:solution_hash) do
-            default_solution_hash.merge(abstract: abstract)
-          end
-
-          it 'has an unescaped body' do
-            expect(body).to match([
-              {
-                content_type: 'text/govspeak',
-                content: '<p>This research design and methods paper '\
-                  'can be applied to other countries in Africa and Latin America.</p>'
-              },
-              {
-                content_type: 'text/html',
-                content: "<p>This research design and methods paper can be "\
-                  "applied to other countries in Africa and Latin America.</p>\n"
-              }
-            ])
-          end
+        it 'has the abstract' do
+          expect(body).to include(
+            '<p>This research design and methods paper '\
+            'can be applied to other countries in Africa and Latin America.</p>')
         end
       end
     end
