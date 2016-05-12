@@ -26,6 +26,7 @@ publishing_api = GdsApi::PublishingApiV2.new(
 rummager = GdsApi::Rummager.new(Plek.new.find('search'))
 
 class ContentIdByBasePath < Struct.new(:publishing_api)
+  # Only looks up for state: 'published'
   def [](base_path)
     publishing_api.lookup_content_id(base_path: base_path)
   end
@@ -65,10 +66,20 @@ output_solutions.each do |output_solution|
 
   update_type = existing_draft_content_id ? 'republish' : 'major'
 
-  publishing_api.put_content(doc.content_id, doc.to_json)
-  publishing_api.publish(doc.content_id, update_type)
-  puts "Published #{doc.title} at "\
-       "http://specialist-frontend.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
+  should_discard_draft = true
+  begin
+    publishing_api.put_content(doc.content_id, doc.to_json)
+    publishing_api.publish(doc.content_id, update_type)
+    puts "Published #{doc.title} at "\
+         "http://www.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
+    should_discard_draft = false
+  rescue GdsApi::HTTPUnprocessableEntity => e
+    $stderr.puts "WARN: #{e.inspect}"
+    should_discard_draft = false
+  ensure
+    # Don't leave us in a state where we could 422
+    publishing_api.discard_draft(doc.content_id) if should_discard_draft
+  end
 
   rummager.add_document(
     'dfid_research_output',
