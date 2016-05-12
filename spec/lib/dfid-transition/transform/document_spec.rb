@@ -100,6 +100,16 @@ module DfidTransition::Transform
         it 'has metadata' do
           expect(details[:metadata]).to eql(doc.metadata)
         end
+
+        describe 'the presented body' do
+          subject(:presented_body) { details[:body] }
+
+          it { is_expected.to be_an(Array) }
+
+          it 'contains the body in the markdown section' do
+            expect(presented_body.first[:content]).to eql(doc.body)
+          end
+        end
       end
 
       describe 'the metadata' do

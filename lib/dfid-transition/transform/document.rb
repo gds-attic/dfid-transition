@@ -73,7 +73,7 @@ module DfidTransition
 
       def details
         {
-          body: Govuk::Presenters::Govspeak.present(abstract),
+          body: Govuk::Presenters::Govspeak.present(body),
           metadata: metadata
           # change_history: change_history
         }
