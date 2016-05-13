@@ -76,12 +76,10 @@ module DfidTransition
           body: Govuk::Presenters::Govspeak.present(body),
           metadata: metadata
           # change_history: change_history
-        }
-
-        # Attachments would be handled here
-        #.tap do |details_hash|
-        #  details_hash[:attachments] = attachments if document.attachments
-        #end
+        }.tap do |details_hash|
+          details_hash[:headers] = headers
+          #  details_hash[:attachments] = attachments if document.attachments
+        end
       end
 
       def abstract
@@ -92,6 +90,18 @@ module DfidTransition
       def body
         "## Abstract\n" +
         abstract
+      end
+
+      def headers
+        headers = Govspeak::Document.new(body).structured_headers
+        remove_empty_headers(headers.map(&:to_h))
+      end
+
+      def remove_empty_headers(headers)
+        headers.each do |header|
+          header.delete_if { |k, v| k == :headers && v.empty? }
+          remove_empty_headers(header[:headers]) if header.has_key?(:headers)
+        end
       end
 
       def to_json

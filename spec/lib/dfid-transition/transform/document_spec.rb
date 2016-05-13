@@ -137,6 +137,59 @@ module DfidTransition::Transform
             'can be applied to other countries in Africa and Latin America.</p>')
         end
       end
+
+      describe '#headers' do
+        subject(:headers) { doc.headers }
+
+        before do
+          allow(doc).to receive(:body).and_return(body)
+        end
+
+        context 'there is just one header' do
+          let(:body) { '## Abstract' }
+
+          it { is_expected.to be_an(Array) }
+
+          it 'has one item for the abstract' do
+            expect(headers.first).to eql(
+              text: 'Abstract', level: 2, id: 'abstract'
+            )
+          end
+        end
+
+        context 'there are some nested headers' do
+          let(:body) do
+            <<-MARKDOWN.freeze
+## Abstract
+
+### Sub-abstract
+
+## Downloads
+            MARKDOWN
+          end
+
+          it { is_expected.to be_an(Array) }
+
+          it 'has 2 main headers' do
+            expect(headers.size).to eql(2)
+          end
+
+          it 'nests the other headers' do
+            expect(headers).to eql(
+              [
+                {
+                  text: 'Abstract', level: 2, id: 'abstract',
+                  headers: [
+                    { text: 'Sub-abstract', level: 3, id: 'sub-abstract' }
+                  ]
+                },
+                { text: 'Downloads', level: 2, id: 'downloads' }
+              ]
+            )
+          end
+        end
+
+      end
     end
   end
 end
