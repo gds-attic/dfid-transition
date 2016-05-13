@@ -9,21 +9,16 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '../lib')
 
 require 'sparql/client'
-require 'gds_api/publishing_api_v2'
-require 'gds_api/rummager'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/string'
 require 'dfid-transition/transform/document'
 require 'govuk/presenters/search'
+require 'dfid-transition/services'
 
 ENDPOINT = 'http://linked-development.org/sparql'
 
-publishing_api = GdsApi::PublishingApiV2.new(
-  Plek.new.find('publishing-api'),
-  bearer_token: 'example',
-)
-
-rummager = GdsApi::Rummager.new(Plek.new.find('search'))
+publishing_api = DfidTransition::Services.publishing_api
+rummager       = DfidTransition::Services.rummager
 
 class ContentIdByBasePath < Struct.new(:publishing_api)
   # Only looks up for state: 'published'
