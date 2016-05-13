@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'dfid-transition/transform/document'
+require 'active_support/core_ext/string/strip'
 
 module DfidTransition::Transform
   describe Document do
@@ -159,12 +160,12 @@ module DfidTransition::Transform
 
         context 'there are some nested headers' do
           let(:body) do
-            <<-MARKDOWN.freeze
-## Abstract
+            <<-MARKDOWN.strip_heredoc
+              ## Abstract
 
-### Sub-abstract
+              ### Sub-abstract
 
-## Downloads
+              ## Downloads
             MARKDOWN
           end
 
@@ -188,7 +189,6 @@ module DfidTransition::Transform
             )
           end
         end
-
       end
     end
   end

@@ -2,6 +2,7 @@ require 'securerandom'
 require 'cgi'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
+require 'active_support/core_ext/string/strip'
 
 module DfidTransition
   LINKED_DEVELOPMENT_OUTPUT_URI =
@@ -88,8 +89,11 @@ module DfidTransition
       end
 
       def body
-        "## Abstract\n" +
-        abstract
+        <<-MARKDOWN.strip_heredoc
+          ## Abstract
+
+          #{abstract}
+        MARKDOWN
       end
 
       def headers

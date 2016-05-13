@@ -22,7 +22,7 @@ module Govuk
         }.merge(document.format_specific_metadata).reject { |_k, v| v.blank? }
       end
 
-      private
+    private
 
       attr_reader :document
     end
