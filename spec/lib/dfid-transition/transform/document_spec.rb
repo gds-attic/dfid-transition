@@ -4,15 +4,7 @@ require 'active_support/core_ext/string/strip'
 
 module DfidTransition::Transform
   describe Document do
-    def literal(value, options = { class: 'RDF::Literal' })
-      double(options[:class]).tap do |literal|
-        allow(literal).to receive(:to_s).and_return(value)
-      end
-    end
-
-    def uri(value, options = { class: 'RDF::URI' })
-      literal(value, options)
-    end
+    include RDFDoubles
 
     subject(:doc) { Document.new(solution) }
 
