@@ -1,0 +1,23 @@
+{
+  "head": {
+    "vars": [ "output" , "date" , "abstract" , "title" , "countryCodes" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "output": { "type": "uri" , "value": "http://linked-development.org/r4d/output/213014/" } ,
+        "date": { "type": "literal" , "value": "2016-04-28T11:26:00" } ,
+        "abstract": { "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "type": "typed-literal" , "value": " - " } ,
+        "title": { "type": "literal" , "value": " In Search of Human Capital - Identifying Gifted Children in Poor Areas of Dar Es Salaam, Tanzania " } ,
+        "countryCodes": { "type": "literal" , "value": "TZ" }
+      } ,
+      {
+        "output": { "type": "uri" , "value": "http://linked-development.org/r4d/output/213009/" } ,
+        "date": { "type": "literal" , "value": "2016-04-28T09:52:00" } ,
+        "abstract": { "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "type": "typed-literal" , "value": " The Study aims to deepen understanding of why investments in Domestic Violence law (DV Law) are faltering and what can be done. " } ,
+        "title": { "type": "literal" , "value": " Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It " } ,
+        "countryCodes": { "type": "literal" , "value": "KH" }
+      }
+    ]
+  }
+}

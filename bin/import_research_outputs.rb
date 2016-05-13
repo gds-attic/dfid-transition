@@ -8,12 +8,12 @@
 #
 $LOAD_PATH << File.join(File.dirname(__FILE__), '../lib')
 
-require 'sparql/client'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/string'
 require 'dfid-transition/transform/document'
 require 'govuk/presenters/search'
 require 'dfid-transition/services'
+require 'dfid-transition/extract/query/outputs'
 
 ENDPOINT = 'http://linked-development.org/sparql'
 
@@ -27,29 +27,7 @@ class ContentIdByBasePath < Struct.new(:publishing_api)
   end
 end
 
-QUERY = <<-SPARQL
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX ont:     <http://purl.org/ontology/bibo/>
-PREFIX geo:     <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
-
-SELECT DISTINCT ?output ?date ?abstract
-                (GROUP_CONCAT(DISTINCT(?titleSource)) AS ?title)
-                (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
-WHERE {
-  ?output a ont:Article ;
-          dcterms:title ?titleSource ;
-          dcterms:abstract ?abstract ;
-          dcterms:date ?date ;
-          dcterms:coverage ?country .
-  ?country a geo:self_governing ;
-           geo:codeISO2 ?codeISO2 .
-} GROUP BY ?output ?date ?abstract
-ORDER BY DESC(?date)
-LIMIT 10
-SPARQL
-
-client = SPARQL::Client.new(ENDPOINT, method: :get)
-output_solutions = client.query(QUERY, content_type: SPARQL::Client::RESULT_JSON)
+output_solutions = DfidTransition::Extract::Query::Outputs.new.solutions
 
 content_id_mappings = ContentIdByBasePath.new(publishing_api)
 

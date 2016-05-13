@@ -13,4 +13,5 @@ gem 'activesupport'
 group :development, :test do
   gem 'govuk-lint'
   gem 'rspec'
+  gem 'webmock'
 end
