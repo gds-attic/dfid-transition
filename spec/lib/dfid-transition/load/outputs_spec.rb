@@ -25,7 +25,8 @@ describe DfidTransition::Load::Outputs do
         date:         literal('2016-04-28T09:52:00'),
         title:        literal('Output Title'),
         abstract:     literal('&amp;lt;p&amp;gt;Abstract;lt;/p&amp;gt;'),
-        countryCodes: literal('AZ GB')
+        countryCodes: literal('AZ GB'),
+        countryNames: literal('Azerbaijan|United Kingdom')
       }
     end
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }

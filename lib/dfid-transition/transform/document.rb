@@ -52,7 +52,8 @@ module DfidTransition
       def metadata
         {
           document_type: "dfid_research_output",
-          country: countries
+          country_code: country_codes,
+          country_name: country_names
         }
       end
 
@@ -60,12 +61,19 @@ module DfidTransition
         solution[:date].to_s
       end
 
-      def countries
+      def country_codes
         solution[:countryCodes].to_s.split(' ')
       end
 
+      def country_names
+        solution[:countryNames].to_s.split('|')
+      end
+
       def format_specific_metadata
-        { country: countries }
+        {
+          country_code: country_codes,
+          country_name: country_names
+        }
       end
 
       def organisations

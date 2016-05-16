@@ -14,6 +14,7 @@ module DfidTransition
           SELECT DISTINCT ?output ?date ?abstract
                           (GROUP_CONCAT(DISTINCT(?titleSource)) AS ?title)
                           (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
+                          (GROUP_CONCAT(DISTINCT(?nameShort); separator = '|') AS ?countryNames)
           WHERE {
             ?output a ont:Article ;
                     dcterms:title ?titleSource ;
@@ -21,7 +22,9 @@ module DfidTransition
                     dcterms:date ?date ;
                     dcterms:coverage ?country .
             ?country a geo:self_governing ;
-                     geo:codeISO2 ?codeISO2 .
+                     geo:codeISO2 ?codeISO2 ;
+                     geo:nameShort ?nameShort .
+            FILTER (LANG(?nameShort) = 'en')
           } GROUP BY ?output ?date ?abstract
           ORDER BY DESC(?date)
           LIMIT 10

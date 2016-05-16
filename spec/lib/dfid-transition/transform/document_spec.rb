@@ -21,7 +21,8 @@ module DfidTransition::Transform
           abstract:     literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
             'applied to other countries in Africa and Latin America.&amp;lt;/p&amp;gt;'),
-          countryCodes: literal('AZ GB')
+          countryCodes: literal('AZ GB'),
+          countryNames: literal('Azerbaijan|United Kingdom')
         }
       end
 
@@ -75,11 +76,17 @@ module DfidTransition::Transform
       end
 
       it 'splits country codes' do
-        expect(doc.countries).to eql(%w(AZ GB))
+        expect(doc.country_codes).to eql(%w(AZ GB))
+      end
+
+      it 'splits country names' do
+        expect(doc.country_names).to eql(['Azerbaijan', 'United Kingdom'])
       end
 
       it 'has these countries in format_specific_metadata' do
-        expect(doc.format_specific_metadata).to eql(country: doc.countries)
+        expect(doc.format_specific_metadata).to eql(
+          country_code: doc.country_codes,
+          country_name: doc.country_names)
       end
 
       it 'has fixed organisations' do
@@ -111,8 +118,11 @@ module DfidTransition::Transform
         it 'has the document type' do
           expect(metadata[:document_type]).to eql('dfid_research_output')
         end
-        it 'has a list of countries' do
-          expect(metadata[:country]).to eql(%w(AZ GB))
+        it 'has a list of country codes' do
+          expect(metadata[:country_code]).to eql(%w(AZ GB))
+        end
+        it 'has a list of country names' do
+          expect(metadata[:country_name]).to eql(['Azerbaijan', 'United Kingdom'])
         end
       end
 
