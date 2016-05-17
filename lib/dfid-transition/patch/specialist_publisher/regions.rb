@@ -3,7 +3,8 @@ require 'rest-client'
 require 'nokogiri'
 
 module DfidTransition
-  R4D_ADVANCED_SEARCH = "http://r4d.dfid.gov.uk/Search/SearchResearchDatabase.aspx"
+  R4D_ADVANCED_SEARCH =
+    "http://r4d.dfid.gov.uk/Search/SearchResearchDatabase.aspx".freeze
 
   module Patch
     module SpecialistPublisher

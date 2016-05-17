@@ -6,7 +6,7 @@ module DfidTransition
   module Patch
     module SpecialistPublisher
       class Themes < Base
-        QUERY = <<-SPARQL
+        QUERY = <<-SPARQL.freeze
           PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
 
           SELECT DISTINCT ?theme ?prefLabel
