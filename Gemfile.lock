@@ -157,6 +157,7 @@ DEPENDENCIES
   gds-api-adapters
   govspeak
   govuk-lint
+  kramdown
   nokogiri
   pry
   rake
