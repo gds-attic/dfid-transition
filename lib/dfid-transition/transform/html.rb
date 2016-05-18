@@ -1,5 +1,6 @@
 require 'cgi'
 require 'kramdown'
+require 'nokogiri'
 
 module DfidTransition
   module Transform
@@ -13,7 +14,9 @@ module DfidTransition
       end
 
       def self.to_markdown(html)
-        kramdown_tree, _warnings = Kramdown::Parser::Html.parse(html)
+        corrected_html = Nokogiri::HTML.fragment(html).to_s
+
+        kramdown_tree, _warnings = Kramdown::Parser::Html.parse(corrected_html)
         Kramdown::Converter::Kramdown.convert(kramdown_tree).first
       end
     end

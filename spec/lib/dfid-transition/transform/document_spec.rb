@@ -20,7 +20,9 @@ module DfidTransition::Transform
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
           abstract:     literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
-            'applied to other countries in Africa and Latin America.&amp;lt;/p&amp;gt;'),
+            'applied to other countries in Africa and Latin America.'\
+            '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
+            '&amp;lt;/p&amp;gt;'),
           countryCodes: literal('AZ GB')
         }
       end
@@ -127,6 +129,9 @@ module DfidTransition::Transform
         it 'has the abstract as markdown' do
           expect(body).to include('This research design and methods paper')
           expect(body).not_to include('<p>')
+        end
+        it 'corrects non-standard HTML – the list is separate' do
+          expect(body).to include("\n* Hello")
         end
       end
 

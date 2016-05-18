@@ -6,7 +6,7 @@ module DfidTransition::Transform
   describe Html do
     describe '.unescaped_html' do
       subject(:unescaped_html) do
-        DfidTransition::Transform::Html.unescape_three_times(string_input)
+        Html.unescape_three_times(string_input)
       end
 
       context 'HTML is single-escaped' do
@@ -39,7 +39,7 @@ module DfidTransition::Transform
 
     describe '.to_markdown' do
       subject(:markdown) do
-        DfidTransition::Transform::Html.to_markdown(string_input)
+        Html.to_markdown(string_input)
       end
 
       context 'Everything is peachy' do
@@ -81,9 +81,9 @@ module DfidTransition::Transform
           HTML
         end
 
-        it 'deals with the problem as part of the conversion' do
+        it 'expands the list and closes the para beforehand. A newline separates' do
           expect(markdown).to include('This is a para. Lists should not appear')
-          expect(markdown).to include("BOING\n* BOING")
+          expect(markdown).to include("\n* BOING\n* BOING")
         end
       end
     end
