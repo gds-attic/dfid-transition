@@ -11,6 +11,8 @@ module DfidTransition
 
   module Transform
     class Document
+      Html = DfidTransition::Transform::Html
+
       attr_reader :solution
       attr_accessor :content_id
 
@@ -36,7 +38,7 @@ module DfidTransition
 
       def title
         title = solution[:title].to_s
-        unescaped_title = DfidTransition::Transform::Html.unescape_three_times(title)
+        unescaped_title = Html.unescape_three_times(title)
         unescaped_title.strip
       end
 
@@ -84,8 +86,9 @@ module DfidTransition
       end
 
       def abstract
-        @abstract ||= DfidTransition::Transform::Html.unescape_three_times(
-          solution[:abstract].to_s)
+        @abstract ||= Html.to_markdown(
+          Html.unescape_three_times(solution[:abstract].to_s)
+        )
       end
 
       def body

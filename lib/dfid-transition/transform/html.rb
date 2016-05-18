@@ -1,4 +1,5 @@
 require 'cgi'
+require 'kramdown'
 
 module DfidTransition
   module Transform
@@ -9,6 +10,11 @@ module DfidTransition
             CGI.unescape_html(string_input)
           )
         )
+      end
+
+      def self.to_markdown(html)
+        kramdown_tree, _warnings = Kramdown::Parser::Html.parse(html)
+        Kramdown::Converter::Kramdown.convert(kramdown_tree).first
       end
     end
   end

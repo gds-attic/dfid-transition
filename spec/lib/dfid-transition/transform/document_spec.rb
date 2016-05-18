@@ -105,7 +105,7 @@ module DfidTransition::Transform
         end
       end
 
-      describe 'the metadata' do
+      describe '#metadata' do
         subject(:metadata) { doc.metadata }
 
         it 'has the document type' do
@@ -124,10 +124,9 @@ module DfidTransition::Transform
         it 'has a markdown h2 header for the abstract' do
           expect(body).to include('## Abstract')
         end
-        it 'has the abstract' do
-          expect(body).to include(
-            '<p>This research design and methods paper '\
-            'can be applied to other countries in Africa and Latin America.</p>')
+        it 'has the abstract as markdown' do
+          expect(body).to include('This research design and methods paper')
+          expect(body).not_to include('<p>')
         end
       end
 

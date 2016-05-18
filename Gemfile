@@ -9,6 +9,7 @@ gem 'nokogiri'
 gem 'gds-api-adapters'
 gem 'govspeak'
 gem 'activesupport'
+gem 'kramdown'
 
 group :development, :test do
   gem 'govuk-lint'
