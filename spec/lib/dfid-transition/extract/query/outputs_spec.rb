@@ -28,11 +28,16 @@ describe DfidTransition::Extract::Query::Outputs do
       end
     end
 
-    describe 'the first solution' do
-      subject(:solution) { query.solutions.first }
+    describe 'the last solution' do
+      subject(:solution) { query.solutions.last }
 
       it 'has an output URI' do
         expect(solution[:output]).to be_an(RDF::URI)
+      end
+
+      it 'has a pipe-delimited list of creators' do
+        expect(solution[:creators]).to be_an(RDF::Literal)
+        expect(solution[:creators].to_s).to include(' | ')
       end
     end
   end
