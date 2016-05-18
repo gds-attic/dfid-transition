@@ -92,11 +92,9 @@ module DfidTransition
       end
 
       def body
-        <<-MARKDOWN.strip_heredoc
-          ## Abstract
-
-          #{abstract}
-        MARKDOWN
+        "## Abstract"\
+        "\n"\
+        "#{abstract}"
       end
 
       def headers

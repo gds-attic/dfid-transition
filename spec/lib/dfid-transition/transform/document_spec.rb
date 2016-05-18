@@ -121,8 +121,8 @@ module DfidTransition::Transform
 
         it { is_expected.to be_a(String) }
 
-        it 'has a markdown h2 header for the abstract' do
-          expect(body).to include('## Abstract')
+        it 'has a header with no indents for the abstract' do
+          expect(body).to match(/^## Abstract/)
         end
         it 'has the abstract as markdown' do
           expect(body).to include('This research design and methods paper')
