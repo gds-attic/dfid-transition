@@ -74,11 +74,18 @@ module DfidTransition
         [ORGANISATION_CONTENT_ID]
       end
 
+      def change_history
+        [{
+          public_timestamp: public_updated_at,
+          note:             'First published.'
+        }]
+      end
+
       def details
         {
           body: Govuk::Presenters::Govspeak.present(body),
-          metadata: metadata
-          # change_history: change_history
+          metadata: metadata,
+          change_history: change_history
         }.tap do |details_hash|
           details_hash[:headers] = headers
           #  details_hash[:attachments] = attachments if document.attachments
