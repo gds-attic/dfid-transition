@@ -96,6 +96,11 @@ module DfidTransition::Transform
           expect(details[:metadata]).to eql(doc.metadata)
         end
 
+        it 'has a non-empty change history list' do
+          expect(details[:change_history]).to be_an(Array)
+          expect(details[:change_history]).not_to be_empty
+        end
+
         describe 'the presented body' do
           subject(:presented_body) { details[:body] }
 
@@ -116,6 +121,15 @@ module DfidTransition::Transform
         it 'has a list of countries' do
           expect(metadata[:country]).to eql(%w(AZ GB))
         end
+      end
+
+      describe '#change_history' do
+        subject(:change_history) { doc.change_history }
+
+        it {
+          is_expected.to eql \
+            [{ public_timestamp: doc.public_updated_at, note: 'First published.' }]
+        }
       end
 
       describe '#body' do
