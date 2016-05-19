@@ -121,6 +121,9 @@ module DfidTransition::Transform
         it 'has a list of countries' do
           expect(metadata[:country]).to eql(%w(AZ GB))
         end
+        it 'says that this is bulk_published' do
+          expect(metadata[:bulk_published]).to be true
+        end
       end
 
       describe '#change_history' do
