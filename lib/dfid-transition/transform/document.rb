@@ -54,7 +54,8 @@ module DfidTransition
       def metadata
         {
           document_type: "dfid_research_output",
-          country: countries
+          country: countries,
+          bulk_published: true
         }
       end
 
