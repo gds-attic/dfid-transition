@@ -28,15 +28,15 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     let(:schema) { JSON.parse(File.read(patch_location)) }
     let(:themes) { schema['facets'].find { |facet| facet['key'] == 'theme' } }
 
-    it 'adds theme data to the schema' do
+    it 'adds only top-level theme data to the schema' do
       patch.run
 
       allowed_values = themes['allowed_values']
 
-      expect(allowed_values.count).to eq(95)
+      expect(allowed_values.count).to eq(12)
       expect(allowed_values).to include(
-        'label' => 'Neglected Tropical Diseases',
-        'value' => 'Neglected%20Tropical%20Diseases'
+        'label' => 'Climate and Environment',
+        'value' => 'Climate%20and%20Environment'
       )
     end
 
