@@ -82,6 +82,10 @@ module DfidTransition
         }]
       end
 
+      def creators
+        solution[:creators].to_s.split('|').map(&:strip)
+      end
+
       def details
         {
           body: Govuk::Presenters::Govspeak.present(body),
@@ -100,9 +104,10 @@ module DfidTransition
       end
 
       def body
-        "## Abstract"\
-        "\n"\
-        "#{abstract}"
+        "## Authors\n\n"\
+        "#{creators.map { |name| "* #{name}" }.join("\n")}\n\n"\
+        "## Abstract\n"\
+        "#{abstract}\n"
       end
 
       def headers

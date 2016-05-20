@@ -18,6 +18,7 @@ module DfidTransition::Transform
           output:       uri(original_url),
           date:         literal('2016-04-28T09:52:00'),
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
+          creators:     literal(' Heinlein, R. | Asimov, A. '),
           abstract:     literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
             'applied to other countries in Africa and Latin America.'\
@@ -143,6 +144,13 @@ module DfidTransition::Transform
         it 'has a header with no indents for the abstract' do
           expect(body).to match(/^## Abstract/)
         end
+        it 'has a header with no indents for the creators' do
+          expect(body).to match(/^## Authors/)
+        end
+        it 'has a list for the creators' do
+          expect(body).to include('* Heinlein, R.')
+          expect(body).to include('* Asimov, A.')
+        end
         it 'has the abstract as markdown' do
           expect(body).to include('This research design and methods paper')
           expect(body).not_to include('<p>')
@@ -150,6 +158,12 @@ module DfidTransition::Transform
         it 'corrects non-standard HTML – the list is separate' do
           expect(body).to include("\n* Hello")
         end
+      end
+
+      describe '#creators' do
+        subject(:creators) { doc.creators }
+
+        it { is_expected.to eql(['Heinlein, R.', 'Asimov, A.']) }
       end
 
       describe '#headers' do
