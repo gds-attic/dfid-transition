@@ -54,9 +54,12 @@ module DfidTransition
       def metadata
         {
           document_type: "dfid_research_output",
-          country: countries,
           bulk_published: true
-        }
+        }.merge(format_specific_metadata)
+      end
+
+      def first_published_at
+        solution[:date].to_s
       end
 
       def public_updated_at
@@ -68,7 +71,7 @@ module DfidTransition
       end
 
       def format_specific_metadata
-        { country: countries }
+        { country: countries, first_published_at: first_published_at }
       end
 
       def organisations
