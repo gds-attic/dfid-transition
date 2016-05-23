@@ -1,5 +1,6 @@
 require 'securerandom'
 require 'cgi'
+require 'erb'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
 require 'active_support/core_ext/string/strip'
@@ -104,10 +105,37 @@ module DfidTransition
       end
 
       def body
-        "## Authors\n\n"\
-        "#{creators.map { |name| "* #{name}" }.join("\n")}\n\n"\
-        "## Abstract\n"\
-        "#{abstract}\n"
+        Html.unescape_three_times(
+          body_template.result(binding)
+        )
+      end
+
+      def body_template
+        @body_template ||= ERB.new(
+          File.read(
+            File.expand_path('body.md.erb', File.dirname(__FILE__))
+          )
+        )
+      end
+
+      def project_title
+        solution[:projectTitle].to_s
+      end
+
+      def project_abstract
+        solution[:projectAbstract].to_s
+      end
+
+      def project_start
+        solution[:projectStart].to_s
+      end
+
+      def project_end
+        solution[:projectEnd].to_s
+      end
+
+      def programme
+        solution[:programme].to_s
       end
 
       def headers

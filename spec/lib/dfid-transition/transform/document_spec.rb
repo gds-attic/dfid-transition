@@ -15,11 +15,16 @@ module DfidTransition::Transform
       let(:solution)      { double('RDF::Query::Solution') }
       let(:solution_hash) do
         {
-          output:       uri(original_url),
-          date:         literal('2016-04-28T09:52:00'),
-          title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
-          creators:     literal(' Heinlein, R. | Asimov, A. '),
-          abstract:     literal(
+          output:          uri(original_url),
+          date:            literal('2016-04-28T09:52:00'),
+          title:           literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
+          projectTitle:    literal('Project Title'),
+          projectAbstract: literal('Project abstract'),
+          projectStart:    literal('1st April 2016'),
+          projectEnd:      literal('2nd April 2016'),
+          programme:       literal('A programme'),
+          creators:        literal(' Heinlein, R. | Asimov, A. '),
+          abstract:        literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
             'applied to other countries in Africa and Latin America.'\
             '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
@@ -157,6 +162,15 @@ module DfidTransition::Transform
         end
         it 'corrects non-standard HTML – the list is separate' do
           expect(body).to include("\n* Hello")
+        end
+        it 'has details about the project and programme' do
+          expect(body).to match(/^## Project details/)
+
+          expect(body).to include(solution_hash[:projectTitle].to_s)
+          expect(body).to include(solution_hash[:projectAbstract].to_s)
+          expect(body).to include(solution_hash[:projectStart].to_s)
+          expect(body).to include(solution_hash[:projectEnd].to_s)
+          expect(body).to include(solution_hash[:programme].to_s)
         end
       end
 
