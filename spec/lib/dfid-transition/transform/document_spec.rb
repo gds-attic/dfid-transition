@@ -77,12 +77,21 @@ module DfidTransition::Transform
         expect(doc.public_updated_at).to eql('2016-04-28T09:52:00')
       end
 
+      it 'has a first_published_at date' do
+        expect(doc.first_published_at).to eql('2016-04-28T09:52:00')
+      end
+
       it 'splits country codes' do
         expect(doc.countries).to eql(%w(AZ GB))
       end
 
-      it 'has these countries in format_specific_metadata' do
-        expect(doc.format_specific_metadata).to eql(country: doc.countries)
+      describe '#format_specific_metadata' do
+        it 'has our countries' do
+          expect(doc.format_specific_metadata[:country]).to eql(doc.countries)
+        end
+        it 'has our first_published_at date' do
+          expect(doc.format_specific_metadata[:first_published_at]).to eql(doc.first_published_at)
+        end
       end
 
       it 'has fixed organisations' do
@@ -124,6 +133,9 @@ module DfidTransition::Transform
         end
         it 'says that this is bulk_published' do
           expect(metadata[:bulk_published]).to be true
+        end
+        it 'has the published date of the research output' do
+          expect(metadata[:first_published_at]).to eql(doc.first_published_at)
         end
       end
 
