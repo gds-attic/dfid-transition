@@ -1,11 +1,9 @@
-require 'sparql/client'
+require 'dfid-transition/extract/query/base'
 
 module DfidTransition
   module Extract
     module Query
-      ENDPOINT = 'http://linked-development.org/sparql'.freeze
-
-      class Outputs
+      class Outputs < Base
         QUERY = <<-SPARQL.freeze
           PREFIX dcterms: <http://purl.org/dc/terms/>
           PREFIX ont:     <http://purl.org/ontology/bibo/>
@@ -30,18 +28,8 @@ module DfidTransition
           LIMIT 20
         SPARQL
 
-        def endpoint
-          ENDPOINT
-        end
-
-        def solutions
-          client.query(QUERY, content_type: SPARQL::Client::RESULT_JSON)
-        end
-
-      private
-
-        def client
-          @client ||= SPARQL::Client.new(endpoint, method: :get)
+        def query
+          QUERY
         end
       end
     end
