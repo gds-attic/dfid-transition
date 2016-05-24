@@ -75,7 +75,8 @@ module DfidTransition
         {
           country: countries,
           first_published_at: first_published_at,
-          dfid_authors: creators
+          dfid_authors: creators,
+          peer_reviewed: peer_reviewed
         }
       end
 
@@ -122,6 +123,10 @@ module DfidTransition
 
       def async_download_attachments
         downloads.each(&:file_future)
+      end
+
+      def peer_reviewed
+        solution[:peerReviewed].true?
       end
 
       def abstract

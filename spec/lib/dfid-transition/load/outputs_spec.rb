@@ -28,6 +28,7 @@ describe DfidTransition::Load::Outputs do
         date:         literal('2016-04-28T09:52:00'),
         title:        literal('Output Title'),
         abstract:     literal('&amp;lt;p&amp;gt;Abstract;lt;/p&amp;gt;'),
+        peerReviewed: boolean(true),
         countryCodes: literal('AZ GB'),
         uris:         literal("#{onsite_pdf} #{offsite_pdf}")
       }
