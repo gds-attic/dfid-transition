@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'dfid-transition/extract/query/Base'
+require 'dfid-transition/extract/query/base'
 
 describe DfidTransition::Extract::Query::Base do
   class TestQuery < DfidTransition::Extract::Query::Base
