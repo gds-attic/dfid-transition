@@ -28,6 +28,7 @@ module DfidTransition
           should_discard_draft = true
           begin
             publishing_api.put_content(doc.content_id, doc.to_json)
+            publishing_api.patch_links(doc.content_id, doc.links)
             publishing_api.publish(doc.content_id, update_type)
             logger.info "Published #{doc.title} at "\
               "http://www.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"

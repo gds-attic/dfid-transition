@@ -147,7 +147,14 @@ module DfidTransition
                              ],
           redirects:         [],
           update_type:       'minor',
-          organisations:     organisations
+        }
+      end
+
+      def links
+        {
+          links: {
+            organisations:     organisations
+          }
         }
       end
     end
