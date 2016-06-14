@@ -49,6 +49,15 @@ describe DfidTransition::Load::Outputs do
         expect(publishing_api).to have_received(:publish).with(uuid, 'major')
       end
 
+      it 'sends the organisation in a call to links' do
+        expect(publishing_api).to have_received(:patch_links).with(
+          uuid,
+          links: {
+            organisations: [instance_of(String)]
+          },
+        )
+      end
+
       it 'adds the document to rummager' do
         expect(rummager).to have_received(:add_document).with(
           'dfid_research_output',
@@ -73,6 +82,7 @@ describe DfidTransition::Load::Outputs do
 
       before do
         allow(publishing_api).to receive(:put_content)
+        allow(publishing_api).to receive(:patch_links)
         allow(publishing_api).to receive(:publish).and_raise(
           GdsApi::HTTPUnprocessableEntity.new(422, 'Something went bang when we tried to publish'))
         allow(publishing_api).to receive(:discard_draft)
