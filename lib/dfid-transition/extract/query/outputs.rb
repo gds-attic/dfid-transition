@@ -10,9 +10,10 @@ module DfidTransition
           PREFIX geo:     <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
           PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
           PREFIX bibo:    <http://purl.org/ontology/bibo/>
+          PREFIX status:  <http://purl.org/bibo/status/>
 
           SELECT DISTINCT ?output ?date ?abstract ?title ?citation
-            (bound(?peerReviewedExists) AS ?peerReviewed)
+            (EXISTS { ?output bibo:DocumentStatus status:peerReviewed } AS ?peerReviewed)
             (GROUP_CONCAT(DISTINCT(?creator); separator = '|') AS ?creators)
             (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
             (GROUP_CONCAT(DISTINCT(?uri)) AS ?uris)
@@ -26,10 +27,8 @@ module DfidTransition
 
             OPTIONAL { ?output dcterms:coverage/geo:codeISO2 ?codeISO2 }
             OPTIONAL { ?output dcterms:creator/foaf:name     ?creator }
-		        OPTIONAL { ?output bibo:DocumentStatus ?peerReviewedExists .
-                       FILTER (?peerReviewedExists = <http://purl.org/bibo/status/peerReviewed>) }
 
-          } GROUP BY ?output ?date ?abstract ?title ?citation ?peerReviewedExists
+          } GROUP BY ?output ?date ?abstract ?title ?citation
           ORDER BY DESC(?date)
           LIMIT 20
         SPARQL
