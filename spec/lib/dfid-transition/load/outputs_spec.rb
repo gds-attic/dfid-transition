@@ -3,8 +3,9 @@ require 'dfid-transition/load/outputs'
 require 'gds_api/exceptions'
 
 describe DfidTransition::Load::Outputs do
-  let(:publishing_api) { spy('publishing_api') }
+  let(:publishing_api) { spy('publishing-api') }
   let(:rummager)       { spy('rummager') }
+  let(:asset_manager)  { spy('asset_manager' )}
   let(:solutions)      { [] }
   let(:null_logger)    { double('Logger').as_null_object }
 
@@ -17,15 +18,18 @@ describe DfidTransition::Load::Outputs do
   describe '#run' do
     include RDFDoubles
 
-    let(:solutions) { [solution_hash] }
-    let(:solution) { double('RDF::Query::Solution') }
+    let(:solutions)   { [solution_hash] }
+    let(:solution)    { double('RDF::Query::Solution') }
+    let(:onsite_pdf)  { 'http://r4d.dfid.gov.uk/pdfs/onsite.pdf' }
+    let(:offsite_pdf) { 'http://example.com/offsite.pdf' }
     let(:solution_hash) do
       {
         output:       uri('http://original_url/1234/'),
         date:         literal('2016-04-28T09:52:00'),
         title:        literal('Output Title'),
         abstract:     literal('&amp;lt;p&amp;gt;Abstract;lt;/p&amp;gt;'),
-        countryCodes: literal('AZ GB')
+        countryCodes: literal('AZ GB'),
+        uris:         literal("#{onsite_pdf} #{offsite_pdf}")
       }
     end
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
@@ -38,6 +42,14 @@ describe DfidTransition::Load::Outputs do
 
     context 'there is one good solution and no pre-existing content' do
       before { loader.run }
+
+      it 'downloads the single on-site PDF' do
+        expect(RestClient).to have_received(:get).with(onsite_pdf).and_return
+      end
+
+      it 'stores the PDF in the asset_manager' do
+        expect(asset_manager).to have_received(:create_asset).with(file: instance_of(File))
+      end
 
       it 'puts the content' do
         expect(publishing_api).to have_received(:put_content).with(

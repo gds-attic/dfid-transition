@@ -10,6 +10,7 @@ namespace :load do
       loader = Load::Outputs.new(
         Services.publishing_api,
         Services.rummager,
+        Services.asset_manager,
         output_solutions
       )
       loader.run

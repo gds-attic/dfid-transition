@@ -13,12 +13,14 @@ module DfidTransition
           SELECT DISTINCT ?output ?date ?abstract ?title ?citation
                           (GROUP_CONCAT(DISTINCT(?creator); separator = '|') AS ?creators)
                           (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
+                          (GROUP_CONCAT(DISTINCT(?uri)) AS ?uris)
           WHERE {
             ?output a ont:Article ;
                     dcterms:title ?title ;
                     dcterms:abstract ?abstract ;
                     dcterms:bibliographicCitation ?citation ;
-                    dcterms:date ?date .
+                    dcterms:date ?date ;
+                    ont:uri ?uri .
 
             OPTIONAL { ?output dcterms:coverage/geo:codeISO2 ?codeISO2 }
             OPTIONAL { ?output dcterms:creator/foaf:name     ?creator }

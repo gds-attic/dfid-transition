@@ -7,3 +7,9 @@
 ## Citation
 
 <%= citation %>
+
+## Links
+
+<% attachments.each do |attachment| %>
+<%= attachment.snippet %>
+<% end %>

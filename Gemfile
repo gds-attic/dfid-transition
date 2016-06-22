@@ -9,6 +9,7 @@ gem 'nokogiri'
 gem 'gds-api-adapters'
 gem 'govspeak'
 gem 'activesupport'
+gem 'concurrent-ruby'
 gem 'kramdown'
 gem 'erubis'
 

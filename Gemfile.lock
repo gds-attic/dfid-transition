@@ -155,6 +155,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  concurrent-ruby
   erubis
   gds-api-adapters
   govspeak
