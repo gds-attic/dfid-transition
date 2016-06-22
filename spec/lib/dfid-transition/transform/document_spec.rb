@@ -95,7 +95,7 @@ module DfidTransition::Transform
       end
 
       it 'has fixed organisations' do
-        dfid_content_id = 'b994552-7644-404d-a770-a2fe659c661f'
+        dfid_content_id = 'db994552-7644-404d-a770-a2fe659c661f'
         expect(doc.organisations).to eql([dfid_content_id])
       end
 
