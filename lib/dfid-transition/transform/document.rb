@@ -107,9 +107,13 @@ module DfidTransition
 
       def body
         "## Authors\n\n"\
-        "#{creators.map { |name| "* #{name}" }.join("\n")}\n\n"\
-        "## Abstract\n"\
-        "#{abstract}\n"
+        "#{creators.map { |name| "* #{name}" }.join("\n")}\n\n" +
+          if blank_abstract?
+            ''
+          else
+            "## Abstract\n"\
+            "#{abstract}\n"
+          end
       end
 
       def headers
@@ -155,6 +159,12 @@ module DfidTransition
             organisations:     organisations
           }
         }
+      end
+
+    private
+
+      def blank_abstract?
+        ['-', ''].include?(abstract.strip)
       end
     end
   end
