@@ -10,6 +10,7 @@ gem 'gds-api-adapters'
 gem 'govspeak'
 gem 'activesupport'
 gem 'kramdown'
+gem 'erubis'
 
 group :development, :test do
   gem 'govuk-lint'

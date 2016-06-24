@@ -10,19 +10,20 @@ module DfidTransition
           PREFIX geo:     <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
           PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
 
-          SELECT DISTINCT ?output ?date ?abstract ?title
+          SELECT DISTINCT ?output ?date ?abstract ?title ?citation
                           (GROUP_CONCAT(DISTINCT(?creator); separator = '|') AS ?creators)
                           (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
           WHERE {
             ?output a ont:Article ;
                     dcterms:title ?title ;
                     dcterms:abstract ?abstract ;
+                    dcterms:bibliographicCitation ?citation ;
                     dcterms:date ?date .
 
             OPTIONAL { ?output dcterms:coverage/geo:codeISO2 ?codeISO2 }
             OPTIONAL { ?output dcterms:creator/foaf:name     ?creator }
 
-          } GROUP BY ?output ?date ?abstract ?title
+          } GROUP BY ?output ?date ?abstract ?title ?citation
           ORDER BY DESC(?date)
           LIMIT 20
         SPARQL

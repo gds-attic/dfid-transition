@@ -21,6 +21,7 @@ GEM
     ebnf (1.0.1)
       rdf (~> 2.0)
       sxp (~> 1.0)
+    erubis (2.7.0)
     gds-api-adapters (30.2.1)
       link_header
       lrucache (~> 0.1.1)
@@ -154,6 +155,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  erubis
   gds-api-adapters
   govspeak
   govuk-lint

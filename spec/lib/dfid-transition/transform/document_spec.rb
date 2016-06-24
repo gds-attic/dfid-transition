@@ -18,6 +18,7 @@ module DfidTransition::Transform
           output:       uri(original_url),
           date:         literal('2016-04-28T09:52:00'),
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
+          citation:     literal(' Heinlein, R.; Asimov, A. &lt;b&gt;Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It.&lt;/b&gt; 72 pp. '),
           creators:     literal(' Heinlein, R. | Asimov, A. '),
           abstract:     literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
@@ -156,6 +157,9 @@ module DfidTransition::Transform
         it 'has a header with no indents for the abstract' do
           expect(body).to match(/^## Abstract/)
         end
+        it 'has the citation' do
+          expect(body).to include(doc.citation)
+        end
         it 'has a header with no indents for the creators' do
           expect(body).to match(/^## Authors/)
         end
@@ -199,6 +203,15 @@ module DfidTransition::Transform
         subject(:creators) { doc.creators }
 
         it { is_expected.to eql(['Heinlein, R.', 'Asimov, A.']) }
+      end
+
+      describe '#citation' do
+        it 'strips all formatting' do
+          expect(doc.citation).to eql(
+            'Heinlein, R.; Asimov, A. Domestic Violence Law: The Gap Between '\
+            'Legislation and Practice in Cambodia and What Can Be Done About It. 72 pp.'
+          )
+        end
       end
 
       describe '#headers' do
