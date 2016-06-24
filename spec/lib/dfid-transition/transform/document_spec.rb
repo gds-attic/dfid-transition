@@ -170,6 +170,29 @@ module DfidTransition::Transform
         it 'corrects non-standard HTML – the list is separate' do
           expect(body).to include("\n* Hello")
         end
+
+        context 'the abstract is blank' do
+          context 'with a single dash' do
+            before { solution_hash[:abstract] = literal('-') }
+            it 'has no abstract section' do
+              expect(body).not_to include('## Abstract')
+            end
+          end
+
+          context 'with a single dash and leading/trailing space' do
+            before { solution_hash[:abstract] = literal(' - ') }
+            it 'has no abstract section' do
+              expect(body).not_to include('## Abstract')
+            end
+          end
+
+          context 'properly blank' do
+            before { solution_hash[:abstract] = literal('') }
+            it 'has no abstract section' do
+              expect(body).not_to include('## Abstract')
+            end
+          end
+        end
       end
 
       describe '#creators' do
