@@ -43,8 +43,7 @@ module DfidTransition
       end
 
       def summary
-        "This is an example summary for output #{original_id}. The citation would ordinarily
-         appear here but we need CABI to include that data in their triples."
+        ''
       end
 
       def base_path
