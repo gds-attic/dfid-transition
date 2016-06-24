@@ -90,6 +90,9 @@ module DfidTransition::Transform
         it 'has our countries' do
           expect(doc.format_specific_metadata[:country]).to eql(doc.countries)
         end
+        it 'has our authors' do
+          expect(doc.format_specific_metadata[:dfid_authors]).to eql(doc.creators)
+        end
         it 'has our first_published_at date' do
           expect(doc.format_specific_metadata[:first_published_at]).to eql(doc.first_published_at)
         end
@@ -159,13 +162,6 @@ module DfidTransition::Transform
         end
         it 'has the citation' do
           expect(body).to include(doc.citation)
-        end
-        it 'has a header with no indents for the creators' do
-          expect(body).to match(/^## Authors/)
-        end
-        it 'has a list for the creators' do
-          expect(body).to include('* Heinlein, R.')
-          expect(body).to include('* Asimov, A.')
         end
         it 'has the abstract as markdown' do
           expect(body).to include('This research design and methods paper')
