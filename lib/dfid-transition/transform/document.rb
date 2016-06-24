@@ -3,6 +3,7 @@ require 'cgi'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
 require 'active_support/core_ext/string/strip'
+require 'erubis'
 
 module DfidTransition
   LINKED_DEVELOPMENT_OUTPUT_URI =
@@ -88,6 +89,10 @@ module DfidTransition
         solution[:creators].to_s.split('|').map(&:strip)
       end
 
+      def citation
+        solution[:citation].to_s.gsub(/&[lg]t;\/?b?/, '').strip
+      end
+
       def details
         {
           body: Govuk::Presenters::Govspeak.present(body),
@@ -106,14 +111,7 @@ module DfidTransition
       end
 
       def body
-        "## Authors\n\n"\
-        "#{creators.map { |name| "* #{name}" }.join("\n")}\n\n" +
-          if blank_abstract?
-            ''
-          else
-            "## Abstract\n"\
-            "#{abstract}\n"
-          end
+        body_template.result(binding)
       end
 
       def headers
@@ -165,6 +163,11 @@ module DfidTransition
 
       def blank_abstract?
         ['-', ''].include?(abstract.strip)
+      end
+
+      def body_template
+        @body_template ||=
+          Erubis::EscapedEruby.new(File.read(File.expand_path('body.erb.md', File.dirname(__FILE__))))
       end
     end
   end
