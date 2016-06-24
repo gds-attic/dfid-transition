@@ -61,8 +61,8 @@ module DfidTransition::Transform
           '‘And Then He Switched off the Phone’: Mobile Phones ...')
       end
 
-      it 'fixes #summary to the example' do
-        expect(doc.summary).to include('This is an example summary for output 5050')
+      it 'always has an empty summary' do
+        expect(doc.summary).to be_empty
       end
 
       it 'knows the original ID for things' do
