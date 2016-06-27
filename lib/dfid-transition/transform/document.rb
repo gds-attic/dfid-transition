@@ -71,7 +71,11 @@ module DfidTransition
       end
 
       def format_specific_metadata
-        { country: countries, first_published_at: first_published_at }
+        {
+          country: countries,
+          first_published_at: first_published_at,
+          dfid_authors: creators
+        }
       end
 
       def organisations
