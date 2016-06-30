@@ -3,8 +3,6 @@ require 'dfid-transition/transform/attachment'
 
 module DfidTransition::Transform
   describe Attachment do
-    let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
-
     subject(:attachment) { Attachment.new(original_url) }
 
     context 'nothing usable is given' do
@@ -16,17 +14,80 @@ module DfidTransition::Transform
       end
     end
 
-    describe '#hosted_at_r4d?' do
-      subject { attachment.hosted_at_r4d? }
+    context 'given an offsite URL' do
+      let(:original_url) { 'http://example.com/some/file.pdf' }
 
-      context 'given a URL that is offsite' do
-        let(:original_url) { 'http://example.com/offsite' }
-        it { is_expected.to be false }
+      it 'is not #hosted_at_r4d?' do
+        expect(attachment.hosted_at_r4d?).to be false
       end
 
-      context 'given a URL that is onsite' do
-        let(:original_url) { 'http://r4d.dfid.gov.uk/some/file.pdf' }
-        it { is_expected.to be true }
+      it 'is an #external_link?' do
+        expect(attachment.external_link?).to be true
+      end
+
+      it 'has an external link as a #snippet' do
+        expect(attachment.snippet).to eql('[file.pdf](http://example.com/some/file.pdf)')
+      end
+
+      describe '#to_json' do
+        it 'should never be called for an external link' do
+          expect { attachment.to_json }.to raise_error(
+            RuntimeError, '#to_json is not valid for an external link')
+        end
+      end
+
+      describe '#file and #file_future' do
+        it 'has a Future for a #file_future' do
+          expect(attachment.file_future).to be_a(Concurrent::Future)
+        end
+
+        it 'has a value of false when dereferenced with #file' do
+          expect(attachment.file).to be false
+        end
+      end
+    end
+
+    context 'given an onsite URL' do
+      let(:original_url) { 'http://r4d.dfid.gov.uk/some/file.pdf' }
+
+      it 'is #hosted_at_r4d?' do
+        expect(attachment.hosted_at_r4d?).to be true
+      end
+
+      it 'is not an #external_link?' do
+        expect(attachment.external_link?).to be false
+      end
+
+      it 'has an InlineAttachment #snippet' do
+        expect(attachment.snippet).to eql('[InlineAttachment:file.pdf]')
+      end
+
+      describe '#to_json' do
+        before do
+          allow(attachment).to receive(:asset_response).and_return(
+            double('response', file_url: 'http://asset.url'))
+        end
+
+        it 'has the asset manager url' do
+          expect(attachment.to_json[:url]).to eql('http://asset.url')
+        end
+      end
+
+      describe '#file and #file_future' do
+        let(:pdf_content) { 'This is PDF content, honest' }
+
+        before do
+          stub_request(:get, original_url).to_return(body: pdf_content)
+        end
+
+        it 'has a Future for a #file_future' do
+          expect(attachment.file_future).to be_a(Concurrent::Future)
+        end
+
+        it 'has the content of the PDF in #file as a File' do
+          expect(attachment.file).to be_a(File)
+          expect(attachment.file.read).to eql(pdf_content)
+        end
       end
     end
 
@@ -52,6 +113,8 @@ module DfidTransition::Transform
     end
 
     describe '#content_id' do
+      let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
+
       let(:original_url) { 'http://r4d.dfid.gov.uk/pdfs/some.pdf' }
 
       it 'is a uuid' do
@@ -60,71 +123,6 @@ module DfidTransition::Transform
 
       it 'is only minted once' do
         expect(attachment.content_id).to eql(attachment.content_id)
-      end
-    end
-
-    describe '#snippet' do
-      subject { attachment.snippet }
-
-      context 'it is hosted at r4d' do
-        let(:original_url) { 'http://r4d.dfid.gov.uk/some/file.pdf' }
-        it { is_expected.to eql('[InlineAttachment:file.pdf]') }
-      end
-      context 'it is hosted offsite' do
-        let(:original_url) { 'http://www.example.com/some/file.pdf' }
-        it { is_expected.to eql('[file.pdf](http://www.example.com/some/file.pdf)') }
-      end
-    end
-
-    describe '#to_json' do
-      subject(:json) { attachment.to_json }
-      context 'an onsite URL' do
-        let(:original_url) { 'http://r4d.dfid.gov.uk/some/file.pdf' }
-        before do
-          allow(attachment).to receive(:asset_response).and_return(
-            double('response', file_url: 'http://asset.url'))
-        end
-
-        it 'has the asset manager url' do
-          expect(json[:url]).to eql('http://asset.url')
-        end
-      end
-
-      context 'an offsite URL' do
-        let(:original_url) { 'http://example.com/offsite' }
-
-        it 'should never be called' do
-          expect { attachment.to_json }.to raise_error(RuntimeError,
-            '#to_json is not valid for an external link')
-        end
-      end
-    end
-
-    describe '#file_future' do
-      subject { attachment.file_future }
-
-      context 'an offsite URL' do
-        let(:original_url) { 'http://example.com/1234' }
-        it { is_expected.to be_a(Concurrent::Future) }
-
-        it 'has a value of false' do
-          expect(attachment.file).to be false
-        end
-      end
-      context 'an onsite URL' do
-        let(:original_url) { 'http://r4d.dfid.gov.uk/pdfs/some.pdf' }
-        let(:pdf_content) { 'This is PDF content, honest' }
-
-        before do
-          stub_request(:get, original_url).to_return(body: pdf_content)
-        end
-
-        it { is_expected.to be_a(Concurrent::Future) }
-
-        it 'has the content of the PDF as a File' do
-          expect(attachment.file).to be_a(File)
-          expect(attachment.file.read).to eql(pdf_content)
-        end
       end
     end
   end
