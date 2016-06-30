@@ -33,7 +33,7 @@ module DfidTransition
 
         update_type = existing_draft_content_id ? 'republish' : 'major'
 
-        wait_for_upload_to_asset_manager(doc.attachments)
+        wait_for_upload_to_asset_manager(doc.downloads)
 
         should_discard_draft = true
         begin
@@ -60,7 +60,7 @@ module DfidTransition
       end
 
       def wait_for_upload_to_asset_manager(attachments)
-        attachments.select(&:hosted_at_r4d?).each do |attachment|
+        attachments.each do |attachment|
           file = attachment.file # block on the value
           case attachment.file_future.state
           when :rejected

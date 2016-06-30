@@ -105,7 +105,7 @@ module DfidTransition
           change_history: change_history
         }.tap do |details_hash|
           details_hash[:headers]     = headers
-          details_hash[:attachments] = attachments.select(&:hosted_at_r4d?).map(&:to_json) if attachments
+          details_hash[:attachments] = downloads.map(&:to_json) if attachments
         end
       end
 
@@ -116,8 +116,12 @@ module DfidTransition
         end
       end
 
+      def downloads
+        attachments.select(&:hosted_at_r4d?)
+      end
+
       def async_download_attachments
-        attachments.each(&:file_future)
+        downloads.each(&:file_future)
       end
 
       def abstract

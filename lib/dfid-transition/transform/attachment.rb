@@ -20,7 +20,7 @@ module DfidTransition
       def file_future
         @file_future ||= case
                          when external_link?
-                           Concurrent::Future.new { false }
+                           raise RuntimeError, 'external links cannot be downloaded'
                          when hosted_at_r4d?
                            Concurrent::Future.new do
                              download_to = "/tmp/#{filename}"
@@ -30,8 +30,8 @@ module DfidTransition
                                end
                              end
                              File.open(download_to, 'r')
-                           end
-                         end.tap(&:execute)
+                           end.tap(&:execute)
+                         end
       end
 
       def file

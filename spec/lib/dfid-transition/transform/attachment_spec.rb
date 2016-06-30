@@ -37,12 +37,9 @@ module DfidTransition::Transform
       end
 
       describe '#file and #file_future' do
-        it 'has a Future for a #file_future' do
-          expect(attachment.file_future).to be_a(Concurrent::Future)
-        end
-
-        it 'has a value of false when dereferenced with #file' do
-          expect(attachment.file).to be false
+        it 'has no Future at all' do
+          expect { attachment.file_future }.to raise_error(RuntimeError, 'external links cannot be downloaded')
+          expect { attachment.file }.to        raise_error(RuntimeError, 'external links cannot be downloaded')
         end
       end
     end
