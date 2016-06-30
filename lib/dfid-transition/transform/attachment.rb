@@ -31,8 +31,8 @@ module DfidTransition
                                end
                              end
                              File.open(download_to, 'r')
-                           end.tap(&:execute)
-                         end
+                           end
+                         end.tap(&:execute)
       end
 
       def file
