@@ -65,11 +65,6 @@ module DfidTransition
         @asset_response = asset_manager.create_asset(file: file)
       end
 
-      def asset_response
-        @asset_response ||
-          (raise RuntimeError.new('#save_to(asset_manager) has not been called yet'))
-      end
-
       def to_json
         raise RuntimeError, '#to_json is not valid for an external link' if external_link?
 
@@ -81,6 +76,12 @@ module DfidTransition
           created_at: Time.now.to_datetime.rfc3339,
           content_id: content_id
         }
+      end
+
+    private
+      def asset_response
+        @asset_response ||
+          (raise RuntimeError.new('#save_to(asset_manager) has not been called yet'))
       end
     end
   end
