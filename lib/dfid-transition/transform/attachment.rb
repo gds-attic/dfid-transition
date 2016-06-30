@@ -1,6 +1,7 @@
 require 'uri'
 require 'concurrent/future'
 require 'securerandom'
+require 'rest-client'
 
 module DfidTransition
   module Transform
@@ -13,16 +14,16 @@ module DfidTransition
       end
 
       def content_id
-        @content_id = SecureRandom.uuid
+        @content_id ||= SecureRandom.uuid
       end
 
       def file_future
-        @file_future ||= if external_link?
+        @file_future ||= case
+        when external_link?
           Concurrent::Future.new { false }
-        else
+        when hosted_at_r4d?
           Concurrent::Future.new do
             download_to = "/tmp/#{filename}"
-            puts download_to
             File.open(download_to, 'w+') do |file|
               RestClient.get original_url.to_s do |str|
                 file.write(str)
@@ -52,23 +53,28 @@ module DfidTransition
       def snippet
         case
         when hosted_at_r4d? then "[InlineAttachment:#{filename}]"
-        when external_link? then original_url
+        when external_link? then "[#{filename}](#{original_url})"
         end
       end
 
       def link_to_asset
-        "[#{filename}](#{@asset_response.file_url})"
+        "[#{filename}](#{asset_response.file_url})"
       end
 
       def save_to(asset_manager)
         @asset_response = asset_manager.create_asset(file: file)
       end
 
+      def asset_response
+        @asset_response ||
+          (raise RuntimeError.new('#save_to(asset_manager) has not been called yet'))
+      end
+
       def to_json
         return {} if external_link?
 
         {
-          url: @asset_response.file_url,
+          url: asset_response.file_url,
           title: filename,
           content_type: 'application/pdf',
           updated_at: Time.now.to_datetime.rfc3339,

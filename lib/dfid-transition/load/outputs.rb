@@ -47,7 +47,6 @@ module DfidTransition
           logger.warn "#{doc.original_url}: #{e}"
         rescue => e
           logger.error(e)
-          raise
         ensure
           # Don't leave us in a state where we could 422
           publishing_api.discard_draft(doc.content_id) if should_discard_draft

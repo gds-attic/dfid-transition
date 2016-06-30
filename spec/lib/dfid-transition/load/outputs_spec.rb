@@ -11,7 +11,7 @@ describe DfidTransition::Load::Outputs do
 
   subject(:loader) do
     DfidTransition::Load::Outputs.new(
-      publishing_api, rummager, solutions, logger: null_logger
+      publishing_api, rummager, asset_manager, solutions, logger: null_logger
     )
   end
 
@@ -32,20 +32,21 @@ describe DfidTransition::Load::Outputs do
         uris:         literal("#{onsite_pdf} #{offsite_pdf}")
       }
     end
+    let(:asset_response) do
+      OpenStruct.new file_url: 'http://some.media.link/1234567'
+    end
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
     let(:existing_content_id) { nil }
 
     before do
       allow(solution).to receive(:[]) { |key| solution_hash[key] }
       allow(publishing_api).to receive(:lookup_content_id).and_return(existing_content_id)
+      stub_request(:get, onsite_pdf) { 'This is PDF content, honest' }
+      allow(asset_manager).to receive(:create_asset).with(file: instance_of(File)).and_return(asset_response)
     end
 
     context 'there is one good solution and no pre-existing content' do
       before { loader.run }
-
-      it 'downloads the single on-site PDF' do
-        expect(RestClient).to have_received(:get).with(onsite_pdf).and_return
-      end
 
       it 'stores the PDF in the asset_manager' do
         expect(asset_manager).to have_received(:create_asset).with(file: instance_of(File))

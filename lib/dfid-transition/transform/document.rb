@@ -104,15 +104,16 @@ module DfidTransition
           metadata: metadata,
           change_history: change_history
         }.tap do |details_hash|
-          details_hash[:headers] = headers
-          if attachments
-            details_hash[:attachments] = attachments.map(&:to_json)
-          end
+          details_hash[:headers]     = headers
+          details_hash[:attachments] = attachments.map(&:to_json) if attachments
         end
       end
 
       def attachments
-        @attachments ||= solution[:uris].to_s.split(' ').map {|uri| Attachment.new(uri)}
+        @attachments ||= begin
+          uris = solution[:uris].to_s.split(' ')
+          uris.map {|uri| Attachment.new(uri)}
+        end
       end
 
       def async_download_attachments
