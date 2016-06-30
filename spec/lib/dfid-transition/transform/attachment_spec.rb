@@ -91,6 +91,10 @@ module DfidTransition::Transform
           stub_request(:get, original_url).to_return(body: pdf_content)
         end
 
+        after do
+          File.delete("/tmp/#{attachment.filename}")
+        end
+
         it 'has a Future for a #file_future' do
           expect(attachment.file_future).to be_a(Concurrent::Future)
         end

@@ -41,8 +41,14 @@ describe DfidTransition::Load::Outputs do
     before do
       allow(solution).to receive(:[]) { |key| solution_hash[key] }
       allow(publishing_api).to receive(:lookup_content_id).and_return(existing_content_id)
-      stub_request(:get, onsite_pdf) { 'This is PDF content, honest' }
+      stub_request(:get, onsite_pdf).to_return(body: 'This is PDF content, honest')
       allow(asset_manager).to receive(:create_asset).with(file: instance_of(File)).and_return(asset_response)
+    end
+
+    after do
+      loader.send(:documents).each do |document|
+        document.downloads.each { |download| File.delete("/tmp/#{download.filename}") }
+      end
     end
 
     context 'there is one good solution and no pre-existing content' do
