@@ -17,14 +17,16 @@ module DfidTransition
         @logger = logger
       end
 
-      def transform_documents
-        @transform_documents =
-          solutions.map { |solution| DfidTransition::Transform::Document.new(solution) }
+      def run
+        documents.each(&:async_download_attachments)
+        documents.each { |doc| publish(doc) }
       end
 
-      def run
-        transform_documents.each(&:async_download_attachments)
-        transform_documents.each { |doc| publish(doc) }
+    private
+
+      def documents
+        @documents =
+          solutions.map { |solution| DfidTransition::Transform::Document.new(solution) }
       end
 
       def publish(doc)
@@ -74,8 +76,6 @@ module DfidTransition
           end
         end
       end
-
-    private
 
       def content_id_from(base_path)
         publishing_api.lookup_content_id(base_path: base_path)
