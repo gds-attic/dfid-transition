@@ -161,6 +161,7 @@ DEPENDENCIES
   govspeak
   govuk-lint
   kramdown
+  mime-types
   nokogiri
   pry
   rake

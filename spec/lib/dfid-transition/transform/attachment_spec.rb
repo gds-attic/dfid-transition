@@ -68,6 +68,20 @@ module DfidTransition::Transform
         it 'has the asset manager url' do
           expect(attachment.to_json[:url]).to eql('http://asset.url')
         end
+
+        describe '[:content_type]' do
+          context 'for a PDF' do
+            example { expect(attachment.to_json[:content_type]).to eql('application/pdf') }
+          end
+          context 'for a JPEG' do
+            let(:original_url) { 'http://r4d.dfid.gov.uk/a.jpg' }
+            example { expect(attachment.to_json[:content_type]).to eql('image/jpeg') }
+          end
+          context 'for nothing in particular' do
+            let(:original_url) { 'http://r4d.dfid.gov.uk/erk' }
+            example { expect(attachment.to_json[:content_type]).to be nil }
+          end
+        end
       end
 
       describe '#file and #file_future' do

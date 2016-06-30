@@ -12,6 +12,7 @@ gem 'activesupport'
 gem 'concurrent-ruby'
 gem 'kramdown'
 gem 'erubis'
+gem 'mime-types'
 
 group :development, :test do
   gem 'govuk-lint'

@@ -2,6 +2,7 @@ require 'uri'
 require 'concurrent/future'
 require 'securerandom'
 require 'rest-client'
+require 'mime-types'
 
 module DfidTransition
   module Transform
@@ -69,16 +70,22 @@ module DfidTransition
         raise RuntimeError, '#to_json is not valid for an external link' if external_link?
 
         {
-          url: asset_response.file_url,
-          title: filename,
-          content_type: 'application/pdf',
-          updated_at: Time.now.to_datetime.rfc3339,
-          created_at: Time.now.to_datetime.rfc3339,
-          content_id: content_id
+          url:          asset_response.file_url,
+          title:        filename,
+          content_type: content_type,
+          updated_at:   Time.now.to_datetime.rfc3339,
+          created_at:   Time.now.to_datetime.rfc3339,
+          content_id:   content_id
         }
       end
 
     private
+
+      def content_type
+        mime = MIME::Types.type_for(filename).first
+        mime.content_type if mime
+      end
+
       def asset_response
         @asset_response ||
           (raise RuntimeError.new('#save_to(asset_manager) has not been called yet'))
