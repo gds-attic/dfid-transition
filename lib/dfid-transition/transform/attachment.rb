@@ -71,7 +71,7 @@ module DfidTransition
       end
 
       def to_json
-        return {} if external_link?
+        raise RuntimeError, '#to_json is not valid for an external link' if external_link?
 
         {
           url: asset_response.file_url,

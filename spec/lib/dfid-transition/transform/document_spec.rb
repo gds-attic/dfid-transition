@@ -25,7 +25,8 @@ module DfidTransition::Transform
             'applied to other countries in Africa and Latin America.'\
             '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
             '&amp;lt;/p&amp;gt;'),
-          countryCodes: literal('AZ GB')
+          countryCodes: literal('AZ GB'),
+          uris:         literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf')
         }
       end
 
@@ -106,6 +107,13 @@ module DfidTransition::Transform
       describe '#details' do
         subject(:details) { doc.details }
 
+        before do
+          doc.attachments.each do |attachment|
+            allow(attachment).to receive(:asset_response).and_return(
+              double 'response', file_url: 'http://asset.url')
+          end
+        end
+
         it 'has metadata' do
           expect(details[:metadata]).to eql(doc.metadata)
         end
@@ -113,6 +121,12 @@ module DfidTransition::Transform
         it 'has a non-empty change history list' do
           expect(details[:change_history]).to be_an(Array)
           expect(details[:change_history]).not_to be_empty
+        end
+
+        it 'has onsite attachments only with URLs assigned by asset manager' do
+          attachments_json = details[:attachments]
+          expect(attachments_json.size).to eql(1)
+          expect(attachments_json.first[:url]).to eql('http://asset.url')
         end
 
         describe 'the presented body' do

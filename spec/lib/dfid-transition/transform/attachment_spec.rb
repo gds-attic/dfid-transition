@@ -3,6 +3,8 @@ require 'dfid-transition/transform/attachment'
 
 module DfidTransition::Transform
   describe Attachment do
+    let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
+
     subject(:attachment) { Attachment.new(original_url) }
 
     context 'nothing usable is given' do
@@ -51,7 +53,6 @@ module DfidTransition::Transform
 
     describe '#content_id' do
       let(:original_url) { 'http://r4d.dfid.gov.uk/pdfs/some.pdf' }
-      let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
 
       it 'is a uuid' do
         expect(attachment.content_id).to match uuid
@@ -72,6 +73,30 @@ module DfidTransition::Transform
       context 'it is hosted offsite' do
         let(:original_url) { 'http://www.example.com/some/file.pdf' }
         it { is_expected.to eql('[file.pdf](http://www.example.com/some/file.pdf)') }
+      end
+    end
+
+    describe '#to_json' do
+      subject(:json) { attachment.to_json }
+      context 'an onsite URL' do
+        let(:original_url) { 'http://r4d.dfid.gov.uk/some/file.pdf' }
+        before do
+          allow(attachment).to receive(:asset_response).and_return(
+            double('response', file_url: 'http://asset.url'))
+        end
+
+        it 'has the asset manager url' do
+          expect(json[:url]).to eql('http://asset.url')
+        end
+      end
+
+      context 'an offsite URL' do
+        let(:original_url) { 'http://example.com/offsite' }
+
+        it 'should never be called' do
+          expect { attachment.to_json }.to raise_error(RuntimeError,
+            '#to_json is not valid for an external link')
+        end
       end
     end
 
