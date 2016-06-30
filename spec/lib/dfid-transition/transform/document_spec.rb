@@ -174,6 +174,9 @@ module DfidTransition::Transform
         it 'has a header with no indents for the abstract' do
           expect(body).to match(/^## Abstract/)
         end
+        it 'has a header with no indents for the links' do
+          expect(body).to match(/^## Links/)
+        end
         it 'has the citation' do
           expect(body).to include(doc.citation)
         end
@@ -183,6 +186,12 @@ module DfidTransition::Transform
         end
         it 'corrects non-standard HTML – the list is separate' do
           expect(body).to include("\n* Hello")
+        end
+        it 'has the onsite link' do
+          expect(body).to include('[InlineAttachment:some.pdf]')
+        end
+        it 'has the offsite link' do
+          expect(body).to include('[offsite.pdf](http://example.com/offsite.pdf)')
         end
 
         context 'the abstract is blank' do
