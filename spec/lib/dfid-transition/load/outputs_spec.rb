@@ -5,7 +5,7 @@ require 'gds_api/exceptions'
 describe DfidTransition::Load::Outputs do
   let(:publishing_api) { spy('publishing-api') }
   let(:rummager)       { spy('rummager') }
-  let(:asset_manager)  { spy('asset_manager' )}
+  let(:asset_manager)  { spy('asset_manager') }
   let(:solutions)      { [] }
   let(:null_logger)    { double('Logger').as_null_object }
 

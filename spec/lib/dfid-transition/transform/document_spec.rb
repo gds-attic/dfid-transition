@@ -110,7 +110,7 @@ module DfidTransition::Transform
         before do
           doc.attachments.each do |attachment|
             allow(attachment).to receive(:asset_response).and_return(
-              double 'response', file_url: 'http://asset.url')
+              double('response', file_url: 'http://asset.url'))
           end
         end
 

@@ -112,7 +112,7 @@ module DfidTransition
       def attachments
         @attachments ||= begin
           uris = solution[:uris].to_s.split(' ')
-          uris.map {|uri| Attachment.new(uri)}
+          uris.map { |uri| Attachment.new(uri) }
         end
       end
 

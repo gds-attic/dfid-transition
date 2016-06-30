@@ -19,19 +19,19 @@ module DfidTransition
 
       def file_future
         @file_future ||= case
-        when external_link?
-          Concurrent::Future.new { false }
-        when hosted_at_r4d?
-          Concurrent::Future.new do
-            download_to = "/tmp/#{filename}"
-            File.open(download_to, 'w+') do |file|
-              RestClient.get original_url.to_s do |str|
-                file.write(str)
-              end
-            end
-            File.open(download_to, 'r')
-          end
-        end.tap { |future| future.execute }
+                         when external_link?
+                           Concurrent::Future.new { false }
+                         when hosted_at_r4d?
+                           Concurrent::Future.new do
+                             download_to = "/tmp/#{filename}"
+                             File.open(download_to, 'w+') do |file|
+                               RestClient.get original_url.to_s do |str|
+                                 file.write(str)
+                               end
+                             end
+                             File.open(download_to, 'r')
+                           end
+                         end.tap(&:execute)
       end
 
       def file

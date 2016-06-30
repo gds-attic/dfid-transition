@@ -75,7 +75,7 @@ module DfidTransition
         end
       end
 
-      private
+    private
 
       def content_id_from(base_path)
         publishing_api.lookup_content_id(base_path: base_path)
