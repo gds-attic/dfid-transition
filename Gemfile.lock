@@ -155,11 +155,13 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  concurrent-ruby
   erubis
   gds-api-adapters
   govspeak
   govuk-lint
   kramdown
+  mime-types
   nokogiri
   pry
   rake

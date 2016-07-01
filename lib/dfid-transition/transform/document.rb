@@ -2,6 +2,7 @@ require 'securerandom'
 require 'cgi'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
+require 'dfid-transition/transform/attachment'
 require 'active_support/core_ext/string/strip'
 require 'erubis'
 
@@ -99,13 +100,28 @@ module DfidTransition
 
       def details
         {
-          body: Govuk::Presenters::Govspeak.present(body),
+          body: Govuk::Presenters::Govspeak.new(body, attachments).present,
           metadata: metadata,
           change_history: change_history
         }.tap do |details_hash|
-          details_hash[:headers] = headers
-          #  details_hash[:attachments] = attachments if document.attachments
+          details_hash[:headers]     = headers
+          details_hash[:attachments] = downloads.map(&:to_json) if attachments
         end
+      end
+
+      def attachments
+        @attachments ||= begin
+          uris = solution[:uris].to_s.split(' ')
+          uris.map { |uri| Attachment.new(uri) }
+        end
+      end
+
+      def downloads
+        attachments.select(&:hosted_at_r4d?)
+      end
+
+      def async_download_attachments
+        downloads.each(&:file_future)
       end
 
       def abstract

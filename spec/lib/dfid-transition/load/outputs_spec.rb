@@ -3,30 +3,37 @@ require 'dfid-transition/load/outputs'
 require 'gds_api/exceptions'
 
 describe DfidTransition::Load::Outputs do
-  let(:publishing_api) { spy('publishing_api') }
+  let(:publishing_api) { spy('publishing-api') }
   let(:rummager)       { spy('rummager') }
+  let(:asset_manager)  { spy('asset_manager') }
   let(:solutions)      { [] }
   let(:null_logger)    { double('Logger').as_null_object }
 
   subject(:loader) do
     DfidTransition::Load::Outputs.new(
-      publishing_api, rummager, solutions, logger: null_logger
+      publishing_api, rummager, asset_manager, solutions, logger: null_logger
     )
   end
 
   describe '#run' do
     include RDFDoubles
 
-    let(:solutions) { [solution_hash] }
-    let(:solution) { double('RDF::Query::Solution') }
+    let(:solutions)   { [solution_hash] }
+    let(:solution)    { double('RDF::Query::Solution') }
+    let(:onsite_pdf)  { 'http://r4d.dfid.gov.uk/pdfs/onsite.pdf' }
+    let(:offsite_pdf) { 'http://example.com/offsite.pdf' }
     let(:solution_hash) do
       {
         output:       uri('http://original_url/1234/'),
         date:         literal('2016-04-28T09:52:00'),
         title:        literal('Output Title'),
         abstract:     literal('&amp;lt;p&amp;gt;Abstract;lt;/p&amp;gt;'),
-        countryCodes: literal('AZ GB')
+        countryCodes: literal('AZ GB'),
+        uris:         literal("#{onsite_pdf} #{offsite_pdf}")
       }
+    end
+    let(:asset_response) do
+      OpenStruct.new file_url: 'http://some.media.link/1234567'
     end
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
     let(:existing_content_id) { nil }
@@ -34,10 +41,22 @@ describe DfidTransition::Load::Outputs do
     before do
       allow(solution).to receive(:[]) { |key| solution_hash[key] }
       allow(publishing_api).to receive(:lookup_content_id).and_return(existing_content_id)
+      stub_request(:get, onsite_pdf).to_return(body: 'This is PDF content, honest')
+      allow(asset_manager).to receive(:create_asset).with(file: instance_of(File)).and_return(asset_response)
+    end
+
+    after do
+      loader.send(:documents).each do |document|
+        document.downloads.each { |download| File.delete("/tmp/#{download.filename}") }
+      end
     end
 
     context 'there is one good solution and no pre-existing content' do
       before { loader.run }
+
+      it 'stores the PDF in the asset_manager' do
+        expect(asset_manager).to have_received(:create_asset).with(file: instance_of(File))
+      end
 
       it 'puts the content' do
         expect(publishing_api).to have_received(:put_content).with(
