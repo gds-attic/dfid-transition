@@ -76,7 +76,7 @@ module DfidTransition
           country: countries,
           first_published_at: first_published_at,
           dfid_authors: creators,
-          peer_reviewed: peer_reviewed
+          dfid_review_status: peer_reviewed ? 'peer_reviewed' : 'unreviewed',
         }
       end
 

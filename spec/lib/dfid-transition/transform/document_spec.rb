@@ -111,8 +111,8 @@ module DfidTransition::Transform
         it 'has our first_published_at date' do
           expect(doc.format_specific_metadata[:first_published_at]).to eql(doc.first_published_at)
         end
-        it 'has the doc peer_reviewed status' do
-          expect(doc.format_specific_metadata[:peer_reviewed]).to eql(doc.peer_reviewed)
+        it 'has the document review status' do
+          expect(doc.format_specific_metadata[:dfid_review_status]).to eql('peer_reviewed')
         end
       end
 
