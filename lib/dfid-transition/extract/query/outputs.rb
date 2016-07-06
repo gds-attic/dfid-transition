@@ -6,7 +6,6 @@ module DfidTransition
       class Outputs < Base
         QUERY = <<-SPARQL.freeze
           PREFIX dcterms: <http://purl.org/dc/terms/>
-          PREFIX ont:     <http://purl.org/ontology/bibo/>
           PREFIX geo:     <http://www.fao.org/countryprofiles/geoinfo/geopolitical/resource/>
           PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
           PREFIX bibo:    <http://purl.org/ontology/bibo/>
@@ -18,12 +17,12 @@ module DfidTransition
             (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
             (GROUP_CONCAT(DISTINCT(?uri)) AS ?uris)
           WHERE {
-            ?output a ont:Article ;
+            ?output a bibo:Article ;
                     dcterms:title ?title ;
                     dcterms:abstract ?abstract ;
                     dcterms:bibliographicCitation ?citation ;
                     dcterms:date ?date ;
-                    ont:uri ?uri .
+                    bibo:uri ?uri .
 
             OPTIONAL { ?output dcterms:coverage/geo:codeISO2 ?codeISO2 }
             OPTIONAL { ?output dcterms:creator/foaf:name     ?creator }
