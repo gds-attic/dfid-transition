@@ -14,6 +14,10 @@ module DfidTransition
       end
 
       class Base
+        def initialize(client = nil)
+          @client = client
+        end
+
         def query
           raise NotImplementedError
         end

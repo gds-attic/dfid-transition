@@ -1,3 +1,4 @@
+require 'dfid-transition/extract/query/themes'
 require 'dfid-transition/patch/specialist_publisher/base'
 require 'sparql'
 require 'rdf/rdfxml'
@@ -6,34 +7,15 @@ module DfidTransition
   module Patch
     module SpecialistPublisher
       class Themes < Base
-        QUERY = <<-SPARQL.freeze
-          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-          SELECT DISTINCT ?theme ?prefLabel
-          WHERE {
-            ?theme skos:inScheme <http://r4d.dfid.gov.uk/rdf/skos/Themes> ;
-              skos:prefLabel ?prefLabel ;
-              skos:narrower ?narrower .
-          }
-          ORDER BY ?prefLabel
-        SPARQL
-
         def mutate_schema
-          r4d_solutions = sparql_client.query(QUERY)
-
-          theme_facet['allowed_values'] = transform_to_label_value(
-            r4d_solutions
-          )
+          theme_facet['allowed_values'] =
+            transform_to_label_value(themes_query.solutions)
         end
 
       private
 
-        def sparql_client
-          @sparql_client ||= SPARQL::Client.new(repository)
-        end
-
-        def repository
-          @repository ||= RDF::Repository.load('http://r4d.dfid.gov.uk/RDF/SKOS/Themes.rdf')
+        def themes_query
+          @themes_query ||= DfidTransition::Extract::Query::Themes.new
         end
 
         def theme_facet
@@ -42,13 +24,20 @@ module DfidTransition
 
         def transform_to_label_value(r4d_solutions)
           r4d_solutions.map do |solution|
-            theme_slug = solution['theme'].to_s.sub(%r{http://.*#}, '')
+            theme_slug = parameterize(solution['theme'].to_s)
 
             {
               value: theme_slug,
               label: solution['prefLabel'].to_s
             }
           end
+        end
+
+        def parameterize(theme_url)
+          theme_url.
+            sub(%r{http://.*#}, '').  # Strip http://....#
+            gsub('%20', '_').         # underscore escaped spaces
+            downcase
         end
       end
     end
