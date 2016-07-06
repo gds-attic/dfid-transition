@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'dfid-transition/patch/specialist_publisher/themes'
+require 'rdf/rdfxml'
 
 describe DfidTransition::Patch::SpecialistPublisher::Themes do
   let(:patch_location) { nil }
