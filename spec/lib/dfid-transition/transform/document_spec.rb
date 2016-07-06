@@ -20,6 +20,7 @@ module DfidTransition::Transform
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
           citation:     literal(' Heinlein, R.; Asimov, A. &lt;b&gt;Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It.&lt;/b&gt; 72 pp. '),
           creators:     literal(' Heinlein, R. | Asimov, A. '),
+          peerReviewed: boolean(true),
           abstract:     literal(
             '&amp;lt;p&amp;gt;This research design and methods paper can be '\
             'applied to other countries in Africa and Latin America.'\
@@ -83,6 +84,19 @@ module DfidTransition::Transform
         expect(doc.first_published_at).to eql('2016-04-28T09:52:00')
       end
 
+      describe '#peer_reviewed' do
+        subject { doc.peer_reviewed }
+
+        context 'it is peer reviewed' do
+          it { is_expected.to be true }
+        end
+
+        context 'it is not peer reviewed' do
+          before { solution_hash[:peerReviewed] = boolean(false) }
+          it     { is_expected.to be false }
+        end
+      end
+
       it 'splits country codes' do
         expect(doc.countries).to eql(%w(AZ GB))
       end
@@ -96,6 +110,9 @@ module DfidTransition::Transform
         end
         it 'has our first_published_at date' do
           expect(doc.format_specific_metadata[:first_published_at]).to eql(doc.first_published_at)
+        end
+        it 'has the document review status' do
+          expect(doc.format_specific_metadata[:dfid_review_status]).to eql('peer_reviewed')
         end
       end
 
