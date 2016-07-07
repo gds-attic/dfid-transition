@@ -13,7 +13,7 @@ module DfidTransition
             File.join(
               Dir.pwd,
               '..',
-              'govuk_content_schemas',
+              'govuk-content-schemas',
               'formats/specialist_document/publisher/details.json'
             )
           )

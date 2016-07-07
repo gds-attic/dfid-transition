@@ -15,7 +15,7 @@ describe DfidTransition::Patch::GovukContentSchemas::Themes do
       it 'defaults to govuk_content_schemas/formats/specialist_document/details.json relative to the current directory' do
         expect(patch.location).to eql(
           File.expand_path(
-            '../govuk_content_schemas/formats/specialist_document/publisher/details.json',
+            '../govuk-content-schemas/formats/specialist_document/publisher/details.json',
             Dir.pwd
           )
         )
