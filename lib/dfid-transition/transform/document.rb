@@ -3,6 +3,7 @@ require 'cgi'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
 require 'dfid-transition/transform/attachment'
+require 'dfid-transition/transform/themes'
 require 'active_support/core_ext/string/strip'
 require 'erubis'
 
@@ -13,6 +14,8 @@ module DfidTransition
 
   module Transform
     class Document
+      include Themes
+
       Html = DfidTransition::Transform::Html
 
       attr_reader :solution
@@ -77,6 +80,7 @@ module DfidTransition
           first_published_at: first_published_at,
           dfid_authors: creators,
           dfid_review_status: peer_reviewed ? 'peer_reviewed' : 'unreviewed',
+          dfid_theme: theme_identifiers
         }
       end
 
@@ -193,6 +197,12 @@ module DfidTransition
       def body_template
         @body_template ||=
           Erubis::EscapedEruby.new(File.read(File.expand_path('body.erb.md', File.dirname(__FILE__))))
+      end
+
+      def theme_identifiers
+        solution[:themes].to_s.split(' ').map do |theme_url|
+          parameterize(theme_url)
+        end
       end
     end
   end
