@@ -15,7 +15,7 @@ module DfidTransition
       private
 
         def theme_facet
-          facet('theme')
+          facet('dfid_theme')
         end
       end
     end

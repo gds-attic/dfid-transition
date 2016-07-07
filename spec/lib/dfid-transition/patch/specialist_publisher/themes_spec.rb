@@ -33,7 +33,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     end
 
     let(:schema) { JSON.parse(File.read(patch_location)) }
-    let(:themes) { schema['facets'].find { |facet| facet['key'] == 'theme' } }
+    let(:themes) { schema['facets'].find { |facet| facet['key'] == 'dfid_theme' } }
 
     subject(:allowed_values) { themes['allowed_values'] }
 

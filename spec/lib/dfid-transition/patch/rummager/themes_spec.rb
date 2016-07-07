@@ -48,11 +48,11 @@ describe DfidTransition::Patch::Rummager::Themes do
       subject(:parsed_json) { JSON.parse(File.read(patch_location)) }
 
       it 'adds the theme field' do
-        expect(parsed_json['fields']).to include('theme')
+        expect(parsed_json['fields']).to include('dfid_theme')
       end
 
       it 'patches the schema with all of the theme labels and values' do
-        theme_expansions = parsed_json.dig('expanded_search_result_fields', 'theme')
+        theme_expansions = parsed_json.dig('expanded_search_result_fields', 'dfid_theme')
         expect(theme_expansions).to include(
           'value' => 'climate_and_environment',
           'label' => 'Climate and Environment'

@@ -18,13 +18,13 @@ module DfidTransition
       private
 
         def add_theme_field
-          unless schema_hash.fetch('fields').include?('theme')
-            schema_hash.fetch('fields') << 'theme'
+          unless schema_hash.fetch('fields').include?('dfid_theme')
+            schema_hash.fetch('fields') << 'dfid_theme'
           end
         end
 
         def add_theme_expansions
-          schema_hash['expanded_search_result_fields']['theme'] =
+          schema_hash['expanded_search_result_fields']['dfid_theme'] =
             transform_to_label_value(themes_query.solutions)
         end
       end

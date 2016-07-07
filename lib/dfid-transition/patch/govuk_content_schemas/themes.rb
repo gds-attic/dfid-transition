@@ -8,7 +8,7 @@ module DfidTransition
         include DfidTransition::Transform::Themes
 
         def mutate_schema
-          dfid_properties['theme'] = {
+          dfid_properties['dfid_theme'] = {
             'type': 'array',
             'enum': theme_identifiers
           }

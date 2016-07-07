@@ -50,7 +50,7 @@ describe DfidTransition::Patch::GovukContentSchemas::Themes do
     let(:schema) { JSON.parse(File.read(patch_location)) }
 
     subject(:dfid_themes) do
-      schema.dig(*%w(definitions dfid_research_output_metadata properties theme))
+      schema.dig(*%w(definitions dfid_research_output_metadata properties dfid_theme))
     end
 
     it 'is a multi-valued type' do

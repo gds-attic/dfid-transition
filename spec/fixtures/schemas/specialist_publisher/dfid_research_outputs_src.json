@@ -48,7 +48,7 @@
       "filterable": false
     },
     {
-      "key": "theme",
+      "key": "dfid_theme",
       "name": "Theme",
       "type": "text",
       "preposition": "in themes",
