@@ -27,7 +27,11 @@ module DfidTransition::Transform
             '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
             '&amp;lt;/p&amp;gt;'),
           countryCodes: literal('AZ GB'),
-          uris:         literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf')
+          uris:         literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf'),
+          themes:       literal(
+            'http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure '\
+            'http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment'
+          )
         }
       end
 
@@ -165,6 +169,9 @@ module DfidTransition::Transform
         end
         it 'has a list of countries' do
           expect(metadata[:country]).to eql(%w(AZ GB))
+        end
+        it 'has a list of theme identifiers' do
+          expect(metadata[:dfid_theme]).to eql(%w(infrastructure climate_and_environment))
         end
         it 'says that this is bulk_published' do
           expect(metadata[:bulk_published]).to be true
