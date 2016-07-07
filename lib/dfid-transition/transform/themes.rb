@@ -1,6 +1,16 @@
+require 'dfid-transition/extract/query/themes'
+
 module DfidTransition
   module Transform
+    ##
+    # For patchers that need to query themes and transform those
+    # values
+    #
     module Themes
+      def themes_query
+        @themes_query ||= DfidTransition::Extract::Query::Themes.new
+      end
+
       def transform_to_label_value(r4d_solutions)
         r4d_solutions.map do |solution|
           theme_slug = parameterize(solution['theme'].to_s)

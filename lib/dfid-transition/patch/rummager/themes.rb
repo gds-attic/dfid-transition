@@ -17,10 +17,6 @@ module DfidTransition
 
       private
 
-        def themes_query
-          @themes_query ||= DfidTransition::Extract::Query::Themes.new
-        end
-
         def add_theme_field
           unless schema_hash.fetch('fields').include?('theme')
             schema_hash.fetch('fields') << 'theme'

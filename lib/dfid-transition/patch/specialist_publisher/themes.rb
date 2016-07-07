@@ -1,4 +1,3 @@
-require 'dfid-transition/extract/query/themes'
 require 'dfid-transition/transform/themes'
 require 'dfid-transition/patch/specialist_publisher/base'
 
@@ -14,10 +13,6 @@ module DfidTransition
         end
 
       private
-
-        def themes_query
-          @themes_query ||= DfidTransition::Extract::Query::Themes.new
-        end
 
         def theme_facet
           facet('theme')
