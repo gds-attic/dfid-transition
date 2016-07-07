@@ -5,7 +5,6 @@ module DfidTransition
   module Patch
     module GovukContentSchemas
       class Base < Patcher
-
       private
 
         def relative_path

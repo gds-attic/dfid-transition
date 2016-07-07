@@ -9,15 +9,15 @@ module DfidTransition
 
         def mutate_schema
           dfid_properties['dfid_theme'] = {
-            'type': 'array',
-            'items': {
-              'type': 'string',
-              'enum': theme_identifiers
+            'type' => 'array',
+            'items' => {
+              'type' => 'string',
+              'enum' => theme_identifiers
             }
           }
         end
 
-        private
+      private
 
         def theme_identifiers
           themes_query.solutions.map do |solution|
