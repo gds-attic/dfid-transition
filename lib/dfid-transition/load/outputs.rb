@@ -25,7 +25,7 @@ module DfidTransition
     private
 
       def documents
-        @documents =
+        @documents ||=
           solutions.map { |solution| DfidTransition::Transform::Document.new(solution) }
       end
 
