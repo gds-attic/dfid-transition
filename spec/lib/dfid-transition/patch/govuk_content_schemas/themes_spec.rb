@@ -57,12 +57,20 @@ describe DfidTransition::Patch::GovukContentSchemas::Themes do
       expect(dfid_themes['type']).to eql('array')
     end
 
-    it 'adds only top-level theme data to the schema' do
-      expect(dfid_themes['enum'].count).to eq(12)
-    end
+    describe 'the items' do
+      subject(:items) { dfid_themes['items'] }
 
-    it 'underscores/downcases values' do
-      expect(dfid_themes['enum']).to include('climate_and_environment')
+      it 'has a string type' do
+        expect(items['type']).to eql('string')
+      end
+
+      it 'adds only top-level theme data to the schema' do
+        expect(items['enum'].count).to eq(12)
+      end
+
+      it 'underscores/downcases values' do
+        expect(items['enum']).to include('climate_and_environment')
+      end
     end
   end
 end

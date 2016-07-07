@@ -10,7 +10,10 @@ module DfidTransition
         def mutate_schema
           dfid_properties['dfid_theme'] = {
             'type': 'array',
-            'enum': theme_identifiers
+            'items': {
+              'type': 'string',
+              'enum': theme_identifiers
+            }
           }
         end
 
