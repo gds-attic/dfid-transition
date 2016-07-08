@@ -74,10 +74,15 @@ module DfidTransition
         solution[:countryCodes].to_s.split(' ')
       end
 
+      def dfid_document_type
+        parameterize(solution[:type].to_s)
+      end
+
       def format_specific_metadata
         {
           country: countries,
           first_published_at: first_published_at,
+          dfid_document_type: dfid_document_type,
           dfid_authors: creators,
           dfid_review_status: peer_reviewed ? 'peer_reviewed' : 'unreviewed',
           dfid_theme: theme_identifiers
