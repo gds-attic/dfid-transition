@@ -28,6 +28,17 @@
         ]
     },
     {
+        "key": "dfid_document_type",
+        "name": "Document Type",
+        "type": "text",
+        "preposition": "of type",
+        "display_as_result_metadata": true,
+        "filterable": true,
+        "allowed_values": [
+          {"label": "Book Chapter", "value": "book_chapter"}
+        ]
+    },
+    {
         "key": "country",
         "name": "Country",
         "type": "text",
