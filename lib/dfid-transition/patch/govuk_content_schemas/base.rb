@@ -7,7 +7,15 @@ module DfidTransition
       class Base < Patcher
       private
 
-        def relative_path
+      def dfid_properties
+        schema_hash.dig(*%w(
+            definitions
+            dfid_research_output_metadata
+            properties
+          ))
+      end
+
+      def relative_path
           File.expand_path(
             File.join(
               Dir.pwd,
