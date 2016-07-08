@@ -16,6 +16,7 @@ module DfidTransition::Transform
       let(:solution_hash) do
         {
           output:       uri(original_url),
+          type:         uri('http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Book%20Chapter'),
           date:         literal('2016-04-28T09:52:00'),
           title:        literal(' &amp;#8216;And Then He Switched off the Phone&amp;#8217;: Mobile Phones ... '),
           citation:     literal(' Heinlein, R.; Asimov, A. &lt;b&gt;Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It.&lt;/b&gt; 72 pp. '),
@@ -166,6 +167,9 @@ module DfidTransition::Transform
 
         it 'has the document type' do
           expect(metadata[:document_type]).to eql('dfid_research_output')
+        end
+        it 'has the DFID document type' do
+          expect(metadata[:dfid_document_type]).to eql('book_chapter')
         end
         it 'has a list of countries' do
           expect(metadata[:country]).to eql(%w(AZ GB))

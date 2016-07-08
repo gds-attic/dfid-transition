@@ -12,7 +12,7 @@ module DfidTransition
           PREFIX status:  <http://purl.org/bibo/status/>
           PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
 
-          SELECT DISTINCT ?output ?date ?abstract ?title ?citation
+          SELECT DISTINCT ?output ?date ?type ?abstract ?title ?citation
             (EXISTS { ?output bibo:DocumentStatus status:peerReviewed } AS ?peerReviewed)
             (GROUP_CONCAT(DISTINCT(?creator); separator = '|') AS ?creators)
             (GROUP_CONCAT(DISTINCT(?codeISO2)) AS ?countryCodes)
@@ -20,12 +20,15 @@ module DfidTransition
             (GROUP_CONCAT(DISTINCT(?theme)) AS ?themes)
           WHERE {
             ?output a bibo:Article ;
+                    dcterms:type ?type ;
                     dcterms:title ?title ;
                     dcterms:abstract ?abstract ;
                     dcterms:bibliographicCitation ?citation ;
                     dcterms:date ?date ;
                     dcterms:subject ?theme ;
                     bibo:uri ?uri .
+
+            FILTER ( ?type != 'text' )
 
             {
               ?theme skos:inScheme <http://r4d.dfid.gov.uk/rdf/skos/Themes>
@@ -35,7 +38,7 @@ module DfidTransition
             OPTIONAL { ?output dcterms:coverage/geo:codeISO2 ?codeISO2 }
             OPTIONAL { ?output dcterms:creator/foaf:name     ?creator }
 
-          } GROUP BY ?output ?date ?abstract ?title ?citation
+          } GROUP BY ?output ?date ?type ?abstract ?title ?citation
           ORDER BY DESC(?date)
           LIMIT 20
         SPARQL

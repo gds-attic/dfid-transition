@@ -24,14 +24,6 @@ module DfidTransition
             parameterize(solution[:theme].to_s)
           end
         end
-
-        def dfid_properties
-          schema_hash.dig(*%w(
-            definitions
-            dfid_research_output_metadata
-            properties
-          ))
-        end
       end
     end
   end
