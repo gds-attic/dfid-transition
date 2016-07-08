@@ -25,7 +25,7 @@ module DfidTransition
       def parameterize(type_url)
         type_url.
           sub(%r{http://.*#}, ''). # Strip http://....#
-          gsub('/', '_').          # underscore slashes
+          tr('/', '_').            # underscore slashes
           gsub('%20', '_').        # underscore escaped spaces
           downcase
       end
