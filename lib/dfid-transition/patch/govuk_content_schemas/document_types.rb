@@ -8,7 +8,7 @@ module DfidTransition
         include DfidTransition::Transform::DocumentTypes
 
         def mutate_schema
-          dfid_properties['dfid_document_types'] = {
+          dfid_properties['dfid_document_type'] = {
             'type' => 'string',
             'items' => {
               'type' => 'string',
