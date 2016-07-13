@@ -4,20 +4,11 @@ require 'govuk/registers/country'
 
 describe Govuk::Registers::Country do
   describe '.countries' do
-    let(:query_results_p1)  { 'spec/fixtures/service-results/country-register-p1.json' }
-    let(:query_results_p2)  { 'spec/fixtures/service-results/country-register-p2.json' }
-
-    def page(index)
-      { 'page-index' => index, 'page-size' => 100 }
-    end
+    let(:query_results) { 'spec/fixtures/service-results/country-records.json' }
 
     it 'returns both active and inactive countries from the register' do
       allow(RestClient).to receive(:get).with(
-        Govuk::Registers::Country::URL,
-        params: page(1)).and_return(File.read(query_results_p1))
-      allow(RestClient).to receive(:get).with(
-        Govuk::Registers::Country::URL,
-        params: page(2)).and_return(File.read(query_results_p2))
+        Govuk::Registers::Country::URL).and_return(File.read(query_results))
 
       result = Govuk::Registers::Country.countries
 

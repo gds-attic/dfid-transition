@@ -40,12 +40,9 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
       end
 
       context 'we have a full set of countries from the countries register' do
-        def json_for_page(page)
-          JSON.parse(
-            File.read(
-              "spec/fixtures/service-results/country-register-p#{page}.json"))
+        let(:all_countries) do
+          JSON.parse(File.read('spec/fixtures/service-results/country-records.json'))
         end
-        let(:all_countries) { json_for_page(1).merge(json_for_page(2)) }
 
         before do
           allow(Govuk::Registers::Country).to receive(:countries).

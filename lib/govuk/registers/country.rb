@@ -1,23 +1,11 @@
 module Govuk
   class Registers
     class Country
-      URL = 'https://country.register.gov.uk/records.json'.freeze
+      URL = 'https://country.register.gov.uk/records.json?page-size=5000'.freeze
 
       def self.countries
-        params = { 'page-size' => 100, 'page-index' => 1 }
-        done = false
-
-        {}.tap do |results|
-          while !done
-            body = RestClient.get(URL, params: params)
-            countries_page = JSON.parse(body)
-
-            results.merge!(countries_page)
-
-            done = (countries_page.length < params['page-size'])
-            params['page-index'] += 1
-          end
-        end
+        body = RestClient.get(URL)
+        JSON.parse(body)
       end
     end
   end
