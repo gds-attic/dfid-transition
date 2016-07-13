@@ -97,21 +97,59 @@ describe DfidTransition::Load::Outputs do
       end
     end
 
-    context 'publishing the solution fails on publish' do
-      let(:publishing_api) { double('publishing_api') }
+    context 'publishing_api failures' do
+      let(:document)                  { loader.send(:documents).first }
+      let(:existing_draft_content_id) { 'draft-content-id' }
 
-      before do
-        allow(publishing_api).to receive(:put_content)
-        allow(publishing_api).to receive(:patch_links)
-        allow(publishing_api).to receive(:publish).and_raise(
-          GdsApi::HTTPUnprocessableEntity.new(422, 'Something went bang when we tried to publish'))
-        allow(publishing_api).to receive(:discard_draft)
+      context '#put_content fails with a conflict' do
+        before do
+          @times_called = 0
+          allow(publishing_api).to receive(:put_content) do
+            @times_called += 1
+            case @times_called
+            when 1
+              raise GdsApi::HTTPUnprocessableEntity.new(
+                422,
+                "Content item conflicts with a duplicate: state=draft, locale=en, "\
+                "base_path=#{document.base_path}, user_version=1, content_id=#{existing_draft_content_id}"
+              )
+            when 2
+              anything
+            end
+          end
 
-        loader.run
+          allow(publishing_api).to receive(:publish)
+          allow(publishing_api).to receive(:patch_links)
+
+          loader.run
+        end
+
+        it 'puts the content at the "hidden" existing_draft_content_id' do
+          expect(publishing_api).to have_received(:put_content).with(
+            existing_draft_content_id, instance_of(Hash))
+        end
+
+        it 'publishes the content successfully' do
+          expect(publishing_api).to have_received(:publish).with(
+            existing_draft_content_id, 'major')
+        end
       end
 
-      it 'discards the draft' do
-        expect(publishing_api).to have_received(:discard_draft)
+      context 'put_content fails for a non-conflict reason' do
+        let(:non_conflict_error) {
+          GdsApi::HTTPUnprocessableEntity.new(422, "Not a conflict message")
+        }
+
+        before do
+          allow(publishing_api).to receive(:put_content).and_raise(non_conflict_error)
+
+          loader.run
+        end
+
+        it 'logs the error and moves on' do
+          expect(publishing_api).not_to have_received(:patch_links)
+          expect(null_logger).to have_received(:error).with(non_conflict_error)
+        end
       end
     end
   end

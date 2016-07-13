@@ -29,29 +29,38 @@ module DfidTransition
           solutions.map { |solution| DfidTransition::Transform::Document.new(solution) }
       end
 
-      def publish(doc)
-        existing_draft_content_id = content_id_from(doc.base_path)
-        doc.content_id            = existing_draft_content_id if existing_draft_content_id
+      def publish(doc, check_for_existing: true)
+        existing_draft_content_id = nil
+
+        if check_for_existing
+          existing_draft_content_id = publishing_api.lookup_content_id(base_path: doc.base_path)
+          doc.content_id = existing_draft_content_id if existing_draft_content_id
+        end
 
         update_type = existing_draft_content_id ? 'republish' : 'major'
 
         wait_for_upload_to_asset_manager(doc.downloads)
 
-        should_discard_draft = true
         begin
-          publishing_api.put_content(doc.content_id, doc.to_json)
+          begin
+            publishing_api.put_content(doc.content_id, doc.to_json)
+          rescue GdsApi::HTTPUnprocessableEntity => e
+            match = e.message.match(/content_id=(?<content_id>.+)([^a-z0-9-])?/)
+            if match
+              doc.content_id = match[:content_id]
+              publish(doc, check_for_existing: false)
+            else
+              logger.error(e)
+            end
+            return
+          end
+
           publishing_api.patch_links(doc.content_id, doc.links)
           publishing_api.publish(doc.content_id, update_type)
           logger.info "Published #{doc.title} at "\
               "http://www.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
-          should_discard_draft = false
-        rescue GdsApi::HTTPUnprocessableEntity => e
-          logger.warn "#{doc.original_url}: #{e}"
         rescue => e
           logger.error(e)
-        ensure
-          # Don't leave us in a state where we could 422
-          publishing_api.discard_draft(doc.content_id) if should_discard_draft
         end
 
         rummager.add_document(
@@ -75,10 +84,6 @@ module DfidTransition
             end
           end
         end
-      end
-
-      def content_id_from(base_path)
-        publishing_api.lookup_content_id(base_path: base_path)
       end
     end
   end
