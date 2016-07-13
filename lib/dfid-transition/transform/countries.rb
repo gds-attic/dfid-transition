@@ -15,7 +15,10 @@ module DfidTransition
             'country' => 'CK',
             'name' => 'Cook Islands'
           }
-        )
+        ).tap do |countries|
+          countries['GM']['name'] = 'Gambia, The'
+          countries['BS']['name'] = 'Bahamas, The'
+        end
       end
 
       def transform_to_label_value(countries)

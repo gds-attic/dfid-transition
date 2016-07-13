@@ -40,7 +40,33 @@ describe DfidTransition::Transform::Countries do
           "country" => "CK"
         }
       )
+    end
 
+    it 'renames "The Gambia" to "Gambia, The"' do
+      expect(countries).to include(
+        "GM" => {
+          "entry-number" => "202",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "item-hash" => "sha-256:dac66e05ee41707ff9115ed72705eaf8c2e0171285405bea9d859903e8f7ee40",
+          "name" => "Gambia, The",
+          "country" => "GM",
+          "citizen-names" => "Gambian",
+          "official-name" => "The Islamic Republic of The Gambia"
+        }
+      )
+    end
+    it 'renames "The Bahamas" to "Bahamas, The"' do
+      expect(countries).to include(
+        "BS" => {
+          "entry-number" => "203",
+          "entry-timestamp" => "2016-04-05T13:23:05Z",
+          "item-hash" => "sha-256:a77f1e11270aab0c5bf315b2e7c268a7aff89713578020e1b4183c6df2b2c0e7",
+          "name" => "Bahamas, The",
+          "country" => "BS",
+          "citizen-names" => "Bahamian",
+          "official-name" => "The Commonwealth of The Bahamas"
+        }
+      )
     end
 
   end

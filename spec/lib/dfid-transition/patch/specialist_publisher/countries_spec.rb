@@ -54,8 +54,8 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
 
           expect(country_facet['allowed_values'].length).to eql(200)
           expect(country_facet['allowed_values']).to include(
-            'label' => 'The Bahamas',
-            'value' => 'BS'
+            'label' => 'Venezuela',
+            'value' => 'VE'
           )
         end
 
