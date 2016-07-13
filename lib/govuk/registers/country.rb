@@ -1,3 +1,5 @@
+require 'rest-client'
+
 module Govuk
   class Registers
     class Country
