@@ -60,7 +60,7 @@ describe DfidTransition::Patch::GovukContentSchemas::Countries do
       end
 
       it 'adds countries to the schema' do
-        expect(items['enum'].count).to eq(199)
+        expect(items['enum'].count).to eq(200)
         expect(items['enum'].first).to eq('AF')
       end
     end

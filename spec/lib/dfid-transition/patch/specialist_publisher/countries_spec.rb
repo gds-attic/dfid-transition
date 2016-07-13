@@ -52,7 +52,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
         it 'patches the schema with all extant countries' do
           patcher.run
 
-          expect(country_facet['allowed_values'].length).to eql(199)
+          expect(country_facet['allowed_values'].length).to eql(200)
           expect(country_facet['allowed_values']).to include(
             'label' => 'The Bahamas',
             'value' => 'BS'

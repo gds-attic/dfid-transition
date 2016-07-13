@@ -49,7 +49,7 @@ describe DfidTransition::Patch::Rummager::Countries do
         countries = parsed_json.dig('expanded_search_result_fields', 'country')
 
         expect(countries).to be_an(Array)
-        expect(countries.count).to eql(199)
+        expect(countries.count).to eql(200)
         expect(countries).to include('value' => 'VA', 'label' => 'Vatican City')
       end
     end

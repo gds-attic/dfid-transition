@@ -10,7 +10,12 @@ module DfidTransition
       end
 
       def countries
-        Govuk::Registers::Country.countries
+        Govuk::Registers::Country.countries.merge(
+          'CK' => {
+            'country' => 'CK',
+            'name' => 'Cook Islands'
+          }
+        )
       end
 
       def transform_to_label_value(countries)
