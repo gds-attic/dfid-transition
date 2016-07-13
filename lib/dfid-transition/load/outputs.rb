@@ -30,14 +30,14 @@ module DfidTransition
       end
 
       def publish(doc, check_for_existing: true)
-        existing_draft_content_id = nil
+        existing_content_id = nil
 
         if check_for_existing
-          existing_draft_content_id = publishing_api.lookup_content_id(base_path: doc.base_path)
-          doc.content_id = existing_draft_content_id if existing_draft_content_id
+          existing_content_id = publishing_api.lookup_content_id(base_path: doc.base_path)
+          doc.content_id = existing_content_id if existing_content_id
         end
 
-        update_type = existing_draft_content_id ? 'republish' : 'major'
+        update_type = existing_content_id ? 'republish' : 'major'
 
         wait_for_upload_to_asset_manager(doc.downloads)
 
