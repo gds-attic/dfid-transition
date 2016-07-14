@@ -69,5 +69,11 @@ describe DfidTransition::Transform::Countries do
       )
     end
 
+    %w(YU CS SU DD).each do |inactive_country|
+      it "has removed the inactive country with code #{inactive_country}" do
+        expect(countries).not_to include(inactive_country),
+          "Expected #{inactive_country} not to be in #countries"
+      end
+    end
   end
 end
