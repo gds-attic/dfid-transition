@@ -85,6 +85,8 @@ module DfidTransition::Transform
       end
 
       describe '#file and #file_future' do
+        let(:tmp_path) { "/tmp/#{attachment.filename}" }
+
         let(:pdf_content) { 'This is PDF content, honest' }
 
         before do
@@ -92,7 +94,7 @@ module DfidTransition::Transform
         end
 
         after do
-          File.delete("/tmp/#{attachment.filename}")
+          File.delete(tmp_path) if File.exist?(tmp_path)
         end
 
         it 'has a Future for a #file_future' do
