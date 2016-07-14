@@ -40,12 +40,9 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
       end
 
       context 'we have a full set of countries from the countries register' do
-        def json_for_page(page)
-          JSON.parse(
-            File.read(
-              "spec/fixtures/service-results/country-register-p#{page}.json"))
+        let(:all_countries) do
+          JSON.parse(File.read('spec/fixtures/service-results/country-records.json'))
         end
-        let(:all_countries) { json_for_page(1).merge(json_for_page(2)) }
 
         before do
           allow(Govuk::Registers::Country).to receive(:countries).
@@ -55,10 +52,10 @@ describe DfidTransition::Patch::SpecialistPublisher::Countries do
         it 'patches the schema with all extant countries' do
           patcher.run
 
-          expect(country_facet['allowed_values'].length).to eql(199)
+          expect(country_facet['allowed_values'].length).to eql(196)
           expect(country_facet['allowed_values']).to include(
-            'label' => 'The Bahamas',
-            'value' => 'BS'
+            'label' => 'Venezuela',
+            'value' => 'VE'
           )
         end
 
