@@ -3,7 +3,7 @@ require 'gds_api/asset_manager'
 require 'gds_api/rummager'
 
 module DfidTransition
-  class Services
+  module Services
     def self.publishing_api
       @publishing_api ||= GdsApi::PublishingApiV2.new(
         Plek.new.find('publishing-api'),
