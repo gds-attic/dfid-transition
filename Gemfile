@@ -13,9 +13,15 @@ gem 'concurrent-ruby'
 gem 'kramdown'
 gem 'erubis'
 gem 'mime-types'
+gem 'sidekiq'
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'govuk-lint'
   gem 'rspec'
   gem 'webmock'
+end
+
+group :test do
+  gem 'mock_redis'
 end
