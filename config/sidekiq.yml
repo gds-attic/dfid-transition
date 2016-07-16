@@ -1,0 +1,5 @@
+---
+:concurrency:  16
+:require: ./lib/dfid-transition/workers.rb
+:queues:
+  - default
