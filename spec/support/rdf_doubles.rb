@@ -27,6 +27,5 @@ module RDFDoubles
     end
   end
 
-  class Query < Struct.new(:solutions)
-  end
+  Query = Struct.new(:solutions)
 end
