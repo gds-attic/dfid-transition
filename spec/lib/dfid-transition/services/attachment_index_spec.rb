@@ -13,7 +13,7 @@ describe DfidTransition::Services::AttachmentIndex do
   let(:asset_response) do
     double(
       'GDSApi::Response',
-      '_response_info' => {'status' => 'created'},
+      '_response_info' => { 'status' => 'created' },
       'id' => 'http://asset-manager.dev.gov.uk/assets/5788a087759b74360900006c',
       'name' => 'a.pdf',
       'content_type' => 'application/pdf',
