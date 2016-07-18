@@ -18,7 +18,7 @@ module DfidTransition
         JSON.parse(attachment_status)
       end
 
-      KNOWN_ATTACHMENTS_KEY = 'known-attachments'
+      KNOWN_ATTACHMENTS_KEY = 'known-attachments'.freeze
 
       def put(original_url, asset_response)
         redis.multi do
@@ -27,18 +27,18 @@ module DfidTransition
         end
       end
 
-      private
+    private
 
       def attachment_key(original_url)
         "attachment:#{original_url}"
       end
 
       def present(original_url, asset_response)
-        JSON.generate({
+        JSON.generate(
           original_url:      original_url,
           asset_manager_url: asset_response.id,
           file_url:          asset_response.file_url
-        })
+        )
       end
     end
   end
