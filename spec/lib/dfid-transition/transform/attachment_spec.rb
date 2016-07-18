@@ -59,6 +59,18 @@ module DfidTransition::Transform
         expect(attachment.snippet).to eql('[InlineAttachment:file.pdf]')
       end
 
+      describe '#details_from_index' do
+        it 'allows the mocking of the asset response' do
+          details_from_index = {
+            'file_url' => 'http://some.url'
+          }
+          attachment.details_from_index(details_from_index)
+          asset_response = attachment.send(:asset_response)
+
+          expect(asset_response.file_url).to eql('http://some.url')
+        end
+      end
+
       describe '#to_json' do
         before do
           allow(attachment).to receive(:asset_response).and_return(

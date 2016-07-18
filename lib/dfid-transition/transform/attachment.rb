@@ -3,6 +3,7 @@ require 'concurrent/future'
 require 'securerandom'
 require 'rest-client'
 require 'mime-types'
+require 'ostruct'
 
 module DfidTransition
   module Transform
@@ -64,6 +65,10 @@ module DfidTransition
 
       def save_to(asset_manager)
         @asset_response = asset_manager.create_asset(file: file)
+      end
+
+      def details_from_index(details)
+        @asset_response = OpenStruct.new(details)
       end
 
       def to_json
