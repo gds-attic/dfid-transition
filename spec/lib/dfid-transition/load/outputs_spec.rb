@@ -51,7 +51,10 @@ describe DfidTransition::Load::Outputs do
 
     after do
       loader.send(:documents).each do |document|
-        document.downloads.each { |download| File.delete("/tmp/#{download.filename}") }
+        document.downloads.each do |download|
+          filename = "/tmp/#{download.filename}"
+          File.delete(filename) if File.exist?(filename)
+        end
       end
     end
 
