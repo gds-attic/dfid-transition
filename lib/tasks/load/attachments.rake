@@ -1,20 +1,19 @@
 require 'dfid-transition/extract/query/outputs'
-require 'dfid-transition/load/outputs'
+require 'dfid-transition/load/attachments'
 require 'dfid-transition/services'
 
 namespace :load do
-  desc 'Load DFID outputs with results from the SPARQL endpoint'
-  task :outputs do
+  desc 'Load DFID attachments with attachment URIs from the SPARQL endpoint'
+  task :attachments do
     module DfidTransition
       output_solutions = Extract::Query::Outputs.new.solutions
-      loader = Load::Outputs.new(
-        Services.publishing_api,
-        Services.rummager,
+
+      attachments_loader = Load::Attachments.new(
         Services.asset_manager,
-        Services.attachment_index,
         output_solutions
       )
-      loader.run
+
+      attachments_loader.run
     end
   end
 end

@@ -6,13 +6,18 @@ module DfidTransition
   module Load
     class Outputs
       attr_reader :logger
-      attr_accessor :publishing_api, :rummager, :asset_manager, :solutions
+      attr_accessor :publishing_api, :rummager, :asset_manager,
+                    :attachment_index, :solutions
 
-      def initialize(publishing_api, rummager, asset_manager, solutions, logger: Logger.new(STDERR))
-        self.publishing_api = publishing_api
-        self.rummager       = rummager
-        self.asset_manager  = asset_manager
-        self.solutions      = solutions
+      def initialize(
+        publishing_api, rummager, asset_manager,
+        attachment_index, solutions, logger: Logger.new(STDERR)
+      )
+        self.publishing_api    = publishing_api
+        self.rummager          = rummager
+        self.asset_manager     = asset_manager
+        self.attachment_index  = attachment_index
+        self.solutions         = solutions
 
         @logger = logger
       end
@@ -70,18 +75,27 @@ module DfidTransition
         )
       end
 
-      def wait_for_upload_to_asset_manager(attachments)
-        attachments.each do |attachment|
-          file = attachment.file # block on the value
-          case attachment.file_future.state
-          when :rejected
-            logger.warn(attachment.file_future.reason)
-          when :fulfilled
-            begin
-              attachment.save_to(asset_manager)
-            ensure
-              file.close
-            end
+      def wait_for_upload_to_asset_manager(downloads)
+        downloads.each do |attachment|
+          existing_attachment_details = attachment_index.get(attachment.original_url.to_s)
+          if existing_attachment_details
+            attachment.details_from_index(existing_attachment_details)
+          else
+            download(attachment)
+          end
+        end
+      end
+
+      def download(attachment)
+        file = attachment.file # block on the value
+        case attachment.file_future.state
+        when :rejected
+          logger.warn(attachment.file_future.reason)
+        when :fulfilled
+          begin
+            attachment.save_to(asset_manager)
+          ensure
+            file.close
           end
         end
       end
