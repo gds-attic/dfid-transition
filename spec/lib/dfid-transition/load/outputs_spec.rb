@@ -3,15 +3,16 @@ require 'dfid-transition/load/outputs'
 require 'gds_api/exceptions'
 
 describe DfidTransition::Load::Outputs do
-  let(:publishing_api) { spy('publishing-api') }
-  let(:rummager)       { spy('rummager') }
-  let(:asset_manager)  { spy('asset_manager') }
-  let(:solutions)      { [] }
-  let(:null_logger)    { double('Logger').as_null_object }
+  let(:publishing_api)   { spy('publishing-api') }
+  let(:rummager)         { spy('rummager') }
+  let(:asset_manager)    { spy('asset_manager') }
+  let(:attachment_index) { spy('attachment_index') }
+  let(:solutions)        { [] }
+  let(:null_logger)      { double('Logger').as_null_object }
 
   subject(:loader) do
     DfidTransition::Load::Outputs.new(
-      publishing_api, rummager, asset_manager, solutions, logger: null_logger
+      publishing_api, rummager, asset_manager, attachment_index, solutions, logger: null_logger
     )
   end
 
@@ -36,6 +37,7 @@ describe DfidTransition::Load::Outputs do
     let(:asset_response) do
       OpenStruct.new file_url: 'http://some.media.link/1234567'
     end
+    let(:attachment_details) { nil }
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
     let(:existing_content_id) { nil }
 
@@ -43,6 +45,7 @@ describe DfidTransition::Load::Outputs do
       allow(solution).to receive(:[]) { |key| solution_hash[key] }
       allow(publishing_api).to receive(:lookup_content_id).and_return(existing_content_id)
       stub_request(:get, onsite_pdf).to_return(body: 'This is PDF content, honest')
+      allow(attachment_index).to receive(:get).with(onsite_pdf).and_return(attachment_details)
       allow(asset_manager).to receive(:create_asset).with(file: instance_of(File)).and_return(asset_response)
     end
 
@@ -94,6 +97,21 @@ describe DfidTransition::Load::Outputs do
 
       it 'republishes the content' do
         expect(publishing_api).to have_received(:publish).with(existing_content_id, 'republish')
+      end
+    end
+
+    context 'there is one good solution, a pre-existing document, and all downloads are in the attachment index' do
+      let(:existing_content_id) { '9f050fc0-9222-4cf5-a74c-f9634b9b26ee' }
+      let(:attachment_details) do
+        {
+          file_url: 'http://asset.url'
+        }
+      end
+
+      before { loader.run }
+
+      it 'does not download the content again' do
+        expect(asset_manager).not_to have_received(:create_asset)
       end
     end
 

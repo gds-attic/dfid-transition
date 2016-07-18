@@ -11,6 +11,7 @@ namespace :load do
         Services.publishing_api,
         Services.rummager,
         Services.asset_manager,
+        Services.attachment_index,
         output_solutions
       )
       loader.run
