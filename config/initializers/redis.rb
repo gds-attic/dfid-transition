@@ -2,7 +2,11 @@ require 'redis-namespace'
 
 def _redis_config
   @redis_config ||= begin
-    redis_config_hash = YAML.load_file('config/redis.yml').symbolize_keys
+    redis_config_hash = {
+      host: ENV["REDIS_HOST"] || "127.0.0.1",
+      port: ENV["REDIS_PORT"] || 6379,
+      namespace: ENV["REDIS_NAMESPACE"] || "dfid-transition",
+    }
 
     namespace = redis_config_hash[:namespace]
 
