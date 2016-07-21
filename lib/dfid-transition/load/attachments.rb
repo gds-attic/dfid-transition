@@ -1,3 +1,5 @@
+require_relative '../../../config/initializers/sidekiq'
+
 require 'dfid-transition/transform/document'
 require 'dfid-transition/extract/download/attachment'
 require 'govuk/presenters/search'
@@ -17,11 +19,14 @@ module DfidTransition
       end
 
       def run
+        attachments = 0
         documents.each do |doc|
           doc.downloads.each do |attachment|
             DfidTransition::Extract::Download::Attachment.perform_async(attachment.original_url)
+            attachments += 1
           end
         end
+        logger.info "Enqueued #{attachments} attachments for download/upload to asset-manager"
       end
 
     private
