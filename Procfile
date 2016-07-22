@@ -1,2 +1,2 @@
-web: bundle exec rails s -p 3124
+web: bundle exec rackup -p 3124
 worker: bundle exec sidekiq -C ./config/sidekiq.yml
