@@ -9,8 +9,8 @@ module DfidTransition::Transform
       it 'fails given completely the wrong type' do
         expect { Attachment.new(1) }.to raise_error(ArgumentError, /expected URI object or URI string/)
       end
-      it 'fails given a URI that isn\'t a URL' do
-        expect { Attachment.new('some:uri') }.to raise_error(ArgumentError, /expected a URL/)
+      it 'fails given a URI that isn\'t a URL in our schemes' do
+        expect { Attachment.new('some:uri') }.to raise_error(ArgumentError, /expected an HTTP or FTP URL/)
       end
     end
 
@@ -117,6 +117,14 @@ module DfidTransition::Transform
           expect(attachment.file).to be_a(File)
           expect(attachment.file.read).to eql(pdf_content)
         end
+      end
+    end
+
+    context 'given any FTP URL' do
+      let(:original_url) { 'ftp://r4d.dfid.gov.uk/some/file.pdf' }
+
+      it 'is always assumed offsite (in reality, no r4d FTP)' do
+        expect(attachment).not_to be_hosted_at_r4d
       end
     end
 
