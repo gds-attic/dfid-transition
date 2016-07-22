@@ -15,8 +15,12 @@ module DfidTransition
 
           attachment = DfidTransition::Transform::Attachment.new(url)
 
-          asset_response = attachment.save_to(asset_manager)
-          attachment_index.put(url, asset_response)
+          begin
+            asset_response = attachment.save_to(asset_manager)
+            attachment_index.put(url, asset_response)
+          ensure
+            File.delete(attachment.tmp_path)
+          end
         end
 
       private

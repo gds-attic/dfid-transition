@@ -37,6 +37,7 @@ describe DfidTransition::Extract::Download::Attachment do
         allow(attachment_index).to receive(:get).with(original_url).and_return(nil)
         stub_request(:get, original_url).to_return(status: 200, body: 'Some content')
         allow(asset_manager).to receive(:create_asset).and_return(asset_response)
+        allow(File).to receive(:delete)
 
         subject.perform(original_url)
       end
@@ -47,6 +48,10 @@ describe DfidTransition::Extract::Download::Attachment do
 
       it 'updates the index' do
         expect(attachment_index).to have_received(:put).with(original_url, asset_response)
+      end
+
+      it 'cleans up the file afterwards' do
+        expect(File).to have_received(:delete).with('/tmp/file.pdf')
       end
     end
   end
