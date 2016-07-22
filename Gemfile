@@ -15,6 +15,7 @@ gem 'erubis'
 gem 'mime-types'
 gem 'sidekiq'
 gem 'redis-namespace'
+gem 'unicorn', '5.1.0'
 
 group :development, :test do
   gem 'govuk-lint'
