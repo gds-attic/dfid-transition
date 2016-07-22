@@ -17,7 +17,7 @@ describe DfidTransition::Patch::SpecialistPublisher::Themes do
     before do
       allow(patch).to receive(:themes_query).and_return(
         DfidTransition::Extract::Query::Themes.new(
-          SPARQL::Client.new(r4d_skos_theme_repo)
+          client: SPARQL::Client.new(r4d_skos_theme_repo)
         )
       )
 

@@ -32,7 +32,7 @@ describe DfidTransition::Patch::Rummager::Themes do
       before do
         allow(patcher).to receive(:themes_query).and_return(
           DfidTransition::Extract::Query::Themes.new(
-            SPARQL::Client.new(r4d_skos_theme_repo)
+            client: SPARQL::Client.new(r4d_skos_theme_repo)
           )
         )
 
