@@ -14,8 +14,11 @@ module DfidTransition
       end
 
       class Base
-        def initialize(client = nil)
-          @client = client
+        attr_reader :options
+
+        def initialize(options = {})
+          @client = options[:client]
+          @options = options
         end
 
         def query

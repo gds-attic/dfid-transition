@@ -4,16 +4,14 @@ require 'dfid-transition/transform/mappings'
 
 namespace :list do
   desc 'List transition mappings for old URLs'
-  task :mappings do
-    module DfidTransition
-      output_query = Extract::Query::Outputs.new
+  task :mappings, [:limit] do |_t, args|
+    output_query = DfidTransition::Extract::Query::Outputs.new(limit: args[:limit])
 
-      mappings = Transform::Mappings.new(
-        Services.attachment_index,
-        output_query.solutions
-      )
+    mappings = DfidTransition::Transform::Mappings.new(
+      DfidTransition::Services.attachment_index,
+      output_query.solutions
+    )
 
-      mappings.dump_csv
-    end
+    mappings.dump_csv
   end
 end
