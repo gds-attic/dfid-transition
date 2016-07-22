@@ -25,15 +25,18 @@ module DfidTransition
                            raise RuntimeError, 'external links cannot be downloaded'
                          when hosted_at_r4d?
                            Concurrent::Future.new do
-                             download_to = "/tmp/#{filename}"
-                             File.open(download_to, 'w+') do |file|
+                             File.open(tmp_path, 'w+') do |file|
                                RestClient.get original_url.to_s do |str|
                                  file.write(str)
                                end
                              end
-                             File.open(download_to, 'r')
+                             File.open(tmp_path, 'r')
                            end
                          end.tap(&:execute)
+      end
+
+      def tmp_path
+        "/tmp/#{filename}"
       end
 
       def file
