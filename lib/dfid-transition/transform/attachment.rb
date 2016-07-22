@@ -12,7 +12,9 @@ module DfidTransition
 
       def initialize(original_url)
         @original_url = URI(original_url)
-        raise ArgumentError, "expected a URL, got #{original_url}" unless @original_url.is_a?(URI::HTTP)
+        unless @original_url.is_a?(URI::HTTP) || @original_url.is_a?(URI::FTP)
+          raise ArgumentError, "expected an HTTP or FTP URL, got #{original_url}"
+        end
       end
 
       def content_id
@@ -48,7 +50,7 @@ module DfidTransition
       end
 
       def hosted_at_r4d?
-        original_url.host == 'r4d.dfid.gov.uk'
+        original_url.host == 'r4d.dfid.gov.uk' && original_url.scheme == 'http'
       end
 
       def filename
