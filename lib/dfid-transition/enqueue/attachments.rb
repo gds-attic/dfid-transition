@@ -6,7 +6,7 @@ require 'govuk/presenters/search'
 require 'logger'
 
 module DfidTransition
-  module Load
+  module Enqueue
     class Attachments
       attr_reader :logger
       attr_accessor :asset_manager, :solutions
