@@ -26,7 +26,7 @@ module DfidTransition
           }
         }
 
-        JSON.pretty_generate(hash)
+        JSON.generate(hash)
       end
 
       def self.deserialize(json)
