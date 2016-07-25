@@ -13,7 +13,6 @@ namespace :enqueue do
     output_solutions = query.solutions
 
     attachments_loader = DfidTransition::Enqueue::Attachments.new(
-      DfidTransition::Services.asset_manager,
       output_solutions,
       logger: logger
     )
