@@ -1,6 +1,6 @@
 ---
 :verbose: true
-:concurrency:  16
+:concurrency:  8
 :require: ./lib/dfid-transition/workers.rb
 :logfile: ./log/sidekiq.log
 :queues:
