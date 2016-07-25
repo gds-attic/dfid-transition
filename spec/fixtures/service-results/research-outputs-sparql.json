@@ -1,26 +1,34 @@
 {
   "head": {
-    "vars": [ "output" , "date" , "abstract" , "title" , "citation" , "creators" , "countryCodes" ]
+    "vars": [ "output" , "date" , "type" , "abstract" , "title" , "citation" , "peerReviewed" , "creators" , "countryCodes" , "uris" , "themes" ]
   } ,
   "results": {
     "bindings": [
       {
         "output": { "type": "uri" , "value": "http://linked-development.org/r4d/output/213014/" } ,
         "date": { "type": "literal" , "value": "2016-04-28T11:26:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Book%20Chapter" } ,
         "abstract": { "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "type": "typed-literal" , "value": " - " } ,
         "title": { "type": "literal" , "value": " In Search of Human Capital - Identifying Gifted Children in Poor Areas of Dar Es Salaam, Tanzania " } ,
         "citation": { "type": "literal" , "value": " Humble, S. &lt;b&gt;In Search of Human Capital - Identifying Gifted Children in Poor Areas of Dar Es Salaam, Tanzania.&lt;/b&gt; In: Dixon, P.; Humble, S.; Counihan, C. (Eds.), Handbook of International Development and Education. Edward Elgar Publishing, ISBN 978 1 78347 353 3 " } ,
+        "peerReviewed": { "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "type": "typed-literal" , "value": "false" } ,
         "creators": { "type": "literal" , "value": " Humble, S. " } ,
-        "countryCodes": { "type": "literal" , "value": "TZ" }
+        "countryCodes": { "type": "literal" , "value": "TZ" } ,
+        "uris": { "type": "literal" , "value": "http://www.e-elgar.com/shop/handbook-of-international-development-and-education" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" }
       } ,
       {
         "output": { "type": "uri" , "value": "http://linked-development.org/r4d/output/213009/" } ,
         "date": { "type": "literal" , "value": "2016-04-28T09:52:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Research%20Paper" } ,
         "abstract": { "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "type": "typed-literal" , "value": " The Study aims to deepen understanding of why investments in Domestic Violence law (DV Law) are faltering and what can be done. " } ,
         "title": { "type": "literal" , "value": " Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It " } ,
         "citation": { "type": "literal" , "value": " Brickell, K.; Baureaksmey Prak.; Bunnak Poch. &lt;b&gt;Domestic Violence Law: The Gap Between Legislation and Practice in Cambodia and What Can Be Done About It.&lt;/b&gt; 72 pp. " } ,
+        "peerReviewed": { "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "type": "typed-literal" , "value": "false" } ,
         "creators": { "type": "literal" , "value": " Brickell, K. | Baureaksmey Prak. | Bunnak Poch. " } ,
-        "countryCodes": { "type": "literal" , "value": "KH" }
+        "countryCodes": { "type": "literal" , "value": "KH" } ,
+        "uris": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/pdf/outputs/ESRC_DFID/60953_DV_Law_Prelim_Report_2014.pdf" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Social%20Change" }
       }
     ]
   }
