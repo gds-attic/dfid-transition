@@ -2,17 +2,15 @@ require_relative '../../../config/initializers/sidekiq'
 
 require 'dfid-transition/transform/document'
 require 'dfid-transition/extract/download/attachment'
-require 'govuk/presenters/search'
 require 'logger'
 
 module DfidTransition
-  module Load
+  module Enqueue
     class Attachments
       attr_reader :logger
-      attr_accessor :asset_manager, :solutions
+      attr_accessor :solutions
 
-      def initialize(asset_manager, solutions, logger: Logger.new(STDERR))
-        self.asset_manager = asset_manager
+      def initialize(solutions, logger: Logger.new(STDERR))
         self.solutions = solutions
 
         @logger = logger

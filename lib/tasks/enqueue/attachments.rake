@@ -1,8 +1,8 @@
 require 'dfid-transition/extract/query/outputs'
-require 'dfid-transition/load/attachments'
+require 'dfid-transition/enqueue/attachments'
 require 'dfid-transition/services'
 
-namespace :load do
+namespace :enqueue do
   desc 'Load DFID attachments with attachment URIs from the SPARQL endpoint'
   task :attachments, [:limit] do |_t, args|
     logger = Logger.new(STDERR)
@@ -12,8 +12,7 @@ namespace :load do
     logger.info "Requesting #{query.limit} documents' worth of attachments"
     output_solutions = query.solutions
 
-    attachments_loader = DfidTransition::Load::Attachments.new(
-      DfidTransition::Services.asset_manager,
+    attachments_loader = DfidTransition::Enqueue::Attachments.new(
       output_solutions,
       logger: logger
     )
