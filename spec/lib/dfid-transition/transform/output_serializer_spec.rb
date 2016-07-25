@@ -65,17 +65,16 @@ describe DfidTransition::Transform::OutputSerializer do
       subject(:binding) { json['results']['bindings'].first }
 
       it 'has a date' do
-        expect(binding['date']).to eql({ 'type' => 'literal', 'value' => '2016-04-28T11:26:00' })
+        expect(binding['date']).to eql('type' => 'literal', 'value' => '2016-04-28T11:26:00')
       end
       it 'has an output uri' do
-        expect(binding['output']).to eql({ 'type' => 'uri', 'value' => 'http://linked-development.org/r4d/output/213014/' })
+        expect(binding['output']).to eql('type' => 'uri', 'value' => 'http://linked-development.org/r4d/output/213014/')
       end
       it 'has a boolean peerReviewed' do
         expect(binding['peerReviewed']).to eql(
-          {
-            'datatype' => 'http://www.w3.org/2001/XMLSchema#boolean',
-            'type' => 'literal',
-            'value' => 'false' }
+          'datatype' => 'http://www.w3.org/2001/XMLSchema#boolean',
+          'type' => 'literal',
+          'value' => 'false'
         )
       end
     end

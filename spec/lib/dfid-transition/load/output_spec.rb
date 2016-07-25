@@ -166,6 +166,5 @@ describe DfidTransition::Load::Output do
         end
       end
     end
-
   end
 end
