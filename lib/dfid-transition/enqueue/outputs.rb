@@ -1,6 +1,7 @@
 require_relative '../../../config/initializers/sidekiq'
 
-require 'dfid-transition/transform/document'
+require 'dfid-transition/transform/output_serializer'
+require 'dfid-transition/load/output'
 require 'logger'
 
 module DfidTransition
@@ -16,17 +17,11 @@ module DfidTransition
       end
 
       def run
-        documents.each do |doc|
-          DfidTransition::Load::Output.perform_async(doc.solution.to_h)
+        solutions.each do |solution|
+          serialized_solution = DfidTransition::Transform::OutputSerializer.serialize(solution)
+          DfidTransition::Load::Output.perform_async(serialized_solution)
         end
-        logger.info "Enqueued #{documents.count} outputs for publishing"
-      end
-
-    private
-
-      def documents
-        @documents ||=
-          solutions.map { |solution| DfidTransition::Transform::Document.new(solution) }
+        logger.info "Enqueued #{solutions.count} outputs for publishing"
       end
     end
   end

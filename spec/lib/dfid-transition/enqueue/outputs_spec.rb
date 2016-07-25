@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'dfid-transition/enqueue/outputs'
 require 'dfid-transition/load/output'
+require 'dfid-transition/transform/output_serializer'
 require 'rdf/query/solution'
 require 'rdf/query/solutions'
 
@@ -29,7 +30,7 @@ describe DfidTransition::Enqueue::Outputs do
     expect(DfidTransition::Load::Output).to have_received(
       :perform_async
     ).with(
-      output: original_uri
+      DfidTransition::Transform::OutputSerializer.serialize(solution)
     ).twice
   end
 

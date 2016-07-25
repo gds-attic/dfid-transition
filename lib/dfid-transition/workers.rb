@@ -8,3 +8,4 @@ end
 require 'config/initializers/sidekiq'
 
 require 'dfid-transition/extract/download/attachment'
+require 'dfid-transition/load/output'

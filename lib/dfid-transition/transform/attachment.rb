@@ -73,7 +73,7 @@ module DfidTransition
       end
 
       def details_from_index(details)
-        @asset_response = OpenStruct.new(details)
+        @asset_response = OpenStruct.new(details) if details
       end
 
       def to_json
