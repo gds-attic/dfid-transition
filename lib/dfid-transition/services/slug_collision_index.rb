@@ -13,15 +13,13 @@ module DfidTransition
       end
 
       SLUG_COLLISIONS_SET = 'slug-collisions'.freeze
-      SLUG_COLLISIONS_KEY_PREFIX = 'slug-collisions:for:'.freeze
+
+      def put(slug)
+        @redis.sadd(SLUG_COLLISIONS_SET, slug)
+      end
 
       def collides?(slug)
-        false
-      end
-    private
-
-      def slug_collision_key(original_url)
-        "attachment:#{original_url}"
+        @redis.sismember(SLUG_COLLISIONS_SET, slug)
       end
     end
   end
