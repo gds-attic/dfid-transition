@@ -4,11 +4,12 @@ require 'dfid-transition/load/output'
 require 'sidekiq/testing'
 
 describe DfidTransition::Load::Output do
-  let(:publishing_api)   { spy('publishing-api') }
-  let(:rummager)         { spy('rummager') }
-  let(:attachment_index) { spy('attachment_index') }
-  let(:solutions)        { [] }
-  let(:logger)           { double('Logger').as_null_object }
+  let(:publishing_api)       { spy('publishing-api') }
+  let(:rummager)             { spy('rummager') }
+  let(:attachment_index)     { spy('attachment_index') }
+  let(:slug_collision_index) { spy('attachment_index') }
+  let(:solutions)            { [] }
+  let(:logger)               { double('Logger').as_null_object }
 
   subject(:loader) do
     DfidTransition::Load::Output.new
@@ -18,6 +19,7 @@ describe DfidTransition::Load::Output do
     allow(loader).to receive(:publishing_api).and_return(publishing_api)
     allow(loader).to receive(:rummager).and_return(rummager)
     allow(loader).to receive(:attachment_index).and_return(attachment_index)
+    allow(loader).to receive(:slug_collision_index).and_return(slug_collision_index)
     Sidekiq::Logging.logger = logger
   end
 
@@ -30,7 +32,7 @@ describe DfidTransition::Load::Output do
     let(:offsite_pdf) { 'http://example.com/offsite.pdf' }
     let(:solution_hash) do
       {
-        output:       uri('http://original_url/1234/'),
+        output:       uri('http://linked-development.org/r4d/output/5050/'),
         date:         literal('2016-04-28T09:52:00'),
         title:        literal('Output Title'),
         abstract:     literal('&amp;lt;p&amp;gt;Abstract;lt;/p&amp;gt;'),
@@ -41,11 +43,13 @@ describe DfidTransition::Load::Output do
     end
     let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
     let(:existing_content_id) { nil }
+    let(:slug_collides)       { false }
 
     before do
       allow(solution).to receive(:[]) { |key| solution_hash[key] }
       allow(publishing_api).to receive(:lookup_content_id).and_return(existing_content_id)
       allow(attachment_index).to receive(:get).with(onsite_pdf).and_return(attachment_details)
+      allow(slug_collision_index).to receive(:collides?).with('output-title').and_return(slug_collides)
       allow(DfidTransition::Transform::OutputSerializer).to receive(:deserialize).and_return(solutions)
     end
 
@@ -55,7 +59,8 @@ describe DfidTransition::Load::Output do
       before { loader.perform(solution_hash) }
 
       it 'logs this as a warning' do
-        expect(logger).to have_received(:warn).with("One or more assets missing for #{solution[:output]}")
+        expect(logger).to have_received(:warn).with(
+          "One or more assets missing for http://r4d.dfid.gov.uk/Output/5050/Default.aspx")
       end
 
       it 'does not touch the publishing API' do
@@ -98,6 +103,16 @@ describe DfidTransition::Load::Output do
             instance_of(String),
             instance_of(Hash)
           )
+        end
+
+        context 'but there is a title collision' do
+          let(:slug_collides) { true }
+
+          it 'puts content with a unique :base_path' do
+            expect(publishing_api).to have_received(:put_content) do |_content_id, content|
+              expect(content[:base_path]).to eql('/dfid-research-outputs/output-title-5050')
+            end
+          end
         end
       end
 

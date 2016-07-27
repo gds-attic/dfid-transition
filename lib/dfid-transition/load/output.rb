@@ -17,6 +17,7 @@ module DfidTransition
         solution = solutions.first
 
         self.doc = DfidTransition::Transform::Document.new(solution)
+        doc.disambiguate! if slug_collision_index.collides?(doc.slug)
 
         unless all_assets_available?
           logger.warn("One or more assets missing for #{doc.original_url}")
@@ -84,6 +85,10 @@ module DfidTransition
 
       def publishing_api
         Services.publishing_api
+      end
+
+      def slug_collision_index
+        raise NotImplementedError
       end
     end
   end
