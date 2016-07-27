@@ -89,9 +89,8 @@ module DfidTransition::Transform
         it 'appends the original_id' do
           expect { doc.disambiguate! }.to change { doc.slug }.from(
             'and-then-he-switched-off-the-phone-mobile-phones'
-          ).to (
+          ).to \
             'and-then-he-switched-off-the-phone-mobile-phones-5050'
-          )
         end
       end
 

@@ -19,7 +19,7 @@ describe DfidTransition::Services::SlugCollisionIndex do
 
     context 'is in the index' do
       before { slug_collision_index.put(slug) }
-      it     { is_expected.to be true}
+      it     { is_expected.to be true }
     end
   end
 end
