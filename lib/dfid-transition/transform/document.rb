@@ -49,7 +49,7 @@ module DfidTransition
       end
 
       def slug
-        title.parameterize
+        @slug || title.parameterize
       end
 
       def summary
@@ -57,7 +57,14 @@ module DfidTransition
       end
 
       def base_path
-        "/dfid-research-outputs/#{original_id}"
+        "/dfid-research-outputs/#{slug}"
+      end
+
+      ##
+      # Assert that there will be a collision, so make the slug and
+      # hence the base_path unique using the ID space of the old document
+      def disambiguate!
+        @slug = "#{title.parameterize}-#{original_id}"
       end
 
       def metadata

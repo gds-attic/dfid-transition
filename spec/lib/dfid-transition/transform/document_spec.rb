@@ -81,8 +81,18 @@ module DfidTransition::Transform
         expect(doc.original_id).to eql('5050')
       end
 
-      it 'has a base_path' do
-        expect(doc.base_path).to eql('/dfid-research-outputs/5050')
+      it 'has a base_path that corresponds to the title' do
+        expect(doc.base_path).to eql('/dfid-research-outputs/and-then-he-switched-off-the-phone-mobile-phones')
+      end
+
+      describe '#disambiguate_slug!' do
+        it 'appends the original_id' do
+          expect { doc.disambiguate! }.to change { doc.slug }.from(
+            'and-then-he-switched-off-the-phone-mobile-phones'
+          ).to (
+            'and-then-he-switched-off-the-phone-mobile-phones-5050'
+          )
+        end
       end
 
       it 'has a public_updated_at' do
