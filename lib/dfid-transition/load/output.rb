@@ -17,6 +17,7 @@ module DfidTransition
         solution = solutions.first
 
         self.doc = DfidTransition::Transform::Document.new(solution)
+        doc.disambiguate! if slug_collision_index.collides?(doc.slug)
 
         unless all_assets_available?
           logger.warn("One or more assets missing for #{doc.original_url}")
@@ -60,7 +61,7 @@ module DfidTransition
           publishing_api.patch_links(doc.content_id, doc.links)
           publishing_api.publish(doc.content_id, update_type)
           logger.info "Published #{doc.title} at "\
-              "http://www.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
+              "http://www.dev.gov.uk#{doc.base_path}"
         rescue => e
           logger.error(e)
         end
@@ -84,6 +85,10 @@ module DfidTransition
 
       def publishing_api
         Services.publishing_api
+      end
+
+      def slug_collision_index
+        Services.slug_collision_index
       end
     end
   end

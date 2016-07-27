@@ -2,13 +2,15 @@ require 'spec_helper'
 require 'dfid-transition/transform/mappings'
 
 describe DfidTransition::Transform::Mappings do
-  let(:attachment_index)   { double 'DfidTransition::Transform::AttachmentIndex' }
-  let(:attachment_details) { nil }
+  let(:attachment_index)     { double 'DfidTransition::Services::AttachmentIndex' }
+  let(:slug_collision_index) { double 'DfidTransition::Services::SlugCollisionIndex' }
+  let(:attachment_details)   { nil }
+  let(:collides)             { false }
 
   let(:stdout) { spy '$stdout' }
   let(:mappings) do
     DfidTransition::Transform::Mappings.new(
-      attachment_index, solutions, output_to: stdout)
+      attachment_index, slug_collision_index, solutions, output_to: stdout)
   end
 
   describe '#to_csv' do
@@ -31,13 +33,15 @@ describe DfidTransition::Transform::Mappings do
 
       let(:solutions) do
         [{
-          output:       uri('http://original_url/1234/'),
+          output:       uri('http://linked-development.org/r4d/output/5050/'),
+          title:        literal('This is the title'),
           uris:         literal("#{onsite_pdf} #{offsite_pdf}"),
         }]
       end
 
       before do
         allow(attachment_index).to receive(:get).and_return(attachment_details)
+        allow(slug_collision_index).to receive(:collides?).and_return(collides)
 
         mappings.dump_csv
       end
@@ -48,7 +52,7 @@ describe DfidTransition::Transform::Mappings do
 
       it 'has a mapping from the old to the new document URL' do
         expect(stdout).to have_received(:puts).with(
-          "http://original_url/1234/,https://gov.uk/dfid-research-outputs/1234\n"
+          "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://gov.uk/dfid-research-outputs/this-is-the-title\n"
         )
       end
 
@@ -68,6 +72,16 @@ describe DfidTransition::Transform::Mappings do
         it 'has a mapping for the onsite PDF' do
           expect(stdout).to have_received(:puts).with(
             "http://r4d.dfid.gov.uk/pdfs/onsite.pdf,https://new.attachment.url\n"
+          )
+        end
+      end
+
+      context 'there is a namespace collision on title' do
+        let(:collides) { true }
+
+        it 'outputs the disambiguated URL' do
+          expect(stdout).to have_received(:puts).with(
+            "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://gov.uk/dfid-research-outputs/this-is-the-title-5050\n"
           )
         end
       end

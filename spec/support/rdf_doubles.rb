@@ -17,6 +17,12 @@ module RDFDoubles
     end
   end
 
+  def integer(value)
+    double('RDF::Literal::Integer').tap do |integer|
+      allow(integer).to receive(:to_i).and_return(value)
+    end
+  end
+
   class Solution
     def initialize(value_hash)
       @value_hash = value_hash

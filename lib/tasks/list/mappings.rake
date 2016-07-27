@@ -9,6 +9,7 @@ namespace :list do
 
     mappings = DfidTransition::Transform::Mappings.new(
       DfidTransition::Services.attachment_index,
+      DfidTransition::Services.slug_collision_index,
       output_query.solutions
     )
 
