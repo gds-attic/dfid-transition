@@ -57,15 +57,20 @@ module DfidTransition
         File.basename(original_url.path).sub('/', '')
       end
 
+      attr_writer :title
+      def title
+        @title || filename
+      end
+
       def snippet
         case
-        when hosted_at_r4d? then "[InlineAttachment:#{filename}]"
+        when hosted_at_r4d? then "[InlineAttachment:#{title}]"
         when external_link? then "[#{filename}](#{original_url})"
         end
       end
 
       def link_to_asset
-        "[#{filename}](#{asset_response.file_url})"
+        "[#{title}](#{asset_response.file_url})"
       end
 
       def save_to(asset_manager)

@@ -9,6 +9,8 @@ module DfidTransition::Transform
     subject(:doc) { Document.new(solution) }
 
     context 'a solution that behaves like a hash is given' do
+      let(:uris) { literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf') }
+
       AN_R4D_OUTPUT_URL = 'http://r4d.dfid.gov.uk/Output/5050/Default.aspx'.freeze
 
       let(:original_url)  { AN_R4D_OUTPUT_URL }
@@ -28,7 +30,7 @@ module DfidTransition::Transform
             '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
             '&amp;lt;/p&amp;gt;'),
           countryCodes: literal('AZ GB'),
-          uris:         literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf'),
+          uris:         uris,
           themes:       literal(
             'http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure '\
             'http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment'
@@ -162,6 +164,22 @@ module DfidTransition::Transform
           expect(details[:change_history]).not_to be_empty
         end
 
+        describe '#attachments' do
+          context 'there is only one onsite attachment' do
+            it 'assigns the only attachment title from the document' do
+              expect(doc.downloads.first.title).to eql(doc.title)
+            end
+          end
+
+          context 'there is more than one onsite attachment' do
+            let(:uris) { literal('http://r4d.dfid.gov.uk/pdfs/1.pdf http://r4d.dfid.gov.uk/pdfs/2.pdf') }
+
+            it 'leaves the titles alone' do
+              expect(doc.downloads.map(&:title)).to eql(%w( 1.pdf 2.pdf ))
+            end
+          end
+        end
+
         it 'has onsite attachments only with URLs assigned by asset manager' do
           attachments_json = details[:attachments]
           expect(attachments_json.size).to eql(1)
@@ -233,7 +251,7 @@ module DfidTransition::Transform
           expect(body).to include("\n* Hello")
         end
         it 'has the onsite link' do
-          expect(body).to include('[InlineAttachment:some.pdf]')
+          expect(body).to include("[InlineAttachment:#{doc.title}]")
         end
         it 'has the offsite link' do
           expect(body).to include('[offsite.pdf](http://example.com/offsite.pdf)')

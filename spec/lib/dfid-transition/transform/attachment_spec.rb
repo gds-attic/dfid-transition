@@ -157,6 +157,20 @@ module DfidTransition::Transform
       end
     end
 
+    describe '#title' do
+      context 'a filename with an extension' do
+        let(:original_url) { 'http://example.com/some/path/title_of_the_file.pdf' }
+        it 'is the same as the filename' do
+          expect(attachment.title).to eql(attachment.filename)
+        end
+
+        it 'can be set to something else' do
+          attachment.title = 'something else'
+          expect(attachment.title).to eql('something else')
+        end
+      end
+    end
+
     describe '#content_id' do
       let(:uuid) { /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
 

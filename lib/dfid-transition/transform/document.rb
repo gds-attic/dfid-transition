@@ -134,7 +134,12 @@ module DfidTransition
       def attachments
         @attachments ||= begin
           uris = solution[:uris].to_s.split(' ')
-          uris.map { |uri| Attachment.new(uri) }
+          new_attachments = uris.map { |uri| Attachment.new(uri) }
+
+          hosted_at_r4d = new_attachments.select(&:hosted_at_r4d?)
+          hosted_at_r4d.first.title = title if hosted_at_r4d.count == 1
+
+          new_attachments
         end
       end
 
