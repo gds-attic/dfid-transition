@@ -5,6 +5,7 @@ require 'dfid-transition/transform/html'
 require 'dfid-transition/transform/attachment'
 require 'dfid-transition/transform/themes'
 require 'active_support/core_ext/string/strip'
+require 'active_support/core_ext/string/inflections'
 require 'erubis'
 
 module DfidTransition
@@ -45,6 +46,10 @@ module DfidTransition
         title = solution[:title].to_s
         unescaped_title = Html.unescape_three_times(title)
         unescaped_title.strip
+      end
+
+      def slug
+        title.parameterize
       end
 
       def summary

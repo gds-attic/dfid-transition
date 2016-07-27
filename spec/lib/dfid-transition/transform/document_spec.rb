@@ -69,6 +69,10 @@ module DfidTransition::Transform
           '‘And Then He Switched off the Phone’: Mobile Phones ...')
       end
 
+      it 'has a slug' do
+        expect(doc.slug).to eql('and-then-he-switched-off-the-phone-mobile-phones')
+      end
+
       it 'always has an empty summary' do
         expect(doc.summary).to be_empty
       end
