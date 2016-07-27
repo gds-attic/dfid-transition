@@ -28,8 +28,9 @@ module DfidTransition
                       dcterms:abstract ?abstract ;
                       dcterms:bibliographicCitation ?citation ;
                       dcterms:date ?date ;
-                      dcterms:subject ?theme ;
-                      bibo:uri ?uri .
+                      dcterms:subject ?theme .
+
+              { ?output bibo:uri ?uri } UNION { ?output dcterms:uri ?uri }
 
               FILTER ( ?type != 'text' )
 
