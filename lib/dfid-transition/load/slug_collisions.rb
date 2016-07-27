@@ -14,7 +14,7 @@ module DfidTransition
         @solutions.each do |solution|
           slug = DfidTransition::Transform::Document.new(solution).slug
           @slug_collision_index.put(slug)
-          loaded += 1
+          loaded += solution[:outputCount].to_i
         end
 
         @logger.info "#{loaded} collisions loaded"

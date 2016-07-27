@@ -1,4 +1,4 @@
-require 'dfid-transition/extract/query/base_path_dupes'
+require 'dfid-transition/extract/query/duplicate_titles'
 require 'dfid-transition/load/slug_collisions'
 require 'dfid-transition/services'
 
@@ -8,7 +8,7 @@ namespace :load do
     logger   = Logger.new(STDERR)
     services = DfidTransition::Services
 
-    collisions_query = DfidTransition::Extract::Query::BasePathDupes.new
+    collisions_query = DfidTransition::Extract::Query::DuplicateTitles.new
 
     loader = DfidTransition::Load::SlugCollisions.new(
       services.slug_collision_index,

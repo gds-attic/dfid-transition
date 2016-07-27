@@ -88,7 +88,7 @@ module DfidTransition
       end
 
       def slug_collision_index
-        raise NotImplementedError
+        Services.slug_collision_index
       end
     end
   end

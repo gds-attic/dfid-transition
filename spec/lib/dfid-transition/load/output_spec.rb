@@ -7,7 +7,7 @@ describe DfidTransition::Load::Output do
   let(:publishing_api)       { spy('publishing-api') }
   let(:rummager)             { spy('rummager') }
   let(:attachment_index)     { spy('attachment_index') }
-  let(:slug_collision_index) { spy('attachment_index') }
+  let(:slug_collision_index) { spy('slug_collision_index') }
   let(:solutions)            { [] }
   let(:logger)               { double('Logger').as_null_object }
 

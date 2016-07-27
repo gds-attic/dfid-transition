@@ -11,8 +11,8 @@ describe DfidTransition::Load::SlugCollisions do
 
     let(:solutions) do
       [
-        { output: uri('http://linked-development.org/r4d/output/5050/'), title: 'A slug' },
-        { output: uri('http://linked-development.org/r4d/output/5051/'), title: 'Another slug' }
+        { title: literal('A slug'), outputCount: integer(2) },
+        { title: literal('Another slug'), outputCount: integer(2) }
       ]
     end
 
@@ -31,7 +31,7 @@ describe DfidTransition::Load::SlugCollisions do
     end
 
     it 'tells us how many' do
-      expect(logger).to have_received(:info).with('2 collisions loaded')
+      expect(logger).to have_received(:info).with('4 collisions loaded')
     end
   end
 end
