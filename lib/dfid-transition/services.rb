@@ -2,6 +2,7 @@ require 'gds_api/publishing_api_v2'
 require 'gds_api/asset_manager'
 require 'gds_api/rummager'
 require 'dfid-transition/services/attachment_index'
+require 'dfid-transition/services/slug_collision_index'
 
 module DfidTransition
   module Services
@@ -25,6 +26,10 @@ module DfidTransition
 
     def self.attachment_index
       @attachment_index ||= AttachmentIndex.new(redis)
+    end
+
+    def self.slug_collision_index
+      @slug_collision_index ||= SlugCollisionIndex.new(redis)
     end
 
     def self.redis
