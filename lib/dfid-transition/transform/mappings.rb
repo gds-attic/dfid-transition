@@ -22,7 +22,7 @@ module DfidTransition
         @solutions.each do |solution|
           doc = DfidTransition::Transform::Document.new(solution)
 
-          @output.puts "#{doc.original_url},https://gov.uk/dfid-research-outputs/#{doc.original_id}\n"
+          @output.puts "#{doc.original_url},https://gov.uk#{doc.base_path}\n"
 
           doc.downloads.each do |download|
             existing_details = @attachment_index.get(download.original_url.to_s)

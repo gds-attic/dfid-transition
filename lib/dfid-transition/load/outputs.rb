@@ -63,7 +63,7 @@ module DfidTransition
           publishing_api.patch_links(doc.content_id, doc.links)
           publishing_api.publish(doc.content_id, update_type)
           logger.info "Published #{doc.title} at "\
-              "http://www.dev.gov.uk/dfid-research-outputs/#{doc.original_id}"
+              "http://www.dev.gov.uk#{doc.base_path}"
         rescue => e
           logger.error(e)
         end
