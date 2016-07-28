@@ -14,10 +14,21 @@ module DfidTransition
       end
 
       def self.to_markdown(html)
-        corrected_html = expand_h3s(html)
+        fragment = Nokogiri::HTML.fragment(html)
+        corrected_html = expand_h3s(fragment)
 
         kramdown_tree, _warnings = Kramdown::Parser::Html.parse(corrected_html)
         Kramdown::Converter::Kramdown.convert(kramdown_tree).first
+      end
+
+      BADLY_ENCODED_P = '&amp;amp;#55349;&amp;amp;#56387;'.freeze
+      BADLY_ENCODED_LIST_ITEM_VARIANT_1 = '&amp;amp;#56256;&amp;amp;#56457;'.freeze
+      BADLY_ENCODED_LIST_ITEM_VARIANT_2 = '&amp;amp;#56256;&amp;amp;#56451;'.freeze
+
+      def self.fix_encoding_errors(html)
+        html.sub(BADLY_ENCODED_P, 'p') \
+            .gsub(BADLY_ENCODED_LIST_ITEM_VARIANT_1, '* ')
+            .gsub(BADLY_ENCODED_LIST_ITEM_VARIANT_2, '* ')
       end
 
       HEADER_ENDS_WITH_COLON = /[a-z]{2,}:\s*$/

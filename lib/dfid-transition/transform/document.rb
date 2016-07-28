@@ -152,7 +152,11 @@ module DfidTransition
 
       def abstract
         @abstract ||= Html.to_markdown(
-          Html.unescape_three_times(solution[:abstract].to_s)
+          Html.unescape_three_times(
+            Html.fix_encoding_errors(
+              solution[:abstract].to_s
+            )
+          )
         )
       end
 
