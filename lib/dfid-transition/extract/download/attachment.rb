@@ -19,7 +19,7 @@ module DfidTransition
             asset_response = attachment.save_to(asset_manager)
             attachment_index.put(url, asset_response)
           ensure
-            File.delete(attachment.tmp_path)
+            File.delete(attachment.tmp_path) if File.exist?(attachment.tmp_path)
           end
         end
 
