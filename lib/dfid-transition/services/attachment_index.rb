@@ -27,6 +27,13 @@ module DfidTransition
         end
       end
 
+      def clear
+        redis.smembers(KNOWN_ATTACHMENTS_KEY).each do |attachment|
+          redis.del attachment
+        end
+        redis.del(KNOWN_ATTACHMENTS_KEY)
+      end
+
     private
 
       def attachment_key(original_url)

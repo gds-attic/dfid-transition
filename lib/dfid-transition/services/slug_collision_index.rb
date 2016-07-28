@@ -21,6 +21,10 @@ module DfidTransition
       def collides?(slug)
         @redis.sismember(SLUG_COLLISIONS_SET, slug)
       end
+
+      def clear
+        @redis.del(SLUG_COLLISIONS_SET)
+      end
     end
   end
 end

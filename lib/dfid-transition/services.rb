@@ -36,5 +36,9 @@ module DfidTransition
       require_relative '../../config/initializers/redis'
       @redis ||= _namespaced_redis
     end
+
+    def self.stats
+      Stats.new(redis)
+    end
   end
 end
