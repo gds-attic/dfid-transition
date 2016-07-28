@@ -21,9 +21,9 @@ module DfidTransition
         Kramdown::Converter::Kramdown.convert(kramdown_tree).first
       end
 
-      BADLY_ENCODED_P = '&amp;amp;#55349;&amp;amp;#56387;'
-      BADLY_ENCODED_LIST_ITEM_VARIANT_1 = '&amp;amp;#56256;&amp;amp;#56457;'
-      BADLY_ENCODED_LIST_ITEM_VARIANT_2 = '&amp;amp;#56256;&amp;amp;#56451;'
+      BADLY_ENCODED_P = '&amp;amp;#55349;&amp;amp;#56387;'.freeze
+      BADLY_ENCODED_LIST_ITEM_VARIANT_1 = '&amp;amp;#56256;&amp;amp;#56457;'.freeze
+      BADLY_ENCODED_LIST_ITEM_VARIANT_2 = '&amp;amp;#56256;&amp;amp;#56451;'.freeze
 
       def self.fix_encoding_errors(html)
         html.sub(BADLY_ENCODED_P, 'p') \
