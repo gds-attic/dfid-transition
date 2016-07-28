@@ -14,7 +14,7 @@ describe DfidTransition::Services::Stats do
   Stats = DfidTransition::Services::Stats
 
   let(:redis) { MockRedis.new }
-  subject(:stats) { Stats.new(redis) }
+  subject(:show) { Stats.new(redis) }
 
   describe '#collision_index_size' do
     it 'reflects the number of collision index members' do
