@@ -22,7 +22,7 @@ describe DfidTransition::Services::AttachmentIndex do
     )
   end
 
-  describe '.put' do
+  describe '#put' do
     context 'an original_url and an asset response is given' do
       before { @response = attachment_index.put(original_url, asset_response) }
 
@@ -36,7 +36,7 @@ describe DfidTransition::Services::AttachmentIndex do
     end
   end
 
-  describe '.get' do
+  describe '#get' do
     context 'there is no item in the index' do
       it 'returns nil' do
         expect(attachment_index.get('http://example.com/i.dont.exist.pdf')).to eql(nil)
@@ -60,6 +60,30 @@ describe DfidTransition::Services::AttachmentIndex do
         it 'has the asset manager url' do
           expect(attachment_status['asset_manager_url']).to eql(asset_response.id)
         end
+      end
+    end
+  end
+
+  describe '.clean' do
+    context 'there are items in the index' do
+      let(:keys) { [original_url, original_url + '?another'] }
+      before do
+        # mock-redis doesn't allow .each on smembers in a multi. Simulate it here
+        allow_any_instance_of(MockRedis::Future).to receive(:each).and_return(keys)
+        keys.each { |key| attachment_index.put(attachment_index.send(:attachment_key, key), asset_response) }
+      end
+
+      def attachment_count
+        redis.smembers('known-attachments').size
+      end
+
+      it 'removes everything from known attachments' do
+        expect { attachment_index.clean }.to change { attachment_count }.from(2).to(0)
+      end
+
+      it 'removes the keys' do
+        attachment_index.clean
+        expect(attachment_index.get(original_url)).to be_nil
       end
     end
   end
