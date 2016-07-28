@@ -257,6 +257,25 @@ module DfidTransition::Transform
             end
           end
         end
+
+        context 'the abstract has Query: and Summary:' do
+          before do
+            solution_hash[:abstract] = literal(
+              <<-TEXT
+                This is a piece of abstract.
+
+                <b>Query:</b> Something that's a query
+
+                <strong>Summary:</strong> Something that's a summary.
+              TEXT
+            )
+          end
+
+          it 'expands them to h3' do
+            expect(body).to match(/^### Query\n\nSomething/)
+            expect(body).to match(/^### Summary\n\nSomething/m)
+          end
+        end
       end
 
       describe '#creators' do
