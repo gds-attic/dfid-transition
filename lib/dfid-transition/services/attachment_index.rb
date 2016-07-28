@@ -27,13 +27,11 @@ module DfidTransition
         end
       end
 
-      def clean
-        redis.multi do
-          redis.smembers(KNOWN_ATTACHMENTS_KEY).each do |attachment|
-            redis.del attachment
-          end
-          redis.del(KNOWN_ATTACHMENTS_KEY)
+      def clear
+        redis.smembers(KNOWN_ATTACHMENTS_KEY).each do |attachment|
+          redis.del attachment
         end
+        redis.del(KNOWN_ATTACHMENTS_KEY)
       end
 
     private

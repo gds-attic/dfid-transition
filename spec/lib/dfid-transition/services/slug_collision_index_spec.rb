@@ -23,7 +23,7 @@ describe DfidTransition::Services::SlugCollisionIndex do
     end
   end
 
-  describe '#clean' do
+  describe '#clear' do
     let(:another_slug) { 'example-slug-2' }
 
     context 'slugs are in the index' do
@@ -36,7 +36,7 @@ describe DfidTransition::Services::SlugCollisionIndex do
         expect(slug_collision_index.collides?(slug)).to be true
         expect(slug_collision_index.collides?(another_slug)).to be true
 
-        slug_collision_index.clean
+        slug_collision_index.clear
 
         expect(slug_collision_index.collides?(slug)).to be false
         expect(slug_collision_index.collides?(another_slug)).to be false

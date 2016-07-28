@@ -22,7 +22,7 @@ module DfidTransition
         @redis.sismember(SLUG_COLLISIONS_SET, slug)
       end
 
-      def clean
+      def clear
         @redis.del(SLUG_COLLISIONS_SET)
       end
     end

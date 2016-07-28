@@ -64,12 +64,10 @@ describe DfidTransition::Services::AttachmentIndex do
     end
   end
 
-  describe '.clean' do
+  describe '#clear' do
     context 'there are items in the index' do
       let(:keys) { [original_url, original_url + '?another'] }
       before do
-        # mock-redis doesn't allow .each on smembers in a multi. Simulate it here
-        allow_any_instance_of(MockRedis::Future).to receive(:each).and_return(keys)
         keys.each { |key| attachment_index.put(attachment_index.send(:attachment_key, key), asset_response) }
       end
 
@@ -78,11 +76,11 @@ describe DfidTransition::Services::AttachmentIndex do
       end
 
       it 'removes everything from known attachments' do
-        expect { attachment_index.clean }.to change { attachment_count }.from(2).to(0)
+        expect { attachment_index.clear }.to change { attachment_count }.from(2).to(0)
       end
 
       it 'removes the keys' do
-        attachment_index.clean
+        attachment_index.clear
         expect(attachment_index.get(original_url)).to be_nil
       end
     end
