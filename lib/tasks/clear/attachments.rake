@@ -6,5 +6,3 @@ namespace :clear do
     DfidTransition::Services.attachment_index.clear
   end
 end
-
-

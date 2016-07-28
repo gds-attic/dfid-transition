@@ -6,5 +6,3 @@ namespace :clear do
     DfidTransition::Services.slug_collision_index.clear
   end
 end
-
-

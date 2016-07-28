@@ -1,5 +1,5 @@
 desc 'Clear everything'
-task :clear => [
+task clear: [
   'clear:collisions',
   'clear:attachments',
 ]
