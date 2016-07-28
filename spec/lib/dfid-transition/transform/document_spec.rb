@@ -276,6 +276,30 @@ module DfidTransition::Transform
             expect(body).to match(/^### Summary\n\nSomething/m)
           end
         end
+
+        context 'there are bad encodings' do
+          bad_abstract_solutions =
+            JSON.parse(
+              File.read('spec/fixtures/service-results/duff-abstracts.json')
+            ).dig('results', 'bindings')
+
+          bad_abstract_solutions.each do |binding|
+            output         = binding.dig('output', 'value')
+            abstract_value = binding.dig('abstract', 'value')
+
+            context "Output #{output}" do
+              let(:abstract) { abstract_value }
+
+              before do
+                allow(solution_hash).to receive(:[]).with(:abstract).and_return(abstract)
+              end
+
+              it "does not throw a RangeError (or any error)" do
+                expect { doc.abstract }.not_to raise_error
+              end
+            end
+          end
+        end
       end
 
       describe '#creators' do

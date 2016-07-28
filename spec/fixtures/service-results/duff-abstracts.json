@@ -1,0 +1,60 @@
+{
+  "head": {
+    "vars": [ "output" , "date" , "type" , "abstract" , "title" , "citation" , "peerReviewed" , "creators" , "countryCodes" , "uris" , "themes" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "output": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/Output/190756/" } ,
+        "date": { "type": "literal" , "value": "2012-01-01T00:00:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Journal%20Article" } ,
+        "abstract": { "type": "literal" , "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "value": " Twenty-one yellow-fleshed cassava genotypes were evaluated over two years in five major cassava growing agroecological zones in Nigeria. The trials were established in a randomized complete block design with four replications to assess genotype performance and Genotype × Environment interaction for cassava mosaic disease (CMD), fresh and dry root yield (FYLD; DYLD), root dry matter content (DMC), and total carotene concentration (TCC). Combined analysis of variance showed significant differences ( &amp;amp;#55349;&amp;amp;#56387; &amp;amp;lt; 0.001 ) among genotypes (G), environment (E), and Genotype × Environment interaction (GE) for all the traits tested. For reaction to CMD, the best genotypes showing stable resistance were TMS 07/0539 and TMS 07/0628. For root yield, the best genotypes were TMS 01/1368 and TMS 07/0553. Genotype TMS 07/0593 was the best for DMC and TCC across the 10 environments. Variation among genotypes accounted for most of the Total Sum of Squares for CMD (72.1%) and TCC (34.4%). Environmental variation accounted for most of the Total Sum of Squares for FYLD (42.8%), DYLD (39.6%), and DMC (29.2%). This study revealed that TMS 07/0593 has the highest and most stable TCC, DMC with the lowest CMD severity score and appeared to be the best genotype. " } ,
+        "title": { "type": "literal" , "value": " Genotype x Environment Interaction of Mosaic Disease, Root Yields and Total Carotene Concentration of Yellow-Fleshed Cassava in Nigeria " } ,
+        "citation": { "type": "literal" , "value": " Maroya, N.G.; Kulakow, P.; Dixon, A.G.O.; Maziya-Dixon, B.B. &lt;b&gt;Genotype × Environment Interaction of Mosaic Disease, Root Yields and Total Carotene Concentration of Yellow-Fleshed Cassava in Nigeria.&lt;/b&gt; International Journal of Agronomy (2012) 2012: Article ID 434675. [DOI: 10.1155/2012/434675] " } ,
+        "peerReviewed": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" } ,
+        "creators": { "type": "literal" , "value": " Dixon, A.G.O. | Kulakow, P. | Maroya, N.G. | Maziya-Dixon, B.B. " } ,
+        "countryCodes": { "type": "literal" , "value": "NG" } ,
+        "uris": { "type": "literal" , "value": "http://dx.doi.org/10.1155/2012/434675" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Agriculture" }
+      } ,
+      {
+        "output": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/Output/180523/" } ,
+        "date": { "type": "literal" , "value": "2009-01-01T00:00:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Conference%20Paper" } ,
+        "abstract": { "type": "literal" , "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "value": " Chair of the CCAA programme Mbareck Diop highlighted the work of CCAA during a panel on environmental vulnerability, migration, peace and stability at the Italy-Africa conference on 21 April 2009. The presentation outline is: &amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;Definitional clarity \u2013what do we mean by human mobility?&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Vulnerability as the main driver to human mobility&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;The African continent and climate change&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Links between climate change, human mobility and environmental degradation&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Building adaptive capacity and resilience \u2013CCAA\u2019s action research strategy, objectives, &amp;amp; responses&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Concluding Remarks. " } ,
+        "title": { "type": "literal" , "value": " The connections between environmental vulnerability and mobility. " } ,
+        "citation": { "type": "literal" , "value": " Presentation at 'Climate Change and Human Mobility on Africa Dialogue for a strategic cooperation between Italy and Africa'. International Conference towards the G8 Summit, Rome, Italy, 21 April 2009. 23 pp. " } ,
+        "peerReviewed": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" } ,
+        "creators": { "type": "literal" , "value": " Diop, M. " } ,
+        "uris": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/PDF/Outputs/ClimateChange/60055-Diop.pdf" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment" }
+      } ,
+      {
+        "output": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/Output/176870/" } ,
+        "date": { "type": "literal" , "value": "2007-01-01T00:00:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Manual" } ,
+        "abstract": { "type": "literal" , "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "value": " Following an introduction (Chapter 1), this document outlines the objectives of the guideline, and its intended target audience (Chapter 2) and summarises the pavement options (Chapter 3). The main body of the document then comprises a series of technical chapters (Chapters 4-8) relating directly to specific RRST [Rural Road Surfacing Trials] pavement options and their specifications, grouped as follows:&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Surface seals&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Stabilised bases and sub-bases&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Non stabilised bases and sub-bases&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Block pavement options&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56451; Cement Concrete pavements&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;A final chapter (Chapter 9) deals with key shoulder construction issues, which influence the integrity and performance of the actual road pavements. Following these main chapters the document contains three important appendices. The first contains a series of illustrated guides to key construction issues for the RRDST pavement options. The second highlights some fundamental issues relating to site supervision and construction quality control, whilst the third contains a series of standard site forms developed and used during the RRST construction phases. " } ,
+        "title": { "type": "literal" , "value": " SEACAP 1. RRST Guidelines: Rural road pavement construction. " } ,
+        "citation": { "type": "literal" , "value": " Intech Associates; TRL. &lt;b&gt;SEACAP 1. RRST Guidelines: Rural road pavement construction.&lt;/b&gt; (2007) 118 pp. " } ,
+        "peerReviewed": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" } ,
+        "creators": { "type": "literal" , "value": " TRL | Intech Associates " } ,
+        "countryCodes": { "type": "literal" , "value": "VN" } ,
+        "uris": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/PDF/Outputs/SeaCap/RRST-ConstructionGuidelines.pdf" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" }
+      } ,
+      {
+        "output": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/Output/176873/" } ,
+        "date": { "type": "literal" , "value": "2006-01-01T00:00:00" } ,
+        "type": { "type": "uri" , "value": "http://r4d.dfid.gov.uk/rdf/skos/DocumentTypes#Technical%20Report" } ,
+        "abstract": { "type": "literal" , "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral" , "value": " The Cambodia Transport Mainstreaming Partnership (TMP) is a research, knowledge generation, dissemination and mainstreaming initiative for the rural transport sector. It is being carried out for, and with the involvement of, the Royal Government of Cambodia (RGC) in pursuit of their development and poverty reduction strategies.&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;The SEACAP 2 initiative was designed to include the following components:-&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;Output 1 - Operational Transport Mainstreaming Partnership&amp;lt;br/&amp;gt;Output 2 - Knowledge Products&amp;lt;br/&amp;gt;Output 3 - Practical Demonstration&amp;lt;br/&amp;gt;Output 4 - Website&amp;lt;br/&amp;gt;Output 5 - Policy, Standards and Procedures&amp;lt;br/&amp;gt;Output 6 - Improved Road Maintenance&amp;lt;br/&amp;gt;Output 7 - Training Courses&amp;lt;br/&amp;gt;Output 8 - Training Needs Assessment and Delivery (Human Resources Development Strategy)&amp;lt;br/&amp;gt;Output 9 - Improvement of Road Safety&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;The activities and outputs relating to the various TMP components are described in this Final Report. The Key Outputs are:&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Operational transport sector forum (CNCTP)&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Operational website and electronic library of key sector documents&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Interim Rural Road Standards&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; National workshops on key topics&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; International Rural Transport Seminar in association with the World Road Association&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Review or guidance documents on Human Resources Development, Road Safety, Road Surfacing and Road Maintenance.&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Concept for a Transport Infrastructure Management system (TIM)&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; Concept for a Poverty Impact Audit System (PIAS)&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56457; BBC television World Service documentary transmission as part of the \"Earth Report\" series. " } ,
+        "title": { "type": "literal" , "value": " SEACAP 2. Cambodia Transport Mainstreaming Partnership. Final Report. " } ,
+        "citation": { "type": "literal" , "value": " Intech Associates; TRL. &lt;b&gt;SEACAP 2. Cambodia Transport Mainstreaming Partnership. Final Report.&lt;/b&gt; (2006) 46 pp. " } ,
+        "peerReviewed": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" } ,
+        "creators": { "type": "literal" , "value": " TRL | Intech Associates " } ,
+        "countryCodes": { "type": "literal" , "value": "KH" } ,
+        "uris": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/PDF/Outputs/SeaCap/SEACAP2-FINALReport-a.pdf" } ,
+        "themes": { "type": "literal" , "value": "http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure" }
+      }
+    ]
+  }
+}

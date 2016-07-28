@@ -37,6 +37,43 @@ module DfidTransition::Transform
       end
     end
 
+    describe '.fix_encoding_errors' do
+      subject(:fixed_html) { Html.fix_encoding_errors(string_input) }
+
+      context 'output 190756 is trying to say p < 0.001' do
+        let(:string_input) do
+          "Combined analysis of variance showed significant differences "\
+          "( &amp;amp;#55349;&amp;amp;#56387; &amp;amp;lt; 0.001 ) among genotypes (G), ..."
+        end
+
+        it 'resolves to a p' do
+          expect(fixed_html).to include('( p &amp;amp;lt; 0.001 )')
+        end
+      end
+
+      context 'output 180523 (and the others) look like a list' do
+        let(:string_input) do
+          "The presentation outline is: &amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;Definitional clarity \u2013what do we mean by human mobility?&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Vulnerability as the main driver to human mobility&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;The African continent and climate change&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Links between climate change, human mobility and environmental degradation&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Building adaptive capacity and resilience \u2013CCAA\u2019s action research strategy, objectives, &amp;amp; responses&amp;lt;br/&amp;gt; &amp;amp;#56256;&amp;amp;#56457;Concluding Remarks. "
+        end
+
+        it 'resolves to a list' do
+          expect(fixed_html).not_to include('&amp;amp;#56256;&amp;amp;#56457')
+          expect(fixed_html).to include('* ')
+        end
+      end
+
+      context 'output 176870 looks like a list' do
+        let(:string_input) do
+          "as follows:&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Surface seals&amp;lt;br/&amp;gt;&amp;amp;#56256;&amp;amp;#56451; Stabilised bases and sub-bases&amp;lt;br/&amp;gt;"
+        end
+
+        it 'resolves to a list' do
+          expect(fixed_html).not_to include('&amp;amp;#56256;&amp;amp;#56451;')
+          expect(fixed_html).to include('* ')
+        end
+      end
+    end
+
     describe '.to_markdown' do
       subject(:markdown) do
         Html.to_markdown(string_input)
