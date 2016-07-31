@@ -75,11 +75,11 @@ module DfidTransition
       end
 
       def first_published_at
-        solution[:date].to_s
+        solution[:date].to_s.sub(/T.*$/, '')
       end
 
       def public_updated_at
-        solution[:date].to_s
+        solution[:date].to_s + 'Z'
       end
 
       def countries
