@@ -94,12 +94,16 @@ module DfidTransition::Transform
         end
       end
 
-      it 'has a public_updated_at' do
-        expect(doc.public_updated_at).to eql('2016-04-28T09:52:00')
+      it 'has a public_updated_at that conforms to RFC3339' do
+        rfc3339 = /^([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])[Tt]([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)(\.[0-9]+)?(([Zz])|([\+|\-]([01][0-9]|2[0-3]):[0-5][0-9]))$/
+        expect(doc.public_updated_at).to match(rfc3339)
+        expect(doc.public_updated_at).to eql('2016-04-28T09:52:00Z')
       end
 
-      it 'has a first_published_at date' do
-        expect(doc.first_published_at).to eql('2016-04-28T09:52:00')
+      it 'has a first_published_at date that conforms to schema' do
+        schema_pattern = %r(^[1-9][0-9]{3}[-/](0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[0-1])$)
+        expect(doc.first_published_at).to match(schema_pattern)
+        expect(doc.first_published_at).to eql('2016-04-28')
       end
 
       describe '#peer_reviewed' do
