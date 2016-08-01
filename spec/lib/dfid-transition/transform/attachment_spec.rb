@@ -98,7 +98,7 @@ module DfidTransition::Transform
           end
           context 'for nothing in particular' do
             let(:original_url) { 'http://r4d.dfid.gov.uk/erk' }
-            example { expect(attachment.to_json[:content_type]).to eql('application/octet-stream')}
+            example { expect(attachment.to_json[:content_type]).to eql('application/octet-stream') }
           end
         end
       end

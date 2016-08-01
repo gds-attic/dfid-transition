@@ -78,7 +78,6 @@ module DfidTransition::Transform
           expect(attachments.first.title).to eql(document_title)
         end
       end
-
     end
   end
 end
