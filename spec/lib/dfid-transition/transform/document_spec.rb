@@ -9,6 +9,8 @@ module DfidTransition::Transform
     subject(:doc) { Document.new(solution) }
 
     context 'a solution that behaves like a hash is given' do
+      let(:uris) { literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf') }
+
       AN_R4D_OUTPUT_URL = 'http://r4d.dfid.gov.uk/Output/5050/Default.aspx'.freeze
 
       let(:original_url)  { AN_R4D_OUTPUT_URL }
@@ -28,7 +30,7 @@ module DfidTransition::Transform
             '&amp;lt;p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Hello&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;/p&amp;gt;'\
             '&amp;lt;/p&amp;gt;'),
           countryCodes: literal('AZ GB'),
-          uris:         literal('http://r4d.dfid.gov.uk/pdfs/some.pdf http://example.com/offsite.pdf'),
+          uris:         uris,
           themes:       literal(
             'http://r4d.dfid.gov.uk/rdf/skos/Themes#Infrastructure '\
             'http://r4d.dfid.gov.uk/rdf/skos/Themes#Climate%20and%20Environment'
@@ -232,11 +234,47 @@ module DfidTransition::Transform
         it 'corrects non-standard HTML – the list is separate' do
           expect(body).to include("\n* Hello")
         end
-        it 'has the onsite link' do
-          expect(body).to include('[InlineAttachment:some.pdf]')
-        end
         it 'has the offsite link' do
           expect(body).to include('[offsite.pdf](http://example.com/offsite.pdf)')
+        end
+        it 'has the attachments as a list' do
+          expect(body).to include(
+            "* [InlineAttachment:some.pdf]\n* [offsite.pdf](http://example.com/offsite.pdf)")
+        end
+
+        context 'there is only one attachment' do
+          context 'an onsite link' do
+            let(:uris) { literal('http://r4d.dfid.gov.uk/filename.pdf') }
+
+            it 'does not appear as a list and its title is that of the document' do
+              expect(body).to include('[InlineAttachment:filename.pdf]')
+              expect(body).not_to match(/\* \[InlineAttachment/)
+            end
+          end
+
+          context 'an offsite link' do
+            let(:uris) { literal('http://www.e-elgar.com/shop/handbook-of-international-development-and-education') }
+
+            it 'does not appear as a list and its title is that of the document' do
+              expect(body).to match(/\[‘And Then He Switched off the Phone’.*\]/)
+              expect(body).not_to match(/\* \[‘And Then/)
+            end
+          end
+
+          ##
+          # 'Bumph' is defined as "the same summary and attachment hosted elsewhere, e.g.
+          # dx.doi.org or gsdrc.org"
+          context 'there are bumph attachments' do
+            let(:uris) {
+              'http://dx.doi.org/10.12774/eod_hd.march2016.agarwaletal '\
+              'http://r4d.dfid.gov.uk/pdfs/EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf'
+            }
+
+            it 'eliminates the bumph' do
+              expect(body).to include('[InlineAttachment:EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf]')
+              expect(body).not_to match(/\* \[InlineAttachment/)
+            end
+          end
         end
 
         context 'the abstract is blank' do

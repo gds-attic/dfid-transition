@@ -29,8 +29,15 @@ module DfidTransition::Transform
         expect(attachment.snippet).to eql('[file.pdf](http://example.com/some/file.pdf)')
       end
 
+      context 'the title is set' do
+        before { attachment.title = 'Zootopia' }
+        it 'renders the title in the #snippet' do
+          expect(attachment.snippet).to eql('[Zootopia](http://example.com/some/file.pdf)')
+        end
+      end
+
       describe '#to_json' do
-        it 'should never be called for an external link' do
+        it 'is never called for an external link' do
           expect { attachment.to_json }.to raise_error(
             RuntimeError, '#to_json is not valid for an external link')
         end
@@ -91,7 +98,7 @@ module DfidTransition::Transform
           end
           context 'for nothing in particular' do
             let(:original_url) { 'http://r4d.dfid.gov.uk/erk' }
-            example { expect(attachment.to_json[:content_type]).to eql('application/octet-stream')}
+            example { expect(attachment.to_json[:content_type]).to eql('application/octet-stream') }
           end
         end
       end
@@ -154,6 +161,20 @@ module DfidTransition::Transform
       context 'no path at all' do
         let(:original_url) { 'http://example.com/' }
         example { expect(attachment.filename).to be_empty }
+      end
+    end
+
+    describe '#title' do
+      context 'a filename with an extension' do
+        let(:original_url) { 'http://example.com/some/path/title_of_the_file.pdf' }
+        it 'is the same as the filename' do
+          expect(attachment.title).to eql(attachment.filename)
+        end
+
+        it 'can be set to something else' do
+          attachment.title = 'something else'
+          expect(attachment.title).to eql('something else')
+        end
       end
     end
 

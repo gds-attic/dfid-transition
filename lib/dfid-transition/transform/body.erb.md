@@ -10,6 +10,10 @@
 
 ## Links
 
+<% if attachments.one? %>
+<%= attachments.first.snippet %>
+<% else %>
 <% attachments.each do |attachment| %>
-<%= attachment.snippet %>
+* <%= attachment.snippet %>
+<% end %>
 <% end %>
