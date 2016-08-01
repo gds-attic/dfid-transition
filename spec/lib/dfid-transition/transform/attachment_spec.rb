@@ -91,7 +91,7 @@ module DfidTransition::Transform
           end
           context 'for nothing in particular' do
             let(:original_url) { 'http://r4d.dfid.gov.uk/erk' }
-            example { expect(attachment.to_json[:content_type]).to be nil }
+            example { expect(attachment.to_json[:content_type]).to eql('application/octet-stream')}
           end
         end
       end
@@ -117,6 +117,14 @@ module DfidTransition::Transform
           expect(attachment.file).to be_a(File)
           expect(attachment.file.read).to eql(pdf_content)
         end
+      end
+    end
+
+    context 'given an extensionless URL that will probably 404 anyway' do
+      let(:original_url) { 'http://r4d.dfid.gov.uk/pdf/outputs/FutureHealth_RPC/FHS_KMB#2_ResearchProg_Online.pdf' }
+
+      it 'is assumed to be application/octet-stream to satisfy the schema' do
+        expect(attachment.send(:content_type)).to eql('application/octet-stream')
       end
     end
 
