@@ -2,7 +2,7 @@ require 'securerandom'
 require 'cgi'
 require 'govuk/presenters/govspeak'
 require 'dfid-transition/transform/html'
-require 'dfid-transition/transform/attachment'
+require 'dfid-transition/transform/attachment_collection'
 require 'dfid-transition/transform/themes'
 require 'active_support/core_ext/string/strip'
 require 'active_support/core_ext/string/inflections'
@@ -127,24 +127,16 @@ module DfidTransition
           change_history: change_history
         }.tap do |details_hash|
           details_hash[:headers]     = headers
-          details_hash[:attachments] = downloads.map(&:to_json) if attachments
+          details_hash[:attachments] = attachments.downloads.map(&:to_json) if attachments
         end
       end
 
       def attachments
-        @attachments ||= begin
-          uris = solution[:uris].to_s.split(' ')
-          new_attachments = uris.map { |uri| Attachment.new(uri) }
-
-          hosted_at_r4d = new_attachments.select(&:hosted_at_r4d?)
-          hosted_at_r4d.first.title = title if hosted_at_r4d.count == 1
-
-          new_attachments
-        end
+        @attachments ||= AttachmentCollection.from_uris(solution[:uris].to_s).normalize!(title)
       end
 
       def downloads
-        attachments.select(&:hosted_at_r4d?)
+        attachments.downloads
       end
 
       def async_download_attachments

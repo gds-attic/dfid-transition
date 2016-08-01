@@ -29,8 +29,15 @@ module DfidTransition::Transform
         expect(attachment.snippet).to eql('[file.pdf](http://example.com/some/file.pdf)')
       end
 
+      context 'the title is set' do
+        before { attachment.title = 'Zootopia' }
+        it 'renders the title in the #snippet' do
+          expect(attachment.snippet).to eql('[Zootopia](http://example.com/some/file.pdf)')
+        end
+      end
+
       describe '#to_json' do
-        it 'should never be called for an external link' do
+        it 'is never called for an external link' do
           expect { attachment.to_json }.to raise_error(
             RuntimeError, '#to_json is not valid for an external link')
         end

@@ -65,7 +65,7 @@ module DfidTransition
       def snippet
         case
         when hosted_at_r4d? then "[InlineAttachment:#{title}]"
-        when external_link? then "[#{filename}](#{original_url})"
+        when external_link? then "[#{title}](#{original_url})"
         end
       end
 
