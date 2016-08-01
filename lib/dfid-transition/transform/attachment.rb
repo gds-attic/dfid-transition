@@ -93,7 +93,11 @@ module DfidTransition
 
       def content_type
         mime = MIME::Types.type_for(filename).first
-        mime.content_type if mime
+        if mime
+          mime.content_type
+        else
+          'application/octet-stream'
+        end
       end
 
       def asset_response
