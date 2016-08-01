@@ -64,7 +64,7 @@ module DfidTransition
 
       def snippet
         case
-        when hosted_at_r4d? then "[InlineAttachment:#{title}]"
+        when hosted_at_r4d? then "[InlineAttachment:#{filename}]"
         when external_link? then "[#{title}](#{original_url})"
         end
       end
@@ -86,7 +86,7 @@ module DfidTransition
 
         {
           url:          asset_response.file_url,
-          title:        filename,
+          title:        title,
           content_type: content_type,
           updated_at:   Time.now.to_datetime.rfc3339,
           created_at:   Time.now.to_datetime.rfc3339,

@@ -25,6 +25,16 @@ module Govuk
           body.gsub(attachment.snippet, attachment.link_to_asset)
         end
       end
+
+      # def govspeak_body_with_expanded_attachment_links
+      #   document.attachments.reduce(govspeak_body) { |body, attachment|
+      #     body.gsub(attachment.snippet, attachment_markdown(attachment))
+      #   }
+      # end
+      #
+      # def attachment_markdown(attachment)
+      #   "[#{attachment.title}](#{attachment.url})"
+      # end
     end
   end
 end

@@ -244,10 +244,10 @@ module DfidTransition::Transform
 
         context 'there is only one attachment' do
           context 'an onsite link' do
-            let(:uris) { literal('http://r4d.dfid.gov.uk/wont_be_seen.pdf') }
+            let(:uris) { literal('http://r4d.dfid.gov.uk/filename.pdf') }
 
             it 'does not appear as a list and its title is that of the document' do
-              expect(body).to match(/\[InlineAttachment:‘And Then He Switched off the Phone’.*\]/)
+              expect(body).to include('[InlineAttachment:filename.pdf]')
               expect(body).not_to match(/\* \[InlineAttachment/)
             end
           end
@@ -271,7 +271,7 @@ module DfidTransition::Transform
             }
 
             it 'eliminates the bumph' do
-              expect(body).to match(/\[InlineAttachment:‘And Then He Switched off the Phone’.*\]/)
+              expect(body).to include('[InlineAttachment:EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf]')
               expect(body).not_to match(/\* \[InlineAttachment/)
             end
           end
