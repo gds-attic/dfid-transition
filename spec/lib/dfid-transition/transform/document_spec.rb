@@ -265,14 +265,27 @@ module DfidTransition::Transform
           # 'Bumph' is defined as "the same summary and attachment hosted elsewhere, e.g.
           # dx.doi.org or gsdrc.org"
           context 'there are bumph attachments' do
-            let(:uris) {
-              'http://dx.doi.org/10.12774/eod_hd.march2016.agarwaletal '\
+            context 'for dx.doi.org' do
+              let(:uris) {
+                'http://dx.doi.org/10.12774/eod_hd.march2016.agarwaletal '\
               'http://r4d.dfid.gov.uk/pdfs/EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf'
-            }
+              }
 
-            it 'eliminates the bumph' do
-              expect(body).to include('[InlineAttachment:EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf]')
-              expect(body).not_to match(/\* \[InlineAttachment/)
+              it 'eliminates the bumph' do
+                expect(body).to include('[InlineAttachment:EoD_HDYr3_21_40_March_2016_Disability_Infrastructure.pdf]')
+                expect(body).not_to match(/\* \[InlineAttachment/)
+              end
+            end
+            context 'for gsdrc.org' do
+              let(:uris) {
+                'http://www.gsdrc.org/docs/open/HDQ1005.pdf '\
+                'http://r4d.dfid.gov.uk/pdf/outputs/GovPEAKS/hdq1005.pdf'
+              }
+
+              it 'eliminates the bumph' do
+                expect(body).to include('[InlineAttachment:hdq1005.pdf]')
+                expect(body).not_to match(/\* \[InlineAttachment/)
+              end
             end
           end
         end
