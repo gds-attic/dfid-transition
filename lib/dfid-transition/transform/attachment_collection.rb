@@ -20,12 +20,21 @@ module DfidTransition
       end
 
       ##
+      # If one URI encountered with an r4d URI, is most often duplicate content
+      BUMPH_DOMAINS = %w(dx.doi.org gsdrc.org).map { |domain| Regexp.new(domain) }
+      def bumph_links
+        @attachments.select do |a|
+          BUMPH_DOMAINS.any? { |domain| a.original_url.host.match(domain) }
+        end || []
+      end
+
+      ##
       # Sets the title of attachment(s) where able
       def normalize!(document_title)
         case
         when count == 1
           @attachments.first.title = document_title if @attachments.one?
-        when count == 2 && one_r4d_one_bumph?
+        when one_r4d_one_bumph?
           @attachments = @attachments.reject(&:external_link?)
           @attachments.first.title = document_title
         end
@@ -33,8 +42,9 @@ module DfidTransition
       end
 
       def one_r4d_one_bumph?
-        @attachments.detect { |a| a.original_url.host =~ /dx\.doi\.org/ } &&
-          Set.new(@attachments.map(&:hosted_at_r4d?)) == Set.new([false, true])
+        @attachments.count == 2 &&
+          bumph_links.count == 1 &&
+          downloads.count == 1
       end
 
       def self.from_uris(uris)
