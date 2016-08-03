@@ -25,7 +25,7 @@ module DfidTransition
           doc = DfidTransition::Transform::Document.new(solution)
           doc.disambiguate! if @slug_collision_index.collides?(doc.slug)
 
-          @output.puts "#{doc.original_url},https://gov.uk#{doc.base_path}\n"
+          @output.puts "#{doc.original_url},https://www.gov.uk#{doc.base_path}\n"
 
           doc.downloads.each do |download|
             existing_details = @attachment_index.get(download.original_url.to_s)

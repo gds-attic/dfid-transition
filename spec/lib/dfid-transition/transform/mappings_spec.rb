@@ -50,9 +50,9 @@ describe DfidTransition::Transform::Mappings do
         expect(stdout).to have_received(:puts).with("Old URL, New URL\n")
       end
 
-      it 'has a mapping from the old to the new document URL' do
+      it 'has a mapping from the old to the new document URL with www' do
         expect(stdout).to have_received(:puts).with(
-          "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://gov.uk/dfid-research-outputs/this-is-the-title\n"
+          "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://www.gov.uk/dfid-research-outputs/this-is-the-title\n"
         )
       end
 
@@ -81,7 +81,7 @@ describe DfidTransition::Transform::Mappings do
 
         it 'outputs the disambiguated URL' do
           expect(stdout).to have_received(:puts).with(
-            "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://gov.uk/dfid-research-outputs/this-is-the-title-5050\n"
+            "http://r4d.dfid.gov.uk/Output/5050/Default.aspx,https://www.gov.uk/dfid-research-outputs/this-is-the-title-5050\n"
           )
         end
       end
