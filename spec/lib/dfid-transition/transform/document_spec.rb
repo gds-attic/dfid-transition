@@ -332,25 +332,68 @@ module DfidTransition::Transform
           end
         end
 
-        context 'there are bad encodings' do
-          bad_abstract_solutions =
-            JSON.parse(
-              File.read('spec/fixtures/service-results/duff-abstracts.json')
-            ).dig('results', 'bindings')
+        context 'there is trouble in the abstract' do
+          before do
+            allow(solution_hash).to receive(:[]).with(:abstract).and_return(abstract)
+          end
 
-          bad_abstract_solutions.each do |binding|
-            output         = binding.dig('output', 'value')
-            abstract_value = binding.dig('abstract', 'value')
+          context 'there are linked-development output hrefs in the abstract' do
+            let(:abstract) do
+              <<-BAD_HTML.strip_heredoc
+                See also the document record for the meeting website
+                &amp;lt;a href="http://linked-development.org/r4d/output/65132"&amp;gt;Moving
+                Beyond Research to Influence Policy Workshop, University of Southampton, 23-24 January 2001.
+                &amp;lt;/a&amp;gt; which provides the links to the presentations made at the meeting.
+              BAD_HTML
+            end
 
-            context "Output #{output}" do
-              let(:abstract) { abstract_value }
+            let(:govuk_url) do
+              'https://gov.uk/dfid-research-outputs/moving-beyond-research'\
+              '-to-influence-policy-workshop-university-of-southampton-23-24-january-2001'
+            end
 
-              before do
-                allow(solution_hash).to receive(:[]).with(:abstract).and_return(abstract)
-              end
+            it 'replaces the LD URI with the gov.uk' do
+              expect(doc.abstract).not_to include('linked-development')
+              expect(doc.abstract).to include(govuk_url)
+            end
+          end
 
-              it "does not throw a RangeError (or any error)" do
-                expect { doc.abstract }.not_to raise_error
+          context 'there are linked-development project hrefs in the abstract' do
+            let(:abstract) do
+              <<-BAD_HTML.strip_heredoc
+                This paper reports on two action research projects conducted in Nepal, India and Kyrgyzstan
+                between 2002 and 2005
+                (&amp;lt;a href="http://linked-development.org/r4d/project/2980"&amp;gt;R8023: Guidelines for Good Governance&amp;lt;/a&amp;gt;,
+                and &amp;lt;a href="http://linked-development.org/r4d/project/3730"&amp;gt;R8338: Equity, Irrigation and Poverty&amp;lt;/a&amp;gt;).
+              BAD_HTML
+            end
+
+            it 'removes the link completely' do
+              expect(doc.abstract).not_to include('linked-development')
+            end
+
+            it 'keeps the text of both' do
+              expect(doc.abstract).to include('R8023: Guidelines for Good Governance')
+              expect(doc.abstract).to include('R8338: Equity, Irrigation and Poverty')
+            end
+          end
+
+          context 'there are bad encodings' do
+            bad_abstract_solutions =
+              JSON.parse(
+                File.read('spec/fixtures/service-results/duff-abstracts.json')
+              ).dig('results', 'bindings')
+
+            bad_abstract_solutions.each do |binding|
+              output         = binding.dig('output', 'value')
+              abstract_value = binding.dig('abstract', 'value')
+
+              context "Output #{output}" do
+                let(:abstract) { abstract_value }
+
+                it "does not throw a RangeError (or any error)" do
+                  expect { doc.abstract }.not_to raise_error
+                end
               end
             end
           end

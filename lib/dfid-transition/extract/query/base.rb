@@ -16,7 +16,7 @@ module DfidTransition
       class Base
         attr_reader :options
 
-        def initialize(options = {})
+        def initialize(options = { method: :get })
           @client = options[:client]
           @options = options
         end
@@ -36,7 +36,7 @@ module DfidTransition
       private
 
         def client
-          @client ||= SPARQL::Client.new(endpoint, method: :get)
+          @client ||= SPARQL::Client.new(endpoint, method: options[:method])
         end
       end
     end
