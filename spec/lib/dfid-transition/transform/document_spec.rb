@@ -354,7 +354,7 @@ module DfidTransition::Transform
 
             it 'replaces the LD URI with the gov.uk' do
               expect(doc.abstract).not_to include('linked-development')
-              expect(doc.abstract).to include("#{govuk_url}")
+              expect(doc.abstract).to include(govuk_url)
             end
           end
 

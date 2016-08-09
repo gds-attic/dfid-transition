@@ -5,7 +5,6 @@ require 'dfid-transition/services'
 require 'nokogiri'
 
 namespace :list do
-
   def linked_development_urls(abstract)
     fragment = Nokogiri::HTML.fragment(
       Html.unescape_three_times(
@@ -13,9 +12,10 @@ namespace :list do
       )
     )
 
-    fragment.css('a').select { |a| a['href'] =~ /linked-development/ }.map do |a|
+    anchors = fragment.css('a').select { |a| a['href'] =~ /linked-development/ }.map do |a|
       a['href']
-    end.uniq
+    end
+    anchors.uniq
   end
 
   def canonicalize(linked_development_url)
@@ -32,14 +32,14 @@ namespace :list do
 
     query = DfidTransition::Extract::Query::AbstractsWithLinkedDevelopment.new
 
-    urls = query.solutions.each_with_object([]) do |solution, urls|
+    output_urls = query.solutions.each_with_object([]) do |solution, urls|
       linked_development_urls(solution[:abstract].to_s).each do |linked_development_url|
         urls << canonicalize(linked_development_url)
       end
-    end.uniq
+    end
+    output_urls = output_urls.uniq
 
-
-    referenced_outputs = DfidTransition::Extract::Query::OutputsByUri.new(output_uris: urls, method: :post)
+    referenced_outputs = DfidTransition::Extract::Query::OutputsByUri.new(output_uris: output_urls, method: :post)
 
     puts '{'
     referenced_outputs.solutions.each do |solution|
@@ -50,14 +50,13 @@ namespace :list do
     puts '}'
   end
 
-  desc 'list the URIs of things that use LD links'
+  desc 'list the URIs/abstracts of things that use LD links'
   task :abstracts_referencing_ld do
     query = DfidTransition::Extract::Query::AbstractsWithLinkedDevelopment.new
 
     query.solutions.each do |solution|
       puts solution[:abstract].to_s
       puts "\n*********************************************************************\n"
-
     end
   end
 end
