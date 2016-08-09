@@ -1,6 +1,7 @@
 require 'cgi'
 require 'kramdown'
 require 'nokogiri'
+require 'dfid-transition/services/lookup_govuk_url_from_badr4d'
 
 module DfidTransition
   module Transform
@@ -15,7 +16,10 @@ module DfidTransition
 
       def self.to_markdown(html)
         fragment = Nokogiri::HTML.fragment(html)
-        corrected_html = expand_h3s(fragment)
+        corrected_html =
+          replace_linked_development_hrefs(
+            expand_h3s(fragment)
+          ).to_s
 
         kramdown_tree, _warnings = Kramdown::Parser::Html.parse(corrected_html)
         Kramdown::Converter::Kramdown.convert(kramdown_tree).first
@@ -44,7 +48,25 @@ module DfidTransition
           node.add_previous_sibling('<br/><br/>')
           node.next_sibling.content = node.next_sibling.content.sub(/^\s*/, '')
         end
-        frag.to_s
+        frag
+      end
+
+      def self.replace_linked_development_hrefs(frag)
+        frag = Nokogiri::HTML.fragment(frag) unless frag.is_a?(Nokogiri::HTML::DocumentFragment)
+
+        linked_development_anchors = frag.css('a').select { |a| a['href'] =~ /linked-development/ }
+        linked_development_anchors.each do |a|
+          href = a['href']
+          case href
+          when /output/
+            new_govuk_url = DfidTransition::Services::LookupGovukUrlFromBadr4d[href]
+            a['href'] = new_govuk_url if new_govuk_url
+          when /project/
+            a.replace(a.text)
+          end
+        end
+
+        frag
       end
     end
   end

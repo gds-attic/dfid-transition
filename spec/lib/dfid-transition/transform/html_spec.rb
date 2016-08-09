@@ -126,8 +126,8 @@ module DfidTransition::Transform
     end
 
     describe '.expand_h3s' do
-      subject(:result) do
-        Html.expand_h3s(abstract)
+      subject(:result_as_str) do
+        Html.expand_h3s(abstract).to_s
       end
 
       context 'Query, Summary, Key findings are b or strong' do
@@ -144,12 +144,12 @@ module DfidTransition::Transform
         end
 
         it 'expands query and summary to h3' do
-          expect(result).to include('<h3>Query</h3>')
-          expect(result).to include('<h3>Summary</h3>')
+          expect(result_as_str).to include('<h3>Query</h3>')
+          expect(result_as_str).to include('<h3>Summary</h3>')
         end
 
         it 'expands key findings to h3' do
-          expect(result).to include('<h3>Key Findings</h3>')
+          expect(result_as_str).to include('<h3>Key Findings</h3>')
         end
       end
     end
