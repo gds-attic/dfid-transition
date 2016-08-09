@@ -5,7 +5,6 @@ require 'dfid-transition/services'
 require 'nokogiri'
 
 namespace :list do
-  desc 'List abstracts with malformed list'
 
   def linked_development_urls(abstract)
     fragment = Nokogiri::HTML.fragment(
@@ -39,6 +38,7 @@ namespace :list do
       end
     end.uniq
 
+
     referenced_outputs = DfidTransition::Extract::Query::OutputsByUri.new(output_uris: urls, method: :post)
 
     puts '{'
@@ -48,5 +48,16 @@ namespace :list do
       puts "  'http://linked-development.org/r4d/output/#{doc.original_id}/' => 'https://gov.uk#{doc.base_path}',"
     end
     puts '}'
+  end
+
+  desc 'list the URIs of things that use LD links'
+  task :abstracts_referencing_ld do
+    query = DfidTransition::Extract::Query::AbstractsWithLinkedDevelopment.new
+
+    query.solutions.each do |solution|
+      puts solution[:abstract].to_s
+      puts "\n*********************************************************************\n"
+
+    end
   end
 end
