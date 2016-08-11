@@ -397,6 +397,31 @@ module DfidTransition::Transform
               end
             end
           end
+
+          context 'there are malformed lists (without a line-break)' do
+            context 'ul' do
+              let :abstract do
+                <<-BAD_HTML
+                &amp;lt;b&amp;gt;Query:&amp;lt;/b&amp;gt; What is the evidence on:&amp;lt;br/&amp;gt; &amp;lt;ul&amp;gt;&amp;amp;#61623;&amp;lt;li&amp;gt; how best to promote effective national capacities to conduct learning assessments?&amp;lt;/li&amp;gt; &amp;amp;#61623;&amp;lt;li&amp;gt; to what extent participation in international learning assessments has built national capacities to design, implement and make use of national assessments?&amp;lt;/li&amp;gt; &amp;amp;#61623;&amp;lt;li&amp;gt; participation in international learning assessments having an impact on political decisions, policy-making and teaching practices in countries?&amp;lt;/li&amp;gt; &amp;amp;#61623;&amp;lt;li&amp;gt; the consequences of focusing assessment of learning on language (reading), numeracy/maths and science?&amp;lt;/li&amp;gt; &amp;amp;#61623;&amp;lt;li&amp;gt; the circumstances and actions required to ensure learning assessments (both national and country participation in international assessments) promote and secure improvements in learning achievement?&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;br/&amp;gt;&amp;lt;b&amp;gt;Summary:&amp;lt;/b&amp;gt; This helpdesk report provides a rapid analysis of evidence of the role of large-scale learning assessments (LSEAs) in education systems in low- and middle-income countries. It is divided into five principal sections, each associated with one of the 5 sub-queries set out above. The information and analysis is supplemented by a number of Annexes detailing specific approaches to learning assessment design and implementation. A bibliography is included, with links for resources used. The resources included in this report were identified through a non-systematic desk-based search. A number of experts were also consulted. This report is a rapid response and, as such, it should be treated as a synthesis of the resources and evidence gathered in the assigned time.
+                BAD_HTML
+              end
+
+              it 'Ensures the first items of lists occur after line breaks' do
+                expect(doc.abstract).to match(/\n^\* how best to promote effective national capacities/)
+              end
+            end
+            context 'ol' do
+              let :abstract do
+                <<-BAD_HTML
+                The DFID Crop Protection Programme (CPP) supported a project entitled “Forecasting movements and breeding of the Red-billed Quelea bird in southern Africa and improved control strategies” The project was intended to provide four main outputs: &amp;lt;ol&amp;gt; &amp;lt;li&amp;gt;A desk-based assessment of the environmental impacts of quelea control operations.&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;A preliminary analysis of the potential for developing a statistical medium term quelea seasonal forecasting model based on sea surface temperature (SST) data and atmospheric indicators.&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;Increased knowledge of the key relationships between environmental factors and quelea migrations and breeding activities..&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;A computer-based model for forecasting the timing and geographical distribution of quelea breeding activity in southern Africa.&amp;lt;/li&amp;gt; &amp;lt;/ol&amp;gt; &amp;lt;p&amp;gt; The presentation discussed how involvement with the Information Core for Southern African Migrant Pests (ICOSAMP) project would assist in achieving these objectives, with particular reference to forecasts of breeding by the Red-billed Quelea Quelea quelea lathamii. For each objective, details of achievements to date, needs and future plans were discussed.&amp;lt;/p&amp;gt;
+                BAD_HTML
+              end
+
+              it 'Ensures the first items of lists occur after line breaks' do
+                expect(doc.abstract).to match(/\n^1\.  A desk-based assessment/)
+              end
+            end
+          end
         end
       end
 

@@ -89,17 +89,12 @@ module DfidTransition::Transform
             </ul>
           HTML
         end
-        it {
-          is_expected.to eql(<<-MARKDOWN.strip_heredoc
-            This is para 1
-
-            This is para 2
-
-            * A list item
-
-            MARKDOWN
-          )
-        }
+        it 'has the paras' do
+          expect(markdown).to include("This is para 1\n\nThis is para 2")
+        end
+        it 'has the list' do
+          expect(markdown).to match(/\n\* A list item/)
+        end
       end
 
       context 'there are lists in paragraphs' do

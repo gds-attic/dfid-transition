@@ -17,8 +17,10 @@ module DfidTransition
       def self.to_markdown(html)
         fragment = Nokogiri::HTML.fragment(html)
         corrected_html =
-          replace_linked_development_hrefs(
-            expand_h3s(fragment)
+          correct_malformed_lists(
+            replace_linked_development_hrefs(
+              expand_h3s(fragment)
+            )
           ).to_s
 
         kramdown_tree, _warnings = Kramdown::Parser::Html.parse(corrected_html)
@@ -36,6 +38,14 @@ module DfidTransition
       end
 
       HEADER_ENDS_WITH_COLON = /[a-z]{2,}:\s*$/
+
+      def self.correct_malformed_lists(frag)
+        frag = Nokogiri::HTML.fragment(frag) unless frag.is_a?(Nokogiri::HTML::DocumentFragment)
+        frag.css('ol, ul').each do |list|
+          list.add_previous_sibling('<br /><br />')
+        end
+        frag
+      end
 
       def self.expand_h3s(frag)
         frag = Nokogiri::HTML.fragment(frag) unless frag.is_a?(Nokogiri::HTML::DocumentFragment)
